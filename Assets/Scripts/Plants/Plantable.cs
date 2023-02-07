@@ -8,12 +8,15 @@ public abstract class Plantable {
     public int growthStages;
     public int gridSize;
     public Transform[] growthStagePrefabs;
+    public float[] rootDepths;
     public float growthRateFactor = 1.0f;
-    // TODO
 
-    public void validate() {
+    public void Validate() {
+        Assert.IsTrue(growthStages > 0);
         Assert.IsNotNull(growthStagePrefabs);
+        Assert.IsNotNull(rootDepths);
         Assert.AreEqual(growthStages, growthStagePrefabs.Length);
+        Assert.AreEqual(growthStages, rootDepths.Length);
         Assert.IsTrue(gridSize > 0);
     }
 }

@@ -7,12 +7,10 @@ public class PlayerController : MonoBehaviour {
     public List<InventoryItem> inventory = new List<InventoryItem>();
     private NavMeshAgent agent;
 
-    // Start is called before the first frame update
     void Start() {
         agent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     void Update() {
         if(Input.GetMouseButtonDown(0)) {
             RaycastHit hit;
