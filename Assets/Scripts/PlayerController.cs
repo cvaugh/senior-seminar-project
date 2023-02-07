@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
     public List<InventoryItem> inventory = new List<InventoryItem>();
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        if(Input.GetMouseButtonDown(0)) {
+        if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
             RaycastHit hit;
 
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
