@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
     public float globalGrowthRate = 5.0f;
+    public Transform inventoryUIItem;
     public GameObject inventoryUI;
-    public GameObject openInventoryButton;
+    public GameObject inventoryItemContainer;
+    public GameObject inventoryItemName;
+    public GameObject inventoryItemInfo;
+    public GameObject inventoryOpenButton;
+    public GameObject inventoryUseButton;
+    public GameObject inventoryDropButton;
     private PlayerController player;
 
     void Start() {
@@ -19,12 +25,12 @@ public class GameController : MonoBehaviour {
 
     public void ShowInventory() {
         player.SortInventory();
-        openInventoryButton.SetActive(false);
+        inventoryOpenButton.SetActive(false);
         inventoryUI.SetActive(true);
     }
 
     public void HideInventory() {
         inventoryUI.SetActive(false);
-        openInventoryButton.SetActive(true);
+        inventoryOpenButton.SetActive(true);
     }
 }
