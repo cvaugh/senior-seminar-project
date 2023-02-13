@@ -8,8 +8,11 @@ public class StatsLogicScript : MonoBehaviour
 {
     public int playerLevel;
     public Text levelNumText;
+
     public int playerCoins;
     public Text coinNumText;
+
+    public Text playerNameText;
 
     [ContextMenu("Increase Level")]
     public void increaseLevel()
@@ -24,5 +27,19 @@ public class StatsLogicScript : MonoBehaviour
     {
         playerCoins++;
         coinNumText.text = playerCoins.ToString();
+    }
+
+    [ContextMenu("Decrease Coins")]
+    /* Add parameter to function so it can accept "num of coins to take" */
+    public void decreaseCoins()
+    {
+        playerCoins--;
+        coinNumText.text = playerCoins.ToString();
+    }
+
+    [ContextMenu("Input Player Name")]
+    public void setPlayerName()
+    {
+       
     }
 }
