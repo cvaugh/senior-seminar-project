@@ -19,8 +19,8 @@ public class LoadingManager : MonoBehaviour
     private string targetScene;
     private bool isLoading;
 
- // public Image fadeImage;
-  //public float fadeTime;
+    public Image fadeImage;
+    public float fadeTime;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class LoadingManager : MonoBehaviour
         }
         //mainManager.SetActive(false);
         LoadingPanel.SetActive(false);
-        //fadeImage.gameObject.SetActive(false);
+        fadeImage.gameObject.SetActive(false);
     }
 
     public void LoadScene(string sceneName)
@@ -44,24 +44,24 @@ public class LoadingManager : MonoBehaviour
     {
         isLoading = true;
 
-        //fadeImage.gameObject.SetActive(true);
-        //fadeImage.canvasRenderer.SetAlpha(0);
+        fadeImage.gameObject.SetActive(true);
+        fadeImage.canvasRenderer.SetAlpha(0);
 
-    /*  while (!Fade(1))
+      while (!Fade(1))
         {
             yield return null;
         }
-    */
+    
         LoadingPanel.SetActive(true);
         StartCoroutine(SpinWheelRoutine());
 
-        /*
+        
         while (!Fade(0))
         {
             yield return null;
         }
 
-        */
+        
 
         AsyncOperation op = SceneManager.LoadSceneAsync(targetScene);
         float elapsedTime = 0f;
@@ -78,27 +78,27 @@ public class LoadingManager : MonoBehaviour
             yield return null;
         }
 
-        /*
+        
         while (!Fade(1))
         {
             yield return null;
         }
-        */
+        
 
         LoadingPanel.SetActive(false);
 
-        /*
+        
         while (!Fade(0))
         {
             yield return null;
         }
-        */
+        
 
         isLoading = false;
     }
 
-   /* 
-    * private bool Fade(float target)
+   
+    private bool Fade(float target)
     {
         fadeImage.CrossFadeAlpha(target, fadeTime, true);
         if (Mathf.Abs(fadeImage.canvasRenderer.GetAlpha() - target) <= 0.05f)
@@ -109,7 +109,7 @@ public class LoadingManager : MonoBehaviour
 
         return false;
     }
-   */
+   
 
     private IEnumerator SpinWheelRoutine()
     {
