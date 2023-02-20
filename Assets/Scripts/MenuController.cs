@@ -11,12 +11,9 @@ public class MenuController : MonoBehaviour {
         loadingBlocker.gameObject.SetActive(false);
     }
 
-    void Update() {
-        
-    }
-
     public void InitGame() {
         loadingBlocker.gameObject.SetActive(true);
-        SceneManager.LoadSceneAsync("Main");
+        // todo: load last save
+        SceneManager.LoadSceneAsync("BasementTutorial");
     }
 }

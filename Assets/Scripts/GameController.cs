@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     public float globalGrowthRate = 5.0f;
@@ -12,11 +13,14 @@ public class GameController : MonoBehaviour {
     public GameObject inventoryOpenButton;
     public GameObject inventoryUseButton;
     public GameObject inventoryDropButton;
+    public Transform loadingBlocker;
     private PlayerController player;
 
     void Start() {
+        SceneData.currentScene = SceneManager.GetActiveScene().name;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         HideInventory();
+        loadingBlocker.gameObject.SetActive(false);
     }
 
     void Update() {
@@ -32,5 +36,10 @@ public class GameController : MonoBehaviour {
     public void HideInventory() {
         inventoryUI.SetActive(false);
         inventoryOpenButton.SetActive(true);
+    }
+
+    public void LoadScene(string scene) {
+        loadingBlocker.gameObject.SetActive(true);
+        SceneManager.LoadSceneAsync(scene);
     }
 }

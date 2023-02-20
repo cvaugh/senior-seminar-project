@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class StatsLogicScript : MonoBehaviour {
+public class StatsManager : MonoBehaviour {
     public int playerLevel;
     public Text levelNumText;
 
