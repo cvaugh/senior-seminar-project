@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     public float globalGrowthRate = 5.0f;
+    public SceneStartPoint[] sceneStartPoints;
     public Transform inventoryUIItem;
     public GameObject inventoryUI;
     public GameObject inventoryItemContainer;
@@ -17,8 +18,16 @@ public class GameController : MonoBehaviour {
     private PlayerController player;
 
     void Start() {
-        SceneData.currentScene = SceneManager.GetActiveScene().name;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        if(SceneData.currentScene != null) {
+            foreach(SceneStartPoint ssp in sceneStartPoints) {
+                if(ssp.fromScene == SceneData.currentScene) {
+                    player.transform.position = ssp.point.position;
+                    player.transform.rotation = ssp.point.rotation;
+                }
+            }
+        }
+        SceneData.currentScene = SceneManager.GetActiveScene().name;
         HideInventory();
         loadingBlocker.gameObject.SetActive(false);
     }
