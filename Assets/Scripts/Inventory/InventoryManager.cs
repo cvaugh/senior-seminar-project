@@ -7,10 +7,10 @@ public class InventoryManager : MonoBehaviour {
     private GameController gc;
     private Transform inventoryParent;
     private Transform itemContainer;
-    private Transform openButton;
-    private Transform closeButton;
-    private Transform useButton;
-    private Transform dropButton;
+    private Button openButton;
+    private Button closeButton;
+    private Button useButton;
+    private Button dropButton;
     private Text itemName;
     private Text itemInfo;
 
@@ -18,12 +18,12 @@ public class InventoryManager : MonoBehaviour {
         gc = Camera.main.GetComponent<GameController>();
         inventoryParent = gc.canvas.Find("Inventory");
         itemContainer = inventoryParent.Find("Inventory Scroll/Viewport/Inventory Contents");
-        openButton = gc.canvas.Find("Inventory Open Button");
-        openButton.GetComponent<Button>().onClick.AddListener(ShowInventory);
-        closeButton = inventoryParent.Find("Close Button");
-        closeButton.GetComponent<Button>().onClick.AddListener(HideInventory);
-        useButton = inventoryParent.Find("Use Button");
-        dropButton = inventoryParent.Find("Drop Button");
+        openButton = gc.canvas.Find("Inventory Open Button").GetComponent<Button>();
+        openButton.onClick.AddListener(ShowInventory);
+        closeButton = inventoryParent.Find("Close Button").GetComponent<Button>();
+        closeButton.onClick.AddListener(HideInventory);
+        useButton = inventoryParent.Find("Use Button").GetComponent<Button>();
+        dropButton = inventoryParent.Find("Drop Button").GetComponent<Button>();
         itemName = inventoryParent.Find("Title Panel/Item Name").GetComponent<Text>();
         itemInfo = inventoryParent.Find("Info Panel/Item Info").GetComponent<Text>();
         HideInventory();
@@ -38,5 +38,19 @@ public class InventoryManager : MonoBehaviour {
     public void HideInventory() {
         inventoryParent.gameObject.SetActive(false);
         openButton.gameObject.SetActive(true);
+    }
+
+    public void SelectItem(InventoryItem item) {
+        itemName.text = item.name;
+        itemInfo.text = item.description;
+        useButton.enabled = item.canUse;
+        dropButton.enabled = item.canDrop;
+    }
+
+    public void DeselectItem() {
+        itemName.text = "";
+        itemInfo.text = "";
+        useButton.enabled = false;
+        dropButton.enabled = false;
     }
 }
