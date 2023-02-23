@@ -17,7 +17,11 @@ public class PlayerController : MonoBehaviour {
             RaycastHit hit;
 
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
-                agent.destination = hit.point;
+                if(hit.transform != null && hit.transform.GetComponent<DroppedItem>() != null) {
+                    Debug.Log(hit.transform.name);
+                } else {
+                    agent.destination = hit.point;
+                }
             }
         }
     }
