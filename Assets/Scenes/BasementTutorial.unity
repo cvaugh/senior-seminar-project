@@ -178,7 +178,11 @@ Transform:
   m_Children:
   - {fileID: 1247846543}
   m_Father: {fileID: 1002579284}
+<<<<<<< HEAD
+  m_RootOrder: 16
+=======
   m_RootOrder: 18
+>>>>>>> main
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &99594319
 BoxCollider:
@@ -649,7 +653,11 @@ Transform:
   m_Children:
   - {fileID: 688818685}
   m_Father: {fileID: 1002579284}
+<<<<<<< HEAD
+  m_RootOrder: 14
+=======
   m_RootOrder: 16
+>>>>>>> main
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &342115546
 GameObject:
@@ -1781,10 +1789,6 @@ Transform:
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!64 &1044865178
 MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044865176}
   m_Material: {fileID: 0}
   m_IsTrigger: 0

@@ -40,3 +40,4 @@ public class GameController : MonoBehaviour {
         SceneManager.LoadSceneAsync(scene);
     }
 }
+
