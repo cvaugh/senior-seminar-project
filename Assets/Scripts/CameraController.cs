@@ -14,3 +14,4 @@ public class CameraController : MonoBehaviour {
                                          Mathf.Lerp(transform.position.z, pos.z, interpolation));
     }
 }
+
