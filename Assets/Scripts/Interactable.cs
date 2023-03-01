@@ -5,18 +5,20 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public float radius = .9f;
+    public Transform interactionTransform;  //use interaction point or transform of the object itself
 
     bool isFocused = false;
     bool hasInteracted = false;
     Transform player;
 
     public virtual void Interact() {
+        //to be overwritten for each interactable
         Debug.Log("interacting with " + transform.name);
     }
 
     void Update() {
         if(isFocused && !hasInteracted) {
-            float dist = Vector3.Distance(player.position, transform.position);
+            float dist = Vector3.Distance(player.position, interactionTransform.position);
             if(dist <= radius) {
                 Interact();
                 hasInteracted = true;
@@ -38,6 +40,6 @@ public class Interactable : MonoBehaviour
 
     void OnDrawGizmosSelected () {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(interactionTransform.position, radius);
     }
 }
