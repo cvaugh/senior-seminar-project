@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
     public void FollowTarget(Interactable newTarget) {
         agent.stoppingDistance = newTarget.radius * .7f;
         agent.updateRotation = false;
-        target = newTarget.transform;
+        target = newTarget.interactionTransform;
     }
 
     public void StopFollowingTarget() {
