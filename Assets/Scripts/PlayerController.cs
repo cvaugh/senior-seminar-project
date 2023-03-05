@@ -6,10 +6,10 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
     public List<InventoryItem> inventory = new List<InventoryItem>();
-    private NavMeshAgent agent;
-
+    [HideInInspector]
     public Interactable focus;
-    Transform target;
+    private NavMeshAgent agent;
+    private Transform target;
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if(target != null) {
+        if(target != null && Vector3.Distance(transform.position, target.transform.position) > 0.9) {
             agent.SetDestination(target.position);
             FaceTarget();
         }
@@ -62,27 +62,31 @@ public class PlayerController : MonoBehaviour {
 
     void FaceTarget() {
         Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z), transform.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3f);
     }
 
     void SetFocus(Interactable newFocus) {
         if(newFocus != focus) {
             if(focus != null) {
-                focus.DeFocused();
+                focus.OnFocusChanged();
             }
             focus = newFocus;
             FollowTarget(newFocus);
 
         }
-        newFocus.OnFocused(transform);
+        newFocus.OnFocusChanged();
     }
 
     void RemoveFocus() {
         if(focus != null){
-            focus.DeFocused();
+            focus.OnFocusChanged();
         }
         focus = null;
         StopFollowingTarget();
+    }
+
+    public bool IsFocused(Transform t) {
+        return focus != null && focus.transform == t;
     }
 }

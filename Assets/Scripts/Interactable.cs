@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
-{
+public class Interactable : MonoBehaviour {
     public float radius = .9f;
-    public Transform interactionTransform;  //use interaction point or transform of the object itself
-
-    bool isFocused = false;
     bool hasInteracted = false;
-    Transform player;
+
+    private GameController gc;
+
+    private void Start() {
+        gc = Camera.main.GetComponent<GameController>();
+    }
 
     public virtual void Interact() {
         //to be overwritten for each interactable
@@ -17,8 +18,8 @@ public class Interactable : MonoBehaviour
     }
 
     void Update() {
-        if(isFocused && !hasInteracted) {
-            float dist = Vector3.Distance(player.position, interactionTransform.position);
+        if(gc.player.IsFocused(transform) && !hasInteracted) {
+            float dist = Vector3.Distance(gc.player.transform.position, transform.position);
             if(dist <= radius) {
                 Interact();
                 hasInteracted = true;
@@ -26,15 +27,7 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public void OnFocused(Transform playerTransform) {
-        isFocused = true;
-        player = playerTransform;
-        hasInteracted = false;
-    }
-
-    public void DeFocused() {
-        isFocused = false;
-        player = null;
+    public void OnFocusChanged() {
         hasInteracted = false;
     }
 
