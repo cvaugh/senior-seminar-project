@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 99594321}
   - component: {fileID: 99594320}
   - component: {fileID: 99594319}
+  - component: {fileID: 99594323}
   - component: {fileID: 99594322}
   m_Layer: 6
   m_Name: Plastic Cup
@@ -178,11 +179,7 @@ Transform:
   m_Children:
   - {fileID: 1247846543}
   m_Father: {fileID: 1002579284}
-<<<<<<< HEAD
-  m_RootOrder: 16
-=======
   m_RootOrder: 18
->>>>>>> main
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &99594319
 BoxCollider:
@@ -260,6 +257,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   depth: 0.15
+--- !u!114 &99594323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99594317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956b9d541d43dbb48a68f6b12ace4530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.9
+  interactionTransform: {fileID: 99594318}
 --- !u!1 &101562572 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4402889624675962987, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
@@ -653,11 +664,7 @@ Transform:
   m_Children:
   - {fileID: 688818685}
   m_Father: {fileID: 1002579284}
-<<<<<<< HEAD
-  m_RootOrder: 14
-=======
   m_RootOrder: 16
->>>>>>> main
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &342115546
 GameObject:
@@ -1789,6 +1796,10 @@ Transform:
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!64 &1044865178
 MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044865176}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
