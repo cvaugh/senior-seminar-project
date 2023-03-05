@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour {
+    public Transform inventoryCellPrefab;
     private GameController gc;
     private Transform inventoryParent;
     private Transform itemContainer;
@@ -33,11 +34,17 @@ public class InventoryManager : MonoBehaviour {
         gc.player.SortInventory();
         openButton.gameObject.SetActive(false);
         inventoryParent.gameObject.SetActive(true);
+        foreach(InventoryItem item in gc.player.inventory) {
+
+        }
     }
 
     public void HideInventory() {
         inventoryParent.gameObject.SetActive(false);
         openButton.gameObject.SetActive(true);
+        for(int i = itemContainer.childCount - 1; i >= 0; i--) {
+            Destroy(itemContainer.GetChild(i).gameObject);
+        }
     }
 
     public void SelectItem(InventoryItem item) {

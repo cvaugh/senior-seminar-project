@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 99594320}
   - component: {fileID: 99594319}
   - component: {fileID: 99594322}
+  - component: {fileID: 99594323}
   m_Layer: 6
   m_Name: Plastic Cup
   m_TagString: Untagged
@@ -256,6 +257,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   depth: 0.15
+--- !u!114 &99594323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99594317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956b9d541d43dbb48a68f6b12ace4530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.9
 --- !u!1 &101562572 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4402889624675962987, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
@@ -1781,6 +1795,10 @@ Transform:
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!64 &1044865178
 MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044865176}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -3382,6 +3400,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.30000007, y: 0.5, z: 0.04000013}
   m_Center: {x: 1.6537239e-11, y: 0.00018496814, z: -0.0000000018942188}
+--- !u!114 &1592621909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592621902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956b9d541d43dbb48a68f6b12ace4530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.9
 --- !u!4 &1600038876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2477917044394609953, guid: fa791c4c908cebe4c94c54a4a66ad356, type: 3}
@@ -3733,6 +3764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9642e6667c9781e498df7790d8cfc837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryCellPrefab: {fileID: 6946361153688100605, guid: 98cc8f5ad13bd174da7425feaf1ef651, type: 3}
 --- !u!1001 &2477917042839677693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3869,9 +3901,29 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4402889625189227587, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
+      propertyPath: m_CellSize.x
+      value: 145
+      objectReference: {fileID: 0}
+    - target: {fileID: 4402889625189227587, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
+      propertyPath: m_CellSize.y
+      value: 145
+      objectReference: {fileID: 0}
+    - target: {fileID: 4402889625189227589, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4402889625189227589, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4402889625228445980, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4402889625228445980, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     - target: {fileID: 4402889625516514586, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
       propertyPath: m_Pivot.x
