@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class PlantContainer : MonoBehaviour {
+public class PlantContainer : Interactable {
     public float depth;
     private List<Transform> attachmentPoints = new List<Transform>();
 
@@ -27,5 +27,10 @@ public class PlantContainer : MonoBehaviour {
             t.GetComponent<MeshRenderer>().enabled = visible;
             t.GetComponent<MeshCollider>().enabled = visible;
         }
+    }
+
+    public override void Interact(PlayerController player) {
+        // TODO
+        throw new System.NotImplementedException();
     }
 }

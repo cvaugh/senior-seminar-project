@@ -48,6 +48,14 @@ public class PlayerController : MonoBehaviour {
         inventory.Sort((a, b) => a.name.CompareTo(b.name));
     }
 
+    public void UseItem(InventoryItem item) {
+        // TODO
+    }
+
+    public void DropItem(InventoryItem item) {
+        DroppedItem.Create(this, item);
+    }
+
     public void FollowTarget(Interactable newTarget) {
         agent.stoppingDistance = newTarget.radius * .7f;
         agent.updateRotation = false;

@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroppedItem : MonoBehaviour {
+public class DroppedItem : Interactable {
+    public InventoryItem item;
 
-    void Start() {
-        
+    public override void Interact(PlayerController player) {
+        PickUp(player);
     }
 
-    void Update() {
-        
+    public void PickUp(PlayerController player) {
+        player.inventory.Add(item);
+        player.SortInventory();
+        Destroy(gameObject);
+    }
+
+    public static void Create(PlayerController player, InventoryItem item) {
+        Transform dropped = Instantiate(item.prefab, player.transform.position, Quaternion.identity);
+        dropped.GetComponent<DroppedItem>().item = item;
     }
 }

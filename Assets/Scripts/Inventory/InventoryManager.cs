@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour {
     public Transform inventoryCellPrefab;
@@ -12,8 +13,8 @@ public class InventoryManager : MonoBehaviour {
     private Button closeButton;
     private Button useButton;
     private Button dropButton;
-    private Text itemName;
-    private Text itemInfo;
+    private TMP_Text itemName;
+    private TMP_Text itemInfo;
 
     void Start() {
         gc = Camera.main.GetComponent<GameController>();
@@ -25,17 +26,20 @@ public class InventoryManager : MonoBehaviour {
         closeButton.onClick.AddListener(HideInventory);
         useButton = inventoryParent.Find("Use Button").GetComponent<Button>();
         dropButton = inventoryParent.Find("Drop Button").GetComponent<Button>();
-        itemName = inventoryParent.Find("Title Panel/Item Name").GetComponent<Text>();
-        itemInfo = inventoryParent.Find("Info Panel/Item Info").GetComponent<Text>();
+        itemName = inventoryParent.Find("Title Panel/Item Name").GetComponent<TMP_Text>();
+        itemInfo = inventoryParent.Find("Info Panel/Item Info").GetComponent<TMP_Text>();
         HideInventory();
     }
 
     public void ShowInventory() {
+        DeselectItem();
         gc.player.SortInventory();
         openButton.gameObject.SetActive(false);
         inventoryParent.gameObject.SetActive(true);
-        foreach(InventoryItem item in gc.player.inventory) {
-
+        for(int i = 0; i < gc.player.inventory.Count; i++) {
+            Transform cell = Instantiate(inventoryCellPrefab, itemContainer);
+            int cachedIndex = i;
+            cell.GetComponent<Button>().onClick.AddListener(() => SelectItem(cachedIndex));
         }
     }
 
@@ -47,11 +51,20 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
-    public void SelectItem(InventoryItem item) {
+    public void SelectItem(int index) {
+        InventoryItem item = gc.player.inventory[index];
         itemName.text = item.name;
         itemInfo.text = item.description;
         useButton.enabled = item.canUse;
+        useButton.onClick.AddListener(() => {
+            HideInventory();
+            gc.player.UseItem(item);
+        });
         dropButton.enabled = item.canDrop;
+        dropButton.onClick.AddListener(() => {
+            HideInventory();
+            gc.player.DropItem(item);
+        });
     }
 
     public void DeselectItem() {
