@@ -5,11 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
     public Transform target;
     public float followSpeed;
-    private Vector3 offset;
-
-    void Start() {
-        offset = transform.position - target.position;
-    }
+    public Vector3 offset;
 
     void Update() {
         float interpolation = followSpeed * Time.deltaTime;
@@ -18,3 +14,4 @@ public class CameraController : MonoBehaviour {
                                          Mathf.Lerp(transform.position.z, pos.z, interpolation));
     }
 }
+

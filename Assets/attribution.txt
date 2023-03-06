@@ -9,3 +9,8 @@ Blogger Sans:
 Steel City Comic:
    Designed by Josh Dunn <mr_george_bailey@hotmail.com>
    https://www.1001fonts.com/steel-city-comic-font.html
+
+--- SHADER ATTRIBUTION ---
+depth_mask.shader:
+   Created by Mark Johns (doomlaser)
+   https://github.com/doomlaser/DepthMask-Unity-Shader
