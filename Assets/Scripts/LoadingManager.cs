@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class LoadingManager : MonoBehaviour {
     public static LoadingManager instance;
@@ -19,6 +21,19 @@ public class LoadingManager : MonoBehaviour {
     public Image fadeImage;
     public float fadeTime;
 
+    public Text currentFact;
+    
+
+    string[] facts = {
+        "The world's tallest tree is the coast redwood", 
+        "Bamboo is the fastest growing woody plant in the world", 
+        "Small pockets of air inside cranberries cause them to float in water", 
+        "Iris means 'rainbow' in Greek", 
+        "Trees are the longest-living organisms on Earth",
+        "Banana is an Arabic word for fingers",
+        "Oak trees do not produce acorns until they are 50 years old",
+        "More than 85% of plant life is found in the ocean"};
+
     private void Awake() {
         if(instance == null) {
             instance = this;
@@ -26,6 +41,7 @@ public class LoadingManager : MonoBehaviour {
         }
         loadingPanel.SetActive(false);
         fadeImage.gameObject.SetActive(false);
+        
     }
 
     public void LoadScene(string sceneName) {
@@ -38,16 +54,21 @@ public class LoadingManager : MonoBehaviour {
 
         fadeImage.gameObject.SetActive(true);
         fadeImage.canvasRenderer.SetAlpha(0);
+        currentFact.gameObject.SetActive(true);
 
-        while(!Fade(1)) {
+        while (!Fade(1)) {
             yield return null;
         }
     
         loadingPanel.SetActive(true);
         StartCoroutine(SpinWheelRoutine());
 
-        
-        while(!Fade(0)) {
+        int randNum = UnityEngine.Random.Range(0, facts.Length);
+        currentFact.text = facts[randNum];
+        //Debug.Log("Fact: " + currentFact.text);
+
+
+        while (!Fade(0)) {
             yield return null;
         }
 
@@ -68,16 +89,16 @@ public class LoadingManager : MonoBehaviour {
         while(!Fade(1)) {
             yield return null;
         }
-        
 
+        currentFact.gameObject.SetActive(false);
         loadingPanel.SetActive(false);
-
         
+
         while (!Fade(0)) {
             yield return null;
         }
-        
 
+        
         isLoading = false;
     }
 
