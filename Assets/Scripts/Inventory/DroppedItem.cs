@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DroppedItem : Interactable {
+    [HideInInspector]
+    public int itemIndex = 0;
     public InventoryItem item;
+
+    public void Init() {
+        item = ItemRegistry.Items[itemIndex];
+    }
 
     public override void Interact(PlayerController player) {
         PickUp(player);

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6847627531672065781}
   - component: {fileID: 6847627531672065771}
   m_Layer: 0
-  m_Name: Seed Packet (Generic)
+  m_Name: seed_packet_generic
   m_TagString: DroppedItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -40,6 +40,7 @@ public class InventoryManager : MonoBehaviour {
             Transform cell = Instantiate(inventoryCellPrefab, itemContainer);
             int cachedIndex = i;
             cell.GetComponent<Button>().onClick.AddListener(() => SelectItem(cachedIndex));
+            cell.GetChild(0).GetComponent<Image>().sprite = gc.player.inventory[i].icon;
         }
     }
 

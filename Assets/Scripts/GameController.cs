@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
     public Transform canvas;
 
     void Awake() {
+        ItemRegistry.Init();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         canvas = GameObject.Find("Canvas").transform;
     }

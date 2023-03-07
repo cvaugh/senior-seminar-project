@@ -10,6 +10,9 @@ public abstract class Interactable : MonoBehaviour {
 
     private void Start() {
         gc = Camera.main.GetComponent<GameController>();
+        if(this is DroppedItem) {
+            ((DroppedItem)this).Init();
+        }
     }
 
     public abstract void Interact(PlayerController player);
