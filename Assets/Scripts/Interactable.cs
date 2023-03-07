@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour {
+public abstract class Interactable : MonoBehaviour {
     public float radius = .9f;
     bool hasInteracted = false;
 
@@ -12,16 +12,13 @@ public class Interactable : MonoBehaviour {
         gc = Camera.main.GetComponent<GameController>();
     }
 
-    public virtual void Interact() {
-        //to be overwritten for each interactable
-        Debug.Log("interacting with " + transform.name);
-    }
+    public abstract void Interact(PlayerController player);
 
     void Update() {
         if(gc.player.IsFocused(transform) && !hasInteracted) {
             float dist = Vector3.Distance(gc.player.transform.position, transform.position);
             if(dist <= radius) {
-                Interact();
+                Interact(gc.player);
                 hasInteracted = true;
             }
         }

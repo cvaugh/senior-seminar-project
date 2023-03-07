@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AttachmentPoint
   - Plant
+  - DroppedItem
   layers:
   - Default
   - TransparentFX
