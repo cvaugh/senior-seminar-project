@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void UseItem(InventoryItem item) {
-        // TODO
+        item.Use(this);
     }
 
     public void DropItem(InventoryItem item) {
