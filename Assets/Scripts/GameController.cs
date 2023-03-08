@@ -64,7 +64,7 @@ public class GameController : MonoBehaviour {
     }
 
     public static double CurrentTimeMillis() {
-        return System.DateTime.Now.ToUniversalTime().Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)).TotalMilliseconds;
+        return System.DateTime.Now.ToUniversalTime().Subtract(System.DateTime.UnixEpoch).TotalMilliseconds;
     }
 }
 

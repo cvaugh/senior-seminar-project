@@ -5,7 +5,6 @@ using UnityEngine.Assertions;
 
 public class Plant {
     public readonly string id;
-    public readonly string name;
     public readonly int growthStages;
     public readonly int minContainerSize;
     public readonly Transform[] growthStagePrefabs;
@@ -14,9 +13,10 @@ public class Plant {
     public double plantedTime;
     public int currentGrowthStage = 0;
 
-    public Plant(string id, string name, int growthStages, int minContainerSize, float growthRateFactor) {
+    private GameController gc;
+
+    public Plant(string id, int growthStages, int minContainerSize, float growthRateFactor) {
         this.id = id;
-        this.name = name;
         this.growthStages = growthStages;
         this.minContainerSize = minContainerSize;
         this.growthRateFactor = growthRateFactor;
@@ -33,8 +33,7 @@ public class Plant {
     }
 
     public void SetPlantedTime() {
-        plantedTime = System.DateTime.Now.ToUniversalTime().Subtract(
-            new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)).TotalMilliseconds;
+        plantedTime = GameController.CurrentTimeMillis();
     }
 
     public void Validate() {
@@ -44,7 +43,12 @@ public class Plant {
     }
 
     public void CheckIfShouldGrow() {
-        // TODO
+        if(currentGrowthStage == growthStages - 1) return;
+        if(gc == null) gc = Camera.main.GetComponent<GameController>();
+        double age = (GameController.CurrentTimeMillis() - plantedTime) / 1000.0;
+        if(age > gc.globalGrowthRate * growthRateFactor * (currentGrowthStage + 1)) {
+            currentGrowthStage++;
+        }
     }
 
     public Transform GetCurrentPrefab() {

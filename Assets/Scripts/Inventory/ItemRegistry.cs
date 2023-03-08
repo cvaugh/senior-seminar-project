@@ -5,9 +5,9 @@ using UnityEngine;
 public static class ItemRegistry {
     public static readonly List<InventoryItem> Items = new List<InventoryItem> {
         new Plantable("seed_packet_generic", "Seed Packet", "A small packet containing some seeds.", true, true,
-            new Plant("plant_generic", "Generic Plant", 1, 1, 1.0f)),
+            new Plant("plant_generic", 1, 1, 1.0f)),
         new Plantable("seed_packet_pinto_bean", "Pinto Bean Seeds", "A small packet containing some pinto bean seeds.", true, true,
-            new Plant("pinto_bean", "Pinto Bean", 4, 1, 1.0f))
+            new Plant("pinto_bean", 4, 1, 1.0f))
     };
 
     public static void Init() {
