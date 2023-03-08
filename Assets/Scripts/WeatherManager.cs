@@ -41,6 +41,7 @@ public class WeatherManager : MonoBehaviour
         this.currentYear = 1;
 
         this.seasonTime = this.springTime;
+        this.rain.Stop();
 
         this.defaultLightColor = this.sunlight.color;
         this.defaultLightIntensity = this.sunlight.intensity;
