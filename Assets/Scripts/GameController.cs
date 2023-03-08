@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour {
     public void HighlightPlantContainers(int minSize) {
         foreach(GameObject obj in GameObject.FindGameObjectsWithTag("PlantContainer")) {
             PlantContainer pc = obj.GetComponent<PlantContainer>();
-            if(pc == null || pc.maxSize < minSize) continue;
+            if(pc == null || pc.maxSize < minSize || pc.plant != null) continue;
             MeshRenderer renderer = obj.GetComponent<MeshRenderer>();
             highlightedObjects.Add(obj, renderer.material);
             renderer.material = highlightMaterial;
@@ -57,6 +57,7 @@ public class GameController : MonoBehaviour {
         foreach(GameObject obj in GameObject.FindGameObjectsWithTag("PlantContainer")) {
             obj.GetComponent<MeshRenderer>().material = highlightedObjects[obj];
         }
+        highlightedObjects.Clear();
     }
 
     public static double CurrentTimeMillis() {
