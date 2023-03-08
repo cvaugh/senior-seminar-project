@@ -870,17 +870,6 @@ Transform:
   m_Father: {fileID: 1002579284}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &526702365 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4402889625102270394, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
-  m_PrefabInstance: {fileID: 4402889624777517223}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &553824189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,6 +1793,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044865176}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1060395743 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4402889625361721140, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
+  m_PrefabInstance: {fileID: 4402889624777517223}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1062418481
 GameObject:
   m_ObjectHideFlags: 0
@@ -3532,11 +3532,19 @@ PrefabInstance:
     - target: {fileID: 513395862369757166, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
       propertyPath: coinNumText
       value: 
-      objectReference: {fileID: 48164536}
+      objectReference: {fileID: 1060395743}
+    - target: {fileID: 513395862369757166, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: playerCoins
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 513395862369757166, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: playerLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 513395862369757166, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
       propertyPath: levelNumText
       value: 
-      objectReference: {fileID: 526702365}
+      objectReference: {fileID: 941950647}
     - target: {fileID: 513395862369757166, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
       propertyPath: playerNameText
       value: 
