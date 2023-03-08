@@ -8,6 +8,8 @@ public class InventoryManager : MonoBehaviour {
     public Transform inventoryCellPrefab;
     [HideInInspector]
     public Button openButton;
+    [HideInInspector]
+    public Button cancelPlantingButton;
     private GameController gc;
     private Transform inventoryParent;
     private Transform itemContainer;
@@ -16,7 +18,6 @@ public class InventoryManager : MonoBehaviour {
     private Button dropButton;
     private TMP_Text itemName;
     private TMP_Text itemInfo;
-    private Button cancelPlantingButton;
 
     void Start() {
         gc = Camera.main.GetComponent<GameController>();

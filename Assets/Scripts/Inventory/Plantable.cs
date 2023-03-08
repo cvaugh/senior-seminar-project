@@ -12,6 +12,7 @@ public class Plantable : InventoryItem {
 
     public new void Use(PlayerController player) {
         Camera.main.GetComponent<InventoryManager>().openButton.gameObject.SetActive(false);
+        Camera.main.GetComponent<InventoryManager>().cancelPlantingButton.gameObject.SetActive(true);
         player.gc.HighlightPlantContainers(plant.minContainerSize);
         player.currentlyPlanting = this;
     }
