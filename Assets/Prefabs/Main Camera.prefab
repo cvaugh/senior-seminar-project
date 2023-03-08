@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 513395862369757164}
   - component: {fileID: 513395862369757167}
   - component: {fileID: 513395862369757166}
+  - component: {fileID: 513395862758312603}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -100,16 +101,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   globalGrowthRate: 5
-  sceneStartPoints: []
-  inventoryUIItem: {fileID: 0}
-  inventoryUI: {fileID: 0}
-  inventoryItemContainer: {fileID: 0}
-  inventoryItemName: {fileID: 0}
-  inventoryItemInfo: {fileID: 0}
-  inventoryOpenButton: {fileID: 0}
-  inventoryUseButton: {fileID: 0}
-  inventoryDropButton: {fileID: 0}
+  sceneStartPoints:
+  - fromScene: Garden
+    point: {fileID: 0}
   loadingBlocker: {fileID: 0}
+  highlightMaterial: {fileID: 2100000, guid: 9516ac14e1977a44793f35b203afbcb6, type: 2}
+  player: {fileID: 0}
+  canvas: {fileID: 0}
 --- !u!114 &513395862369757167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,3 +140,17 @@ MonoBehaviour:
   playerCoins: 0
   coinNumText: {fileID: 0}
   playerNameText: {fileID: 0}
+--- !u!114 &513395862758312603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513395862369757160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9642e6667c9781e498df7790d8cfc837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryCellPrefab: {fileID: 6946361153688100605, guid: 98cc8f5ad13bd174da7425feaf1ef651, type: 3}
+  openButton: {fileID: 0}

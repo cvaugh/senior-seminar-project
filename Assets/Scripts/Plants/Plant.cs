@@ -3,20 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public abstract class Plant {
-    public string name;
-    public int growthStages;
-    public int gridSize;
-    public Transform[] growthStagePrefabs;
-    public float[] rootDepths;
-    public float growthRateFactor = 1.0f;
+public class Plant {
+    public readonly string id;
+    public readonly string name;
+    public readonly int growthStages;
+    public readonly int minContainerSize;
+    public readonly Transform[] growthStagePrefabs;
+    public readonly float growthRateFactor = 1.0f;
+
+    public double plantedTime;
+    public int currentGrowthStage = 0;
+
+    public Plant(string id, string name, int growthStages, int minContainerSize, float growthRateFactor) {
+        this.id = id;
+        this.name = name;
+        this.growthStages = growthStages;
+        this.minContainerSize = minContainerSize;
+        this.growthRateFactor = growthRateFactor;
+        growthStagePrefabs = new Transform[growthStages];
+        for(int i = 0; i < growthStages; i++) {
+            Transform prefab = Resources.Load<Transform>("Plants/Prefabs/" + id + "/stage_" + i);
+            if(prefab == null) {
+                Debug.LogError("Prefab not found: Plants/Prefabs/" + id + "/stage_" + i);
+            } else {
+                growthStagePrefabs[i] = prefab;
+            }
+        }
+        Validate();
+    }
+
+    public void SetPlantedTime() {
+        plantedTime = System.DateTime.Now.ToUniversalTime().Subtract(
+            new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)).TotalMilliseconds;
+    }
 
     public void Validate() {
         Assert.IsTrue(growthStages > 0);
         Assert.IsNotNull(growthStagePrefabs);
-        Assert.IsNotNull(rootDepths);
-        Assert.AreEqual(growthStages, growthStagePrefabs.Length);
-        Assert.AreEqual(growthStages, rootDepths.Length);
-        Assert.IsTrue(gridSize > 0);
+        Assert.IsTrue(minContainerSize > 0);
+    }
+
+    public void CheckIfShouldGrow() {
+        // TODO
+    }
+
+    public Transform GetCurrentPrefab() {
+        return growthStagePrefabs[currentGrowthStage];
     }
 }

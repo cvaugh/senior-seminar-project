@@ -11,6 +11,8 @@ public class Plantable : InventoryItem {
     }
 
     public new void Use(PlayerController player) {
-        throw new System.NotImplementedException();
+        Camera.main.GetComponent<InventoryManager>().openButton.gameObject.SetActive(false);
+        player.gc.HighlightPlantContainers(plant.minContainerSize);
+        player.currentlyPlanting = this;
     }
 }
