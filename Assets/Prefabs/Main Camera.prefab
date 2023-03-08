@@ -107,6 +107,7 @@ MonoBehaviour:
   loadingBlocker: {fileID: 0}
   highlightMaterial: {fileID: 2100000, guid: 9516ac14e1977a44793f35b203afbcb6, type: 2}
   player: {fileID: 0}
+  inventoryManager: {fileID: 0}
   canvas: {fileID: 0}
 --- !u!114 &513395862369757167
 MonoBehaviour:
@@ -135,9 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d688f5c65b6f4224b9e4c1f44b0849fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLevel: 0
+  playerLevel: 1
   levelNumText: {fileID: 0}
-  playerCoins: 0
+  playerCoins: 100
   coinNumText: {fileID: 0}
   playerNameText: {fileID: 0}
 --- !u!114 &513395862758312603

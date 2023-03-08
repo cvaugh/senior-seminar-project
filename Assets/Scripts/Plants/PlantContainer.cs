@@ -16,11 +16,13 @@ public class PlantContainer : Interactable {
     }
 
     void Update() {
-        plant.CheckIfShouldGrow();
-        if(plant.currentGrowthStage != currentGrowthStage) {
-            Destroy(plantTransform.gameObject);
-            plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
-            currentGrowthStage = plant.currentGrowthStage;
+        if(plant != null) {
+            plant.CheckIfShouldGrow();
+            if(plant.currentGrowthStage != currentGrowthStage) {
+                Destroy(plantTransform.gameObject);
+                plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
+                currentGrowthStage = plant.currentGrowthStage;
+            }
         }
     }
 
