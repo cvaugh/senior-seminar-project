@@ -31,21 +31,11 @@ public class PlayerController : MonoBehaviour {
                         inventory.Remove(currentlyPlanting);
                         gc.inventoryManager.CancelPlanting();
                     }
+                } else if(hit.collider.GetComponent<Interactable>() != null) {
+                    SetFocus(hit.collider.GetComponent<Interactable>());
                 } else {
                     agent.destination = hit.point;
                     RemoveFocus();
-                }
-            }
-        }
-
-        if(Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject()) {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if(Physics.Raycast(ray, out hit, 100)) {
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
-                if(interactable != null) {
-                    SetFocus(interactable);
                 }
             }
         }
