@@ -6,10 +6,13 @@ using TMPro;
 
 public class InventoryManager : MonoBehaviour {
     public Transform inventoryCellPrefab;
+    [HideInInspector]
+    public Button openButton;
+    [HideInInspector]
+    public Button cancelPlantingButton;
     private GameController gc;
     private Transform inventoryParent;
     private Transform itemContainer;
-    private Button openButton;
     private Button closeButton;
     private Button useButton;
     private Button dropButton;
@@ -28,6 +31,8 @@ public class InventoryManager : MonoBehaviour {
         dropButton = inventoryParent.Find("Drop Button").GetComponent<Button>();
         itemName = inventoryParent.Find("Title Panel/Item Name").GetComponent<TMP_Text>();
         itemInfo = inventoryParent.Find("Info Panel/Item Info").GetComponent<TMP_Text>();
+        cancelPlantingButton = gc.canvas.Find("Cancel Planting Button").GetComponent<Button>();
+        cancelPlantingButton.onClick.AddListener(CancelPlanting);
         HideInventory();
     }
 
@@ -57,15 +62,21 @@ public class InventoryManager : MonoBehaviour {
         itemName.text = item.name;
         itemInfo.text = item.description;
         useButton.enabled = item.canUse;
-        useButton.onClick.AddListener(() => {
-            HideInventory();
-            gc.player.UseItem(item);
-        });
+        useButton.onClick.RemoveAllListeners();
+        if(item.canUse) {
+            useButton.onClick.AddListener(() => {
+                HideInventory();
+                gc.player.UseItem(item);
+            });
+        }
         dropButton.enabled = item.canDrop;
-        dropButton.onClick.AddListener(() => {
-            HideInventory();
-            gc.player.DropItem(item);
-        });
+        dropButton.onClick.RemoveAllListeners();
+        if(item.canDrop) {
+            dropButton.onClick.AddListener(() => {
+                HideInventory();
+                gc.player.DropItem(item);
+            });
+        }
     }
 
     public void DeselectItem() {
@@ -73,5 +84,12 @@ public class InventoryManager : MonoBehaviour {
         itemInfo.text = "";
         useButton.enabled = false;
         dropButton.enabled = false;
+    }
+
+    public void CancelPlanting() {
+        cancelPlantingButton.gameObject.SetActive(false);
+        openButton.gameObject.SetActive(true);
+        gc.UnHighlightPlantContainers();
+        gc.player.currentlyPlanting = null;
     }
 }

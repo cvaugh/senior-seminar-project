@@ -20,7 +20,7 @@ public class DroppedItemEditor : Editor {
             options[i] = item.id;
             i++;
         }
-        selected = EditorGUILayout.Popup("Item", selected, options);
+        selected = EditorGUILayout.Popup("Item", item.intValue, options);
         if(ItemRegistry.Items.Count > 0) {
             item.intValue = selected;
             serializedObject.ApplyModifiedProperties();

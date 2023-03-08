@@ -127,10 +127,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d804fa3c9e5ad244aa08b6596665f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.9
-  item:
-    name: Seed Packet
-    description: A packet containing some seeds.
-    canUse: 1
-    canDrop: 1
-    prefab: {fileID: 6380775526319190274}
+  radius: 1.5
+  itemIndex: 0

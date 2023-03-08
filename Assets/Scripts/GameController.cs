@@ -7,15 +7,21 @@ public class GameController : MonoBehaviour {
     public float globalGrowthRate = 5.0f;
     public SceneStartPoint[] sceneStartPoints;
     public Transform loadingBlocker;
+    public Material highlightMaterial;
 
     [HideInInspector]
     public PlayerController player;
     [HideInInspector]
+    public InventoryManager inventoryManager;
+    [HideInInspector]
     public Transform canvas;
+    [HideInInspector]
+    public Dictionary<GameObject, Material> highlightedObjects = new Dictionary<GameObject, Material>();
 
     void Awake() {
         ItemRegistry.Init();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        inventoryManager = GetComponent<InventoryManager>();
         canvas = GameObject.Find("Canvas").transform;
     }
 
@@ -32,13 +38,30 @@ public class GameController : MonoBehaviour {
         loadingBlocker.gameObject.SetActive(false);
     }
 
-    void Update() {
-
-    }
-
     public void LoadScene(string scene) {
         loadingBlocker.gameObject.SetActive(true);
         SceneManager.LoadSceneAsync(scene);
+    }
+
+    public void HighlightPlantContainers(int minSize) {
+        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("PlantContainer")) {
+            PlantContainer pc = obj.GetComponent<PlantContainer>();
+            if(pc == null || pc.maxSize < minSize || pc.plant != null) continue;
+            MeshRenderer renderer = obj.GetComponent<MeshRenderer>();
+            highlightedObjects.Add(obj, renderer.material);
+            renderer.material = highlightMaterial;
+        }
+    }
+
+    public void UnHighlightPlantContainers() {
+        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("PlantContainer")) {
+            obj.GetComponent<MeshRenderer>().material = highlightedObjects[obj];
+        }
+        highlightedObjects.Clear();
+    }
+
+    public static double CurrentTimeMillis() {
+        return System.DateTime.Now.ToUniversalTime().Subtract(System.DateTime.UnixEpoch).TotalMilliseconds;
     }
 }
 

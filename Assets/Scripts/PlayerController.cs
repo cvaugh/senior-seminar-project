@@ -8,11 +8,15 @@ public class PlayerController : MonoBehaviour {
     public List<InventoryItem> inventory = new List<InventoryItem>();
     [HideInInspector]
     public Interactable focus;
+    [HideInInspector]
+    public GameController gc;
+    public Plantable currentlyPlanting = null;
     private NavMeshAgent agent;
     private Transform target;
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();
+        gc = Camera.main.GetComponent<GameController>();
     }
 
     void Update() {
@@ -20,20 +24,18 @@ public class PlayerController : MonoBehaviour {
             RaycastHit hit;
 
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
-                agent.destination = hit.point;
-
-                RemoveFocus();
-            }
-        }
-
-        if(Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject()) {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if(Physics.Raycast(ray, out hit, 100)) {
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
-                if(interactable != null) {
-                    SetFocus(interactable);
+                if(currentlyPlanting != null && hit.transform.GetComponent<PlantContainer>() != null) {
+                    PlantContainer pc = hit.transform.GetComponent<PlantContainer>();
+                    if(pc.maxSize <= currentlyPlanting.plant.minContainerSize) {
+                        pc.PlacePlant(currentlyPlanting.plant);
+                        inventory.Remove(currentlyPlanting);
+                        gc.inventoryManager.CancelPlanting();
+                    }
+                } else if(hit.collider.GetComponent<Interactable>() != null) {
+                    SetFocus(hit.collider.GetComponent<Interactable>());
+                } else {
+                    agent.destination = hit.point;
+                    RemoveFocus();
                 }
             }
         }
@@ -53,7 +55,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void DropItem(InventoryItem item) {
+        inventory.Remove(item);
         DroppedItem.Create(this, item);
+        Debug.Log("drop");
     }
 
     public void FollowTarget(Interactable newTarget) {

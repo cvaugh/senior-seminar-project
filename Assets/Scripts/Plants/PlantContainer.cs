@@ -4,33 +4,37 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 public class PlantContainer : Interactable {
-    public float depth;
-    private List<Transform> attachmentPoints = new List<Transform>();
+    public int maxSize;
+    public Plant plant;
+    public Transform plantAttachmentPoint;
+    private Transform plantTransform;
+    private int currentGrowthStage = -1;
 
     void Start() {
-        Assert.IsTrue(depth >= 0.0f);
-        for(int i = 0; i < transform.childCount; i++) {
-            Transform child = transform.GetChild(i);
-            if(child.tag == "AttachmentPoint") {
-                attachmentPoints.Add(child);
-            }
-        }
-        SetAttachmentPointVisibility(false);
+        Assert.IsTrue(maxSize > 0);
+        plantAttachmentPoint = transform.GetChild(0);
     }
 
     void Update() {
-        
-    }
-
-    public void SetAttachmentPointVisibility(bool visible) {
-        foreach(Transform t in attachmentPoints) {
-            t.GetComponent<MeshRenderer>().enabled = visible;
-            t.GetComponent<MeshCollider>().enabled = visible;
+        if(plant != null) {
+            plant.CheckIfShouldGrow();
+            if(plant.currentGrowthStage != currentGrowthStage) {
+                Destroy(plantTransform.gameObject);
+                plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
+                currentGrowthStage = plant.currentGrowthStage;
+            }
         }
     }
 
     public override void Interact(PlayerController player) {
         // TODO
         throw new System.NotImplementedException();
+    }
+
+    public void PlacePlant(Plant plant) {
+        this.plant = plant;
+        plant.SetPlantedTime();
+        currentGrowthStage = 0;
+        plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
     }
 }

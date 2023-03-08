@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - AttachmentPoint
   - Plant
   - DroppedItem
+  - Interactable
+  - PlantContainer
   layers:
   - Default
   - TransparentFX
