@@ -38,10 +38,6 @@ public class GameController : MonoBehaviour {
         loadingBlocker.gameObject.SetActive(false);
     }
 
-    void Update() {
-
-    }
-
     public void LoadScene(string scene) {
         loadingBlocker.gameObject.SetActive(true);
         SceneManager.LoadSceneAsync(scene);
