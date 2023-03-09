@@ -15,6 +15,11 @@ public class LeaderboardManager : MonoBehaviour
     private string publicLeaderboardKey =
         "1a7d1ebdd0d15db1929ffd2574aa733f45acd216b79cf18c471e88f00882fbc7";
 
+    private void Start()
+    {
+        GetLeaderBoard();
+    }
+
     public void GetLeaderBoard()
     {
         LeaderboardCreator.GetLeaderboard(publicLeaderboardKey, ((msg) => {
