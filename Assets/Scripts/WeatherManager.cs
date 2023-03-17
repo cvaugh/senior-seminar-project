@@ -12,7 +12,7 @@ public class WeatherManager : MonoBehaviour
 
     public ParticleSystem rain;
     //public ParticleSystem heavyRain;
-    //public ParticleSystem snow;
+    public ParticleSystem snow;
     //public ParticleSystem fog;
     //public ParticleSystem wind;
     //public ParticleSystem storm;
@@ -46,6 +46,7 @@ public class WeatherManager : MonoBehaviour
 
         this.seasonTime = this.springTime;
         this.rain.Stop();
+        this.snow.Stop();
 
         this.defaultLightColor = this.sunlight.color;
         this.defaultLightIntensity = this.sunlight.intensity;
@@ -60,10 +61,28 @@ public class WeatherManager : MonoBehaviour
     public void ChangeWeather(Weather weatherType) {
         if (weatherType != this.currentWeather) {
             currentWeather = weatherType;
-            if (weatherType == Weather.RAIN) {
-                rain.Play();
-            } else {
-                rain.Stop();
+            switch (currentWeather) {
+                case Weather.RAIN:
+                    rain.Play();
+                    snow.Stop();
+                    break;
+                case Weather.SNOW:
+                    snow.Play();
+                    rain.Stop();
+                    break;
+                // case Weather.FOGGY:
+                //     fog.Play();
+                //     break;
+                // case Weather.WINDY:
+                //     wind.Play();
+                //     break;
+                // case Weather.THUNDERSTORM:
+                //     storm.Play();
+                //     break;
+                default:
+                    rain.Stop();
+                    snow.Stop();
+                    break;
             }
         }
     }
