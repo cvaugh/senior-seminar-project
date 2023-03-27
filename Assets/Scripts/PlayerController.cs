@@ -6,24 +6,26 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
     public List<InventoryItem> inventory = new List<InventoryItem>();
-    [HideInInspector]
     public Interactable focus;
-    [HideInInspector]
     public GameController gc;
+    public Transform itemDropPoint;
     public Plantable currentlyPlanting = null;
     private NavMeshAgent agent;
     private Transform target;
+    private int raycastMask;
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();
         gc = Camera.main.GetComponent<GameController>();
+        itemDropPoint = transform.Find("Item Drop Point");
+        raycastMask = ~((1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Ignore Raycast")));
     }
 
     void Update() {
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
             RaycastHit hit;
 
-            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
+            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
                 if(currentlyPlanting != null && hit.transform.GetComponent<PlantContainer>() != null) {
                     PlantContainer pc = hit.transform.GetComponent<PlantContainer>();
                     if(pc.maxSize <= currentlyPlanting.plant.minContainerSize) {
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if(target != null && Vector3.Distance(transform.position, target.transform.position) > 0.9) {
+        if(target != null && Vector3.Distance(transform.position, target.transform.position) > 0.3) {
             agent.SetDestination(target.position);
             FaceTarget();
         }
@@ -85,7 +87,6 @@ public class PlayerController : MonoBehaviour {
             }
             focus = newFocus;
             FollowTarget(newFocus);
-
         }
         newFocus.OnFocusChanged();
     }

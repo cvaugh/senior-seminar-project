@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59aee8ff88097754ca93b32e2393b595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalGrowthRate: 5
   sceneStartPoints:
   - fromScene: Garden
     point: {fileID: 0}
@@ -123,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   followSpeed: 6
-  offset: {x: 4, y: 6.25, z: 4}
+  offset: {x: 4, y: 7, z: 4}
 --- !u!114 &513395862369757166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,3 +154,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryCellPrefab: {fileID: 6946361153688100605, guid: 98cc8f5ad13bd174da7425feaf1ef651, type: 3}
   openButton: {fileID: 0}
+  cancelPlantingButton: {fileID: 0}

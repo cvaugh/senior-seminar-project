@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6847627531672065780}
   - component: {fileID: 6847627531672065781}
   - component: {fileID: 6847627531672065771}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: seed_packet_generic
   m_TagString: DroppedItem
   m_Icon: {fileID: 0}
@@ -128,4 +128,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1.5
+  hasInteracted: 0
   itemIndex: 0

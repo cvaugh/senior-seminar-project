@@ -4,18 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    public float globalGrowthRate = 5.0f;
+    public static double baseGrowthRate = 1.0;
+    public static float dryingRate = 0.01f;
     public SceneStartPoint[] sceneStartPoints;
     public Transform loadingBlocker;
     public Material highlightMaterial;
 
-    [HideInInspector]
     public PlayerController player;
-    [HideInInspector]
     public InventoryManager inventoryManager;
-    [HideInInspector]
     public Transform canvas;
-    [HideInInspector]
     public Dictionary<GameObject, Material> highlightedObjects = new Dictionary<GameObject, Material>();
 
     void Awake() {
