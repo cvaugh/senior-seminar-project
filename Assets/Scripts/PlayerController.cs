@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour {
     public void DropItem(InventoryItem item) {
         inventory.Remove(item);
         DroppedItem.Create(this, item);
-        Debug.Log("drop");
     }
 
     public void FollowTarget(Interactable newTarget) {
