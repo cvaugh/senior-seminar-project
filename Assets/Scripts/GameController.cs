@@ -4,21 +4,25 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    public static double baseGrowthRate = 1.0;
-    public static float dryingRate = 0.01f;
+    public static GameController instance;
+    public static double baseGrowthRate = 0.1;
+    public static float dryingRate = 0.0001f;
     public SceneStartPoint[] sceneStartPoints;
     public Transform loadingBlocker;
     public Material highlightMaterial;
 
     public PlayerController player;
     public InventoryManager inventoryManager;
+    public PlantInfoManager plantInfoManager;
     public Transform canvas;
     public Dictionary<GameObject, Material> highlightedObjects = new Dictionary<GameObject, Material>();
 
     void Awake() {
+        instance = this;
         ItemRegistry.Init();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         inventoryManager = GetComponent<InventoryManager>();
+        plantInfoManager = GetComponent<PlantInfoManager>();
         canvas = GameObject.Find("Canvas").transform;
     }
 

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour {
+    public bool canInteractAnywhere = false;
     public float radius = .9f;
     public bool hasInteracted = false;
-    protected GameController gc;
 
     private void Start() {
-        gc = Camera.main.GetComponent<GameController>();
         if(this is DroppedItem) {
             ((DroppedItem)this).Init();
         }
@@ -17,10 +16,10 @@ public abstract class Interactable : MonoBehaviour {
     public abstract void Interact(PlayerController player);
 
     void Update() {
-        if(gc.player.IsFocused(transform) && !hasInteracted) {
-            float dist = Vector3.Distance(gc.player.transform.position, transform.position);
+        if(GameController.instance.player.IsFocused(transform) && !hasInteracted) {
+            float dist = Vector3.Distance(GameController.instance.player.transform.position, transform.position);
             if(dist <= radius) {
-                Interact(gc.player);
+                Interact(GameController.instance.player);
                 hasInteracted = true;
             }
         }

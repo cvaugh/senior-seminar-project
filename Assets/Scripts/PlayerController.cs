@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour {
     public List<InventoryItem> inventory = new List<InventoryItem>();
     public Interactable focus;
-    public GameController gc;
     public Transform itemDropPoint;
     public Plantable currentlyPlanting = null;
     private NavMeshAgent agent;
@@ -16,7 +15,6 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();
-        gc = Camera.main.GetComponent<GameController>();
         itemDropPoint = transform.Find("Item Drop Point");
         raycastMask = ~((1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Ignore Raycast")));
     }
@@ -31,10 +29,15 @@ public class PlayerController : MonoBehaviour {
                     if(pc.maxSize <= currentlyPlanting.plant.minContainerSize) {
                         pc.PlacePlant(currentlyPlanting.plant);
                         inventory.Remove(currentlyPlanting);
-                        gc.inventoryManager.CancelPlanting();
+                        GameController.instance.inventoryManager.CancelPlanting();
                     }
                 } else if(hit.collider.GetComponent<Interactable>() != null) {
-                    SetFocus(hit.collider.GetComponent<Interactable>());
+                    Interactable interactable = hit.collider.GetComponent<Interactable>();
+                    if(interactable.canInteractAnywhere) {
+                        interactable.Interact(this);
+                    } else {
+                        SetFocus(interactable);
+                    }
                 } else {
                     agent.destination = hit.point;
                     RemoveFocus();
@@ -46,6 +49,12 @@ public class PlayerController : MonoBehaviour {
             agent.SetDestination(target.position);
             FaceTarget();
         }
+    }
+
+    public void AddItem(InventoryItem item) {
+        inventory.Add(item);
+        SortInventory();
+        GameController.instance.inventoryManager.UpdateInventory();
     }
 
     public void SortInventory() {
