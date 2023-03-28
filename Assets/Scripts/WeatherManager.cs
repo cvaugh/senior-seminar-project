@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class WeatherManager : MonoBehaviour
 {
-    public enum Season {NONE, SPRING, SUMMER, AUTUMN, WINTER};
-    public enum Weather {NONE, SUNNY, HOTSUN, RAIN, SNOW};
+    public enum Season {NONE, SPRING, SUMMER, AUTUMN, WINTER}; //MONSOON, DROUGHT
+    public enum Weather {NONE, SUNNY, HOTSUN, RAIN, SNOW}; //HEAVYRAIN, FOGGY, WINDY, THUNDERSTORM
 
     public Season currentSeason;
     public Weather currentWeather;
 
     public ParticleSystem rain;
     //public ParticleSystem heavyRain;
-    //public ParticleSystem snow;
+    public ParticleSystem snow;
+    //public ParticleSystem fog;
+    //public ParticleSystem wind;
+    //public ParticleSystem storm;
+    //public ParticleSystem dust;
 
-    [Header ("Time settings")]
+    [Header ("Season settings")]
     public float seasonTime;
     public float springTime;
     public float summerTime;
@@ -32,7 +36,7 @@ public class WeatherManager : MonoBehaviour
     public Color summerColor;
     public Color autumnColor;
     public Color winterColor;
-
+    
     public int currentYear;
 
     private void Start() {
@@ -42,6 +46,7 @@ public class WeatherManager : MonoBehaviour
 
         this.seasonTime = this.springTime;
         this.rain.Stop();
+        this.snow.Stop();
 
         this.defaultLightColor = this.sunlight.color;
         this.defaultLightIntensity = this.sunlight.intensity;
@@ -49,20 +54,7 @@ public class WeatherManager : MonoBehaviour
 
     public void ChangeSeason(Season seasonType) {
         if (seasonType != this.currentSeason) {
-            switch (seasonType) {
-                case Season.SPRING:
-                    currentSeason = Season.SPRING;
-                    break;
-                case Season.SUMMER:
-                    currentSeason = Season.SUMMER;
-                    break;
-                case Season.AUTUMN:
-                    currentSeason = Season.AUTUMN;
-                    break;
-                case Season.WINTER:
-                    currentSeason = Season.WINTER;
-                    break;
-            }
+            currentSeason = seasonType;
         }
     }
 
@@ -78,12 +70,25 @@ public class WeatherManager : MonoBehaviour
                     this.rain.Stop();
                     break;
                 case Weather.RAIN:
-                    currentWeather = Weather.RAIN;
-                    this.rain.Play();
+                    rain.Play();
+                    snow.Stop();
                     break;
                 case Weather.SNOW:
-                    currentWeather = Weather.SNOW;
-                    this.rain.Stop();
+                    snow.Play();
+                    rain.Stop();
+                    break;
+                // case Weather.FOGGY:
+                //     fog.Play();
+                //     break;
+                // case Weather.WINDY:
+                //     wind.Play();
+                //     break;
+                // case Weather.THUNDERSTORM:
+                //     storm.Play();
+                //     break;
+                default:
+                    rain.Stop();
+                    snow.Stop();
                     break;
             }
         }
@@ -92,58 +97,54 @@ public class WeatherManager : MonoBehaviour
     private void FixedUpdate() {
         this.seasonTime -= Time.deltaTime;
 
-        if (this.currentSeason == Season.SPRING) {
+        switch (currentSeason) {
+        case Season.SPRING:
             ChangeWeather(Weather.SUNNY);
 
-            LerpSunIntesity(this.sunlight, defaultLightIntensity);
-            LerpLightColor(this.sunlight, defaultLightColor);
+            LerpLight(defaultLightColor, defaultLightIntensity + 0.15f);
 
             if (this.seasonTime <= 0f) {
                 ChangeSeason(Season.SUMMER);
                 this.seasonTime = this.summerTime;
             }
-        }
-        else if (this.currentSeason == Season.SUMMER) {
+            break;
+        case Season.SUMMER:
             ChangeWeather(Weather.HOTSUN);
 
-            LerpSunIntesity(this.sunlight, summerLightIntensity);
-            LerpLightColor(this.sunlight, summerColor);
+            LerpLight(summerColor, summerLightIntensity + 0.3f);
 
             if (this.seasonTime <= 0f) {
                 ChangeSeason(Season.AUTUMN);
                 this.seasonTime = this.autumnTime;
             }
-        }
-        else if (this.currentSeason == Season.AUTUMN) {
+            break;
+        case Season.AUTUMN:
             ChangeWeather(Weather.RAIN);
 
-            LerpSunIntesity(this.sunlight, autumnLightIntensity);
-            LerpLightColor(this.sunlight, autumnColor);
+            LerpLight(autumnColor, autumnLightIntensity + 0.1f);
 
             if (this.seasonTime <= 0f) {
                 ChangeSeason(Season.WINTER);
                 this.seasonTime = this.winterTime;
             }
-        }
-        else if (this.currentSeason == Season.WINTER) {
+            break;
+        case Season.WINTER:
             ChangeWeather(Weather.SNOW);
 
-            LerpSunIntesity(this.sunlight, winterLightIntensity);
-            LerpLightColor(this.sunlight, winterColor);
+            LerpLight(winterColor, winterLightIntensity + 0.15f);
 
             if (this.seasonTime <= 0f) {
                 this.currentYear ++;
                 ChangeSeason(Season.SPRING);
                 this.seasonTime = this.springTime;
             }
-        }
+            break;
+    }
     }
 
-    private void LerpLightColor(Light light, Color c) {
-        light.color = Color.Lerp(light.color, c, 0.2f * Time.deltaTime);
+    private void LerpLight(Color c, float intensity) {
+        sunlight.color = Color.Lerp(sunlight.color, c, 0.2f * Time.deltaTime);
+        sunlight.intensity = Mathf.Lerp(sunlight.intensity, intensity, 0.2f * Time.deltaTime);
     }
 
-    private void LerpSunIntesity(Light light, float intensity) {
-        light.intensity = Mathf.Lerp(light.intensity, intensity, 0.2f * Time.deltaTime);
-    }
 }
