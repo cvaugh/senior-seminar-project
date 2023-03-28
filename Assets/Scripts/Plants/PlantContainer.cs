@@ -9,15 +9,23 @@ public class PlantContainer : Interactable {
     public Transform plantAttachmentPoint;
     private Transform plantTransform;
     private int currentGrowthStage = -1;
+    private float moisture = 0.0f;
 
     void Start() {
         Assert.IsTrue(maxSize > 0);
         plantAttachmentPoint = transform.GetChild(0);
+        gc = Camera.main.GetComponent<GameController>();
     }
 
-    void Update() {
+    void FixedUpdate() {
+        // TODO update base moisture based on scene environment
+        // write shader to mix wet/dry soil material
+        moisture -= GameController.dryingRate;
+        if(moisture < 0.0f) {
+            moisture = 0.0f;
+        }
         if(plant != null) {
-            plant.CheckIfShouldGrow();
+            plant.Tick(GetMoisture());
             if(plant.currentGrowthStage != currentGrowthStage) {
                 Destroy(plantTransform.gameObject);
                 plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
@@ -33,8 +41,17 @@ public class PlantContainer : Interactable {
 
     public void PlacePlant(Plant plant) {
         this.plant = plant;
-        plant.SetPlantedTime();
         currentGrowthStage = 0;
         plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
+    }
+
+    public float GetMoisture() {
+        if(moisture > 1.0f) {
+            return 1.0f;
+        } else if(moisture < 0.0f) {
+            return 0.0f;
+        } else {
+            return moisture;
+        }
     }
 }

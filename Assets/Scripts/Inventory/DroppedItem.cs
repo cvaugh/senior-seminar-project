@@ -22,7 +22,10 @@ public class DroppedItem : Interactable {
     }
 
     public static void Create(PlayerController player, InventoryItem item) {
-        Transform dropped = Instantiate(item.prefab, player.transform.position, Quaternion.identity);
+        Transform dropped = Instantiate(item.prefab, player.itemDropPoint.position, Quaternion.identity);
         dropped.GetComponent<DroppedItem>().item = item;
+        // Add small random force so the item will fall over
+        dropped.GetComponent<Rigidbody>().velocity = Random.onUnitSphere * 0.2f;
+        dropped.GetComponent<Rigidbody>().angularVelocity = Random.onUnitSphere * 0.2f;
     }
 }

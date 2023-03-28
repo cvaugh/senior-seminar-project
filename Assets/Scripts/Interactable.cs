@@ -4,9 +4,8 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour {
     public float radius = .9f;
-    bool hasInteracted = false;
-
-    private GameController gc;
+    public bool hasInteracted = false;
+    protected GameController gc;
 
     private void Start() {
         gc = Camera.main.GetComponent<GameController>();

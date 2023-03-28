@@ -60,8 +60,15 @@ public class WeatherManager : MonoBehaviour
 
     public void ChangeWeather(Weather weatherType) {
         if (weatherType != this.currentWeather) {
-            currentWeather = weatherType;
-            switch (currentWeather) {
+            switch (weatherType) {
+                case Weather.SUNNY:
+                    currentWeather = Weather.SUNNY;
+                    this.rain.Stop();
+                    break;
+                case Weather.HOTSUN:
+                    currentWeather = Weather.HOTSUN;
+                    this.rain.Stop();
+                    break;
                 case Weather.RAIN:
                     rain.Play();
                     snow.Stop();
@@ -87,7 +94,7 @@ public class WeatherManager : MonoBehaviour
         }
     }
 
-    private void Update() {
+    private void FixedUpdate() {
         this.seasonTime -= Time.deltaTime;
 
         switch (currentSeason) {
