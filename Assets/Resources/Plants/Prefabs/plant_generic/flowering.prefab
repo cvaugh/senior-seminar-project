@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 72bf7c5ed7cf4304fb1862d5540a406a, type: 2}
+  - {fileID: 2100000, guid: 91027438db0b8ba44a6e550f2d72eaf1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2016662293614361397}
   m_Layer: 0
-  m_Name: harvest
+  m_Name: flowering
   m_TagString: Plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
