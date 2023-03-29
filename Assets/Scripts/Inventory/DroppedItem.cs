@@ -16,8 +16,7 @@ public class DroppedItem : Interactable {
     }
 
     public void PickUp(PlayerController player) {
-        player.inventory.Add(item);
-        player.SortInventory();
+        player.AddItem(item);
         Destroy(gameObject);
     }
 
