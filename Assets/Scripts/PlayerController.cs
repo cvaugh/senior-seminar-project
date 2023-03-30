@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
-    public List<InventoryItem> inventory = new List<InventoryItem>();
+    public List<AbstractInventoryItem> inventory = new List<AbstractInventoryItem>();
     public Interactable focus;
     public Transform itemDropPoint;
     public Plantable currentlyPlanting = null;
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void AddItem(InventoryItem item) {
+    public void AddItem(AbstractInventoryItem item) {
         inventory.Add(item);
         SortInventory();
         GameController.instance.inventoryManager.UpdateInventory();
@@ -61,11 +61,11 @@ public class PlayerController : MonoBehaviour {
         inventory.Sort((a, b) => a.name.CompareTo(b.name));
     }
 
-    public void UseItem(InventoryItem item) {
+    public void UseItem(AbstractInventoryItem item) {
         item.Use(this);
     }
 
-    public void DropItem(InventoryItem item) {
+    public void DropItem(AbstractInventoryItem item) {
         inventory.Remove(item);
         DroppedItem.Create(this, item);
     }
