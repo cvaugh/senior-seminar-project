@@ -63,7 +63,7 @@ public class InventoryManager : MonoBehaviour {
     }
 
     public void SelectItem(int index) {
-        InventoryItem item = GameController.instance.player.inventory[index];
+        AbstractInventoryItem item = GameController.instance.player.inventory[index];
         itemName.text = item.name;
         itemInfo.text = item.description;
         useButton.enabled = item.canUse;
