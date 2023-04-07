@@ -178,6 +178,54 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3793660014202986995, guid: 91ad191d0d03c56438d49046bb05be1c, type: 3}
+--- !u!1 &206678784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 206678786}
+  - component: {fileID: 206678785}
+  m_Layer: 0
+  m_Name: timeOfDay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &206678785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206678784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a92f0c703068b842abb40438a66c470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayDurationSeconds: 10
+  sun: {fileID: 0}
+  currentTimeOfDay: 0
+  weeks: 0
+--- !u!4 &206678786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206678784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.684933, y: 0.21206093, z: -1.5386543}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &217070281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -674,12 +722,17 @@ MonoBehaviour:
   currentSeason: 0
   currentWeather: 0
   rain: {fileID: 1887739876}
+  heavyRain: {fileID: 0}
   snow: {fileID: 1506273691}
+  fog: {fileID: 0}
+  wind: {fileID: 0}
+  storm: {fileID: 0}
   seasonTime: 0
   springTime: 50
   summerTime: 50
   autumnTime: 50
   winterTime: 50
+  currentYear: 0
   sunlight: {fileID: 900034474}
   summerLightIntensity: 1.3
   autumnLightIntensity: 1.1
@@ -687,7 +740,9 @@ MonoBehaviour:
   summerColor: {r: 0.8962264, g: 0.694204, b: 0.42838487, a: 1}
   autumnColor: {r: 0.764151, g: 0.542982, b: 0.3147917, a: 1}
   winterColor: {r: 0.6180135, g: 0.83557224, b: 0.8773585, a: 1}
-  currentYear: 0
+  timeOfDay: {fileID: 206678785}
+  currentWeek: 0
+  weeklyForecast: 
 --- !u!4 &501237425
 Transform:
   m_ObjectHideFlags: 0
@@ -710,7 +765,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501237423}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a92f0c703068b842abb40438a66c470, type: 3}
   m_Name: 
@@ -718,6 +773,7 @@ MonoBehaviour:
   dayDurationSeconds: 10
   sun: {fileID: 900034474}
   currentTimeOfDay: 0
+  weeks: 0
 --- !u!114 &526702365 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4402889625102270394, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
@@ -1032,6 +1088,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &872671952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2477917044394609957, guid: fa791c4c908cebe4c94c54a4a66ad356, type: 3}
+  m_PrefabInstance: {fileID: 2477917042839677693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &900034473
 GameObject:
   m_ObjectHideFlags: 0
@@ -6382,6 +6443,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2477917044394609953, guid: fa791c4c908cebe4c94c54a4a66ad356, type: 3}
   m_PrefabInstance: {fileID: 2477917042839677693}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1600038877
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872671952}
+  m_Enabled: 0
+  m_Avatar: {fileID: 9000000, guid: 92b06bcdff73d5a45b4ecac9d46950d0, type: 3}
+  m_Controller: {fileID: 9100000, guid: 2d31f9a41568b0743b9f421f77160016, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &1605702179 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4402889624031656580, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
