@@ -5,37 +5,58 @@ using UnityEngine.UI;
 
 public class CountdownTimer : MonoBehaviour
 {
-    float currentTime = 0f;
+    float introTime = 0f;
     float startingTime = 3f;
+    float gameTime = 10f;
 
     [SerializeField] Text titleText;
     [SerializeField] Text tutorialParagraph;
     [SerializeField] Button startButton;
-    [SerializeField] Text countdownText;
+
+    [SerializeField] Text introCountdownText;
     [SerializeField] Text goText;
+
+    [SerializeField] Text gameCountdownText;
+    [SerializeField] Text timesUpText;
 
     void Start()
     {
-        currentTime = startingTime;
+        introTime = startingTime;
         titleText.gameObject.SetActive(false);
         tutorialParagraph.gameObject.SetActive(false);
         startButton.gameObject.SetActive(false);
+        gameCountdownText.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        countdownText.gameObject.SetActive(true);
-        currentTime -= 1 * Time.deltaTime;
-        countdownText.text = currentTime.ToString("0");
-        if (currentTime <= 1)
+        introCountdownText.gameObject.SetActive(true);
+        introTime -= 1 * Time.deltaTime;
+        introCountdownText.text = introTime.ToString("0");
+        if (introTime <= 1)
         {
-            countdownText.gameObject.SetActive(false);
+            introCountdownText.gameObject.SetActive(false);
             goText.gameObject.SetActive(true);
-            if (currentTime <= 0)
+
+            if (introTime <= 0)
             {
                 goText.gameObject.SetActive(false);
+                gameCountdownText.gameObject.SetActive(true);
+                gameTime -= 1 * Time.deltaTime;
+                gameCountdownText.text = gameTime.ToString("0");
             }
 
+            if (gameTime <= 1)
+            {
+                gameCountdownText.gameObject.SetActive(false);
+                timesUpText.gameObject.SetActive(true);
+
+                if(gameTime <= 0)
+                {
+                    timesUpText.gameObject.SetActive(false);
+                }
+            }
         }
+        
     }
 }
