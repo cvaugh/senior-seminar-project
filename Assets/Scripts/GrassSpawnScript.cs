@@ -34,6 +34,6 @@ public class GrassSpawnScript : MonoBehaviour
     {
         float lowestPoint = transform.position.y - heightOffset;
         float highestPoint = transform.position.y + heightOffset;
-        Instantiate(grass, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
+        Instantiate(grass, new Vector3(transform.position.x, Random.Range(250, 270), 0), transform.rotation);
     }
 }
