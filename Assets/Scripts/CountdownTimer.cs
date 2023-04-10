@@ -7,7 +7,7 @@ public class CountdownTimer : MonoBehaviour
 {
     float introTime = 0f;
     float startingTime = 3f;
-    float gameTime = 10f;
+    float gameTime = 60f;
 
     [SerializeField] Text titleText;
     [SerializeField] Text tutorialParagraph;
