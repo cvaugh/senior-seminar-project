@@ -14,7 +14,8 @@ public class WeatherManager : MonoBehaviour
     public ParticleSystem heavyRain;
     public ParticleSystem snow;
     public ParticleSystem fog;
-    public ParticleSystem wind;
+    public ParticleSystem wind_curved;
+    public ParticleSystem wind_straight;
     public ParticleSystem storm;
     // public ParticleSystem dust;
 
@@ -67,10 +68,11 @@ public class WeatherManager : MonoBehaviour
         this.seasonTime = this.springTime;
         this.rain.Stop();
         this.snow.Stop();
-        // this.heavyRain.Stop();
+        this.heavyRain.Stop();
         // this.fog.Stop();
-        // this.wind.Stop();
-        // this.storm.Stop();
+        this.wind_curved.Stop();
+        this.wind_straight.Stop();
+        this.storm.Stop();
 
         this.defaultLightColor = this.sunlight.color;
         this.defaultLightIntensity = this.sunlight.intensity;
@@ -269,73 +271,81 @@ public class WeatherManager : MonoBehaviour
                     currentWeather = Weather.SUNNY;
                     this.rain.Stop();
                     this.snow.Stop();
-                    // this.heavyRain.Stop();
+                    this.heavyRain.Stop();
                     // this.fog.Stop();
-                    // this.wind.Stop();
-                    // this.storm.Stop();
+                    this.wind_curved.Stop();
+                    this.wind_straight.Stop();
+                    this.storm.Stop();
                     break;
                 case Weather.HOTSUN:
                     currentWeather = Weather.HOTSUN;
                     this.rain.Stop();
                     this.snow.Stop();
-                    // this.heavyRain.Stop();
+                    this.heavyRain.Stop();
                     // this.fog.Stop();
-                    // this.wind.Stop();
-                    // this.storm.Stop();
+                    this.wind_curved.Stop();
+                    this.wind_straight.Stop();
+                    this.storm.Stop();
                     break;
                 case Weather.RAIN:
                     currentWeather = Weather.RAIN;
                     this.rain.Play();
                     this.snow.Stop();
-                    // this.heavyRain.Stop();
+                    this.heavyRain.Stop();
                     // this.fog.Stop();
-                    // this.wind.Stop();
-                    // this.storm.Stop();
+                    this.wind_curved.Stop();
+                    this.wind_straight.Stop();
+                    this.storm.Stop();
                     break;
                 case Weather.SNOW:
                     currentWeather = Weather.SNOW;
                     this.snow.Play();
                     this.rain.Stop();
-                    // this.heavyRain.Stop();
+                    this.heavyRain.Stop();
                     // this.fog.Stop();
-                    // this.wind.Stop();
-                    // this.storm.Stop();
+                    this.wind_curved.Stop();
+                    this.wind_straight.Stop();
+                    this.storm.Stop();
                     break;
                 case Weather.FOGGY:
                     currentWeather = Weather.FOGGY;
                     // this.fog.Play();
                     this.rain.Stop();
                     this.snow.Stop();
-                    // this.heavyRain.Stop();
-                    // this.wind.Stop();
-                    // this.storm.Stop();
+                    this.heavyRain.Stop();
+                    this.wind_curved.Stop();
+                    this.wind_straight.Stop();
+                    this.storm.Stop();
                     break;
                 case Weather.WINDY:
                     currentWeather = Weather.WINDY;
-                    // this.wind.Play();
+                    this.wind_curved.Play();
+                    this.wind_straight.Play();
                     this.rain.Stop();
                     this.snow.Stop();
-                    // this.heavyRain.Stop();
+                    this.heavyRain.Stop();
                     // this.fog.Stop();
-                    // this.storm.Stop();
+                    this.storm.Stop();
                     break;
                 case Weather.THUNDERSTORM:
                     currentWeather = Weather.THUNDERSTORM;
-                    // this.storm.Play();
+                    this.storm.Play();
+                    this.heavyRain.Play();
                     this.rain.Stop();
                     this.snow.Stop();
-                    // this.heavyRain.Stop();
                     // this.fog.Stop();
-                    // this.wind.Stop();
+                    this.wind_curved.Stop();
+                    this.wind_straight.Stop();
                     break;
                 default:
                     currentWeather = Weather.NONE;
                     this.rain.Stop();
                     this.snow.Stop();
-                    // this.heavyRain.Stop();
+                    this.heavyRain.Stop();
                     // this.fog.Stop();
-                    // this.wind.Stop();
-                    // this.storm.Stop();
+                    this.wind_curved.Stop();
+                    this.wind_straight.Stop();
+                    this.storm.Stop();
                     break;
             }
         }
