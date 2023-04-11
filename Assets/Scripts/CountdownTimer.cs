@@ -19,6 +19,7 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] Text gameCountdownText;
     [SerializeField] Text timesUpText;
 
+    
     void Start()
     {
         introTime = startingTime;

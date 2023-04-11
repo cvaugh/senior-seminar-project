@@ -9,6 +9,7 @@ public class GrassSpawnScript : MonoBehaviour
     public float heightOffset = 20;
     private float timer = 0;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +33,10 @@ public class GrassSpawnScript : MonoBehaviour
 
     void spawnGrass()
     {
-        float lowestPoint = transform.position.y - heightOffset;
-        float highestPoint = transform.position.y + heightOffset;
+        // float lowestPoint = transform.position.y - heightOffset;
+        // float highestPoint = transform.position.y + heightOffset;
         Instantiate(grass, new Vector3(transform.position.x, Random.Range(250, 270), 0), transform.rotation);
     }
+
+ 
 }

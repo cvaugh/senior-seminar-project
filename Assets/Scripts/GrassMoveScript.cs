@@ -6,6 +6,7 @@ public class GrassMoveScript : MonoBehaviour
 {
     public float moveSpeed;
     public float timer = 0f;
+    public float deadZone = 265;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,10 @@ public class GrassMoveScript : MonoBehaviour
         }if(timer >= 50)
         {
             moveSpeed = 7;
+        }
+        if(transform.position.x < deadZone)
+        {
+            Destroy(gameObject);
         }
     }
 }

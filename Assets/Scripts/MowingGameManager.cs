@@ -18,8 +18,4 @@ public class MowingGameManager : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D()
-    {
-
-    }
 }
