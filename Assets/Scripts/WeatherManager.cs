@@ -148,7 +148,6 @@ public class WeatherManager : MonoBehaviour
                 else {
                     return Weather.NONE;
                 }
-                break;
             case Season.SUMMER:
                 float summerWeather = Random.Range(0f, 1f);
                 if (summerWeather < 0.3f) {
@@ -169,7 +168,6 @@ public class WeatherManager : MonoBehaviour
                 else {
                     return Weather.NONE;
                 }
-                break;
             case Season.AUTUMN:
                 float autumnWeather = Random.Range(0f, 1f);
                 if (autumnWeather < 0.3f) {
@@ -190,7 +188,6 @@ public class WeatherManager : MonoBehaviour
                 else {
                     return Weather.NONE;
                 }
-                break;
             case Season.WINTER:
                 float winterWeather = Random.Range(0f, 1f);
                 if (winterWeather < 0.4f) {
@@ -205,7 +202,6 @@ public class WeatherManager : MonoBehaviour
                 else {
                     return Weather.NONE;
                 }
-                break;
             default: return Weather.NONE;
         }
     }
