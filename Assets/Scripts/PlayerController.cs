@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
                 if(currentlyPlanting != null && hit.transform.GetComponent<PlantContainer>() != null) {
                     PlantContainer pc = hit.transform.GetComponent<PlantContainer>();
-                    if(pc.maxSize <= currentlyPlanting.plant.minContainerSize) {
+                    if(pc.maxSize >= currentlyPlanting.plant.minContainerSize) {
                         pc.PlacePlant(currentlyPlanting.plant);
                         inventory.Remove(currentlyPlanting);
                         GameController.instance.inventoryManager.CancelPlanting();
@@ -53,6 +53,13 @@ public class PlayerController : MonoBehaviour {
 
     public void AddItem(AbstractInventoryItem item) {
         inventory.Add(item);
+        SortInventory();
+        GameController.instance.inventoryManager.UpdateInventory();
+        GameController.instance.shopUIManager.Reload();
+    }
+
+    public void RemoveItem(AbstractInventoryItem item) {
+        inventory.Remove(item);
         SortInventory();
         GameController.instance.inventoryManager.UpdateInventory();
         GameController.instance.shopUIManager.Reload();

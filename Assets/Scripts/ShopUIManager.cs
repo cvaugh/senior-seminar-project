@@ -107,13 +107,14 @@ public class ShopUIManager : MonoBehaviour {
     }
 
     private void BuyItem(AbstractInventoryItem item) {
-        // TODO
-        throw new System.NotImplementedException();
+        if(!BalanceManager.CanAfford(item.value)) return;
+        BalanceManager.Withdraw(item.value);
+        GameController.instance.player.AddItem(item);
     }
 
     private void SellItem(AbstractInventoryItem item) {
-        // TODO
-        throw new System.NotImplementedException();
+        BalanceManager.Deposit(item.value);
+        GameController.instance.player.RemoveItem(item);
     }
 
     public void DeselectItem() {

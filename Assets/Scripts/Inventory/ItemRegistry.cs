@@ -40,6 +40,24 @@ public static class ItemRegistry {
                 harvestItemId: "pinto_beans"
             )
         ),
+        new Plantable(
+            id: "seed_packet_wheat",
+            name: "Wheat Seeds",
+            description: "A small packet containing some wheat seeds.",
+            canUse: true,
+            canDrop: true,
+            value: 25,
+            plant: new Plant(
+                id: "wheat_plant",
+                name: "Wheat",
+                growthStages: 4,
+                minContainerSize: 2,
+                growthRate: 1.0,
+                growthStageDuration: 40.0,
+                harvestStageDuration: 40.0,
+                harvestItemId: "wheat"
+            )
+        ),
         new GenericItem(
             id: "pinto_beans",
             name: "Pinto Beans",
@@ -47,6 +65,14 @@ public static class ItemRegistry {
             canUse: false,
             canDrop: true,
             value: 5
+        ),
+        new GenericItem(
+            id: "wheat",
+            name: "Wheat",
+            description: "A bundle of wheat.",
+            canUse: false,
+            canDrop: true,
+            value: 20
         ),
         new HoeItem(
             id: "hoe",
