@@ -8,6 +8,9 @@ TagManager:
   - DroppedItem
   - Interactable
   - PlantContainer
+  - Grass
+  - Lawnmower
+  - GrassSpawner
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - AttachmentPoint
   - DroppedItem
   - Player
-  - 
+  - Mowing
   - 
   - 
   - 

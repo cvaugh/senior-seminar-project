@@ -18,7 +18,7 @@ public class WeatherManager : MonoBehaviour
     public ParticleSystem storm;
     // public ParticleSystem dust;
 
-    [Header ("Time settings")]
+    [Header ("Season settings")]
     public float seasonTime;
     public float springTime;
     public float summerTime;
@@ -210,20 +210,7 @@ public class WeatherManager : MonoBehaviour
 
     public void ChangeSeason(Season seasonType) {
         if (seasonType != this.currentSeason) {
-            switch (seasonType) {
-                case Season.SPRING:
-                    currentSeason = Season.SPRING;
-                    break;
-                case Season.SUMMER:
-                    currentSeason = Season.SUMMER;
-                    break;
-                case Season.AUTUMN:
-                    currentSeason = Season.AUTUMN;
-                    break;
-                case Season.WINTER:
-                    currentSeason = Season.WINTER;
-                    break;
-            }
+            currentSeason = seasonType;
         }
     }
 

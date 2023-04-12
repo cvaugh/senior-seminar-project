@@ -22,7 +22,7 @@ public class SceneTransfer : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "Player") {
-            Camera.main.GetComponent<GameController>().LoadScene(transferTo);
+            GameController.instance.LoadScene(transferTo);
         }
     }
 }
