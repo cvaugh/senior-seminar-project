@@ -42,14 +42,14 @@ public class ShopUIManager : MonoBehaviour {
         DeselectItem();
         GameController.instance.player.SortInventory();
         shopParent.gameObject.SetActive(true);
-        balanceText.text = BalanceManager.Get().ToString() + " c";
+        balanceText.text = BalanceManager.Get().ToString() + " F";
         transactionButton.GetComponent<Image>().color = colorDisabled;
         for(int i = 0; i < GameController.instance.player.inventory.Count; i++) {
             Transform cell = Instantiate(shopCellPrefab, inventoryItemContainer);
             int cachedIndex = i;
             cell.GetComponent<Button>().onClick.AddListener(() => SelectItem(false, cachedIndex));
             cell.GetChild(0).GetComponent<Image>().sprite = GameController.instance.player.inventory[i].icon;
-            cell.GetChild(2).GetComponent<TMP_Text>().text = GameController.instance.player.inventory[i].value.ToString() + " c";
+            cell.GetChild(2).GetComponent<TMP_Text>().text = GameController.instance.player.inventory[i].value.ToString() + " F";
         }
         for(int i = 0; i < shop.inventory.Count; i++) {
             Transform cell = Instantiate(shopCellPrefab, shopItemContainer);
@@ -57,7 +57,7 @@ public class ShopUIManager : MonoBehaviour {
             cell.GetComponent<Button>().onClick.AddListener(() => SelectItem(true, cachedIndex));
             cell.GetChild(0).GetComponent<Image>().sprite = shop.inventory[i].icon;
             cell.GetChild(1).GetComponent<Image>().color = BalanceManager.CanAfford(shop.inventory[i]) ? colorCanAfford : colorTooExpensive;
-            cell.GetChild(2).GetComponent<TMP_Text>().text = shop.inventory[i].value.ToString() + " c";
+            cell.GetChild(2).GetComponent<TMP_Text>().text = shop.inventory[i].value.ToString() + " F";
         }
     }
 
