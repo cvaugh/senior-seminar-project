@@ -5,7 +5,7 @@ using UnityEngine;
 public class DroppedItem : Interactable {
     [HideInInspector]
     public int itemIndex = 0;
-    public InventoryItem item;
+    public AbstractInventoryItem item;
 
     public void Init() {
         item = ItemRegistry.Items[itemIndex];
@@ -16,12 +16,11 @@ public class DroppedItem : Interactable {
     }
 
     public void PickUp(PlayerController player) {
-        player.inventory.Add(item);
-        player.SortInventory();
+        player.AddItem(item);
         Destroy(gameObject);
     }
 
-    public static void Create(PlayerController player, InventoryItem item) {
+    public static void Create(PlayerController player, AbstractInventoryItem item) {
         Transform dropped = Instantiate(item.prefab, player.itemDropPoint.position, Quaternion.identity);
         dropped.GetComponent<DroppedItem>().item = item;
         // Add small random force so the item will fall over

@@ -5,6 +5,7 @@ using UnityEngine.Assertions;
 
 public class PlantContainer : Interactable {
     public int maxSize;
+    public float constantMoisture = -1f;
     public Plant plant;
     public Transform plantAttachmentPoint;
     private Transform plantTransform;
@@ -14,13 +15,17 @@ public class PlantContainer : Interactable {
     void Start() {
         Assert.IsTrue(maxSize > 0);
         plantAttachmentPoint = transform.GetChild(0);
-        gc = Camera.main.GetComponent<GameController>();
+        canInteractAnywhere = true;
     }
 
     void FixedUpdate() {
         // TODO update base moisture based on scene environment
         // write shader to mix wet/dry soil material
-        moisture -= GameController.dryingRate;
+        if(constantMoisture >= 0.0f) {
+            moisture = constantMoisture;
+        } else {
+            moisture -= GameController.dryingRate;
+        }
         if(moisture < 0.0f) {
             moisture = 0.0f;
         }
@@ -35,8 +40,12 @@ public class PlantContainer : Interactable {
     }
 
     public override void Interact(PlayerController player) {
-        // TODO
-        throw new System.NotImplementedException();
+        if(plant == null) {
+            // TODO
+            throw new System.NotImplementedException();
+        } else {
+            GameController.instance.plantInfoManager.Show(this);
+        }
     }
 
     public void PlacePlant(Plant plant) {
