@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MowingLogicScript : MonoBehaviour
 {
     public float points = 0;
+    [SerializeField] Text pointsText;
     public GameObject lawnmower;
     public GameObject grass;
 
@@ -12,7 +14,7 @@ public class MowingLogicScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        pointsText.text = points.ToString();
     }
 
     // Update is called once per frame
@@ -25,6 +27,7 @@ public class MowingLogicScript : MonoBehaviour
     public void addGrassScore()
     {
         points+= 5;
+        pointsText.text = points.ToString();
     }
 
       void OnTriggerEnter2D(Collider2D other)
