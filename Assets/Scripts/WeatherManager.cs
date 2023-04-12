@@ -13,7 +13,7 @@ public class WeatherManager : MonoBehaviour
     public ParticleSystem rain;
     public ParticleSystem heavyRain;
     public ParticleSystem snow;
-    public ParticleSystem fog;
+    // public ParticleSystem fog;
     public ParticleSystem wind_curved;
     public ParticleSystem wind_straight;
     public ParticleSystem storm;
