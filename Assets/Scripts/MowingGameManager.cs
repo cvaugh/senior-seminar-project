@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MowingGameManager : MonoBehaviour
 {
-    GameObject lawnmower;
-    GameObject grass;
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +16,13 @@ public class MowingGameManager : MonoBehaviour
     {
         
     }
+
+ /*   void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Grass"))
+        {
+            Destroy(other.gameObject);
+        }
+    }*/
 
 }

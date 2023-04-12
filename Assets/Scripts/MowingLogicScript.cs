@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MowingLogicScript : MonoBehaviour
 {
-    public float points;
+    public float points = 0;
     public GameObject lawnmower;
     public GameObject grass;
 
@@ -12,7 +12,7 @@ public class MowingLogicScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        points = 0;
+       
     }
 
     // Update is called once per frame
@@ -27,5 +27,12 @@ public class MowingLogicScript : MonoBehaviour
         points+= 5;
     }
 
-    
+      void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Grass"))
+        {
+            Destroy(other.gameObject);
+            addGrassScore();
+        }
+    }
 }
