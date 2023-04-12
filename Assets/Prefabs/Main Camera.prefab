@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 513395862369757167}
   - component: {fileID: 513395862369757166}
   - component: {fileID: 513395862758312603}
+  - component: {fileID: 6377714017481495685}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -107,6 +108,8 @@ MonoBehaviour:
   highlightMaterial: {fileID: 2100000, guid: 9516ac14e1977a44793f35b203afbcb6, type: 2}
   player: {fileID: 0}
   inventoryManager: {fileID: 0}
+  shopUIManager: {fileID: 0}
+  plantInfoManager: {fileID: 0}
   canvas: {fileID: 0}
 --- !u!114 &513395862369757167
 MonoBehaviour:
@@ -155,3 +158,17 @@ MonoBehaviour:
   inventoryCellPrefab: {fileID: 6946361153688100605, guid: 98cc8f5ad13bd174da7425feaf1ef651, type: 3}
   openButton: {fileID: 0}
   cancelPlantingButton: {fileID: 0}
+--- !u!114 &6377714017481495685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513395862369757160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0fa16c636b5c1e4f9576699b05b0280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopCellPrefab: {fileID: 6946361153688100605, guid: a8136bf6d5a5a114ba779f451cfb0c79, type: 3}
+  inventoryCellPrefab: {fileID: 6946361153688100605, guid: 98cc8f5ad13bd174da7425feaf1ef651, type: 3}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17757814, g: 0.22232307, b: 0.30451822, a: 1}
+  m_IndirectSpecularColor: {r: 0.17757834, g: 0.22232334, b: 0.30451858, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -138,11 +138,6 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4402889624762395109, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
   m_PrefabInstance: {fileID: 4402889624777517223}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &61759383 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 513395862369757160, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
-  m_PrefabInstance: {fileID: 513395862758312601}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &69777562 stripped
 GameObject:
@@ -1109,6 +1104,9 @@ MonoBehaviour:
   canInteractAnywhere: 1
   radius: 3
   hasInteracted: 0
+  soldItems:
+  - seed_packet_pinto_bean
+  - hoe
 --- !u!1 &900034473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,21 +1295,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &963194235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61759383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9642e6667c9781e498df7790d8cfc837, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryCellPrefab: {fileID: 0}
-  openButton: {fileID: 0}
-  cancelPlantingButton: {fileID: 0}
 --- !u!1 &978137516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1464,7 +1447,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1469474868169730694, guid: 658d4ccca97001a4295fc8bc17d575e9, type: 3}
       propertyPath: m_Name
-      value: background music
+      value: Background Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469474868169730694, guid: 658d4ccca97001a4295fc8bc17d575e9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 658d4ccca97001a4295fc8bc17d575e9, type: 3}
@@ -6924,7 +6911,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ad24f5f2a1aaa94468485af49f1ecfb4, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: ffcbe45858878644ca30511a5e2daf71, type: 2}
+      objectReference: {fileID: 2100000, guid: 82b1e9733eb5ba44fbf0ed0927409f90, type: 2}
     - target: {fileID: 919132149155446097, guid: ad24f5f2a1aaa94468485af49f1ecfb4, type: 3}
       propertyPath: m_Name
       value: Monitor
@@ -6936,6 +6923,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ad24f5f2a1aaa94468485af49f1ecfb4, type: 3}
   m_PrefabInstance: {fileID: 1813336324}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1870935787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ad24f5f2a1aaa94468485af49f1ecfb4, type: 3}
+  m_PrefabInstance: {fileID: 1813336324}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1870935790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870935787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1183a04729e7aa74baee8a10404b6fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 82b1e9733eb5ba44fbf0ed0927409f90, type: 2}
+  initialOffset: {x: 0, y: -0.4}
+  frameOffset: {x: 0, y: -0.16666667}
+  rate: 0.054
+  frameCount: 6
 --- !u!1 &1887739874
 GameObject:
   m_ObjectHideFlags: 0
@@ -16934,6 +16943,70 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1600038876}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorDisabled.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorDisabled.b
+      value: 0.447
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorDisabled.g
+      value: 0.42877504
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorDisabled.r
+      value: 0.39291298
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorCanAfford.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorCanAfford.b
+      value: 0.19607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorCanAfford.g
+      value: 0.9137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorCanAfford.r
+      value: 0.4627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorTooExpensive.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorTooExpensive.b
+      value: 0.19607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorTooExpensive.g
+      value: 0.19607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorTooExpensive.r
+      value: 0.9137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorTransactionButton.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorTransactionButton.b
+      value: 0.9490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorTransactionButton.g
+      value: 0.7058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377714017481495685, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
+      propertyPath: colorTransactionButton.r
+      value: 0.22745098
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e1ebc59423d68c4992405125f50bf1d, type: 3}
 --- !u!4 &2247515294449650206 stripped

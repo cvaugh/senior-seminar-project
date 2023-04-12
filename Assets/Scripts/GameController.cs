@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
 
     public PlayerController player;
     public InventoryManager inventoryManager;
+    public ShopUIManager shopUIManager;
     public PlantInfoManager plantInfoManager;
     public Transform canvas;
     public Dictionary<GameObject, Material> highlightedObjects = new Dictionary<GameObject, Material>();
@@ -22,6 +23,7 @@ public class GameController : MonoBehaviour {
         ItemRegistry.Init();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         inventoryManager = GetComponent<InventoryManager>();
+        shopUIManager = GetComponent<ShopUIManager>();
         plantInfoManager = GetComponent<PlantInfoManager>();
         canvas = GameObject.Find("Canvas").transform;
     }
