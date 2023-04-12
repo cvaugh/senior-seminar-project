@@ -53,7 +53,6 @@ public class CountdownTimer : MonoBehaviour
 
             if (introTime <= 0)
             {
-                //introTime = 0;
                 goText.gameObject.SetActive(false);
                 gameCountdownText.gameObject.SetActive(true);
                 gameTime -= 1 * Time.deltaTime;
@@ -81,10 +80,7 @@ public class CountdownTimer : MonoBehaviour
 
             if (gameTime <= 0)
             {
-                //gameTime = 0;
-                timesUpText.gameObject.SetActive(false);
-
-                
+                timesUpText.gameObject.SetActive(false);      
             }
         }
 
