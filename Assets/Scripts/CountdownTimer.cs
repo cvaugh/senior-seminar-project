@@ -60,4 +60,9 @@ public class CountdownTimer : MonoBehaviour
         }
         
     }
+
+    public float getGameTime()
+    {
+        return gameTime;
+    }
 }
