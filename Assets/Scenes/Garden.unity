@@ -162,54 +162,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3793660014202986995, guid: 91ad191d0d03c56438d49046bb05be1c, type: 3}
---- !u!1 &206678784
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 206678786}
-  - component: {fileID: 206678785}
-  m_Layer: 0
-  m_Name: timeOfDay
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &206678785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206678784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a92f0c703068b842abb40438a66c470, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dayDurationSeconds: 10
-  sun: {fileID: 0}
-  currentTimeOfDay: 0
-  weeks: 0
---- !u!4 &206678786
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206678784}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.684933, y: 0.21206093, z: -1.5386543}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &217070281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -735,7 +687,7 @@ MonoBehaviour:
   summerColor: {r: 0.8962264, g: 0.694204, b: 0.42838487, a: 1}
   autumnColor: {r: 0.764151, g: 0.542982, b: 0.3147917, a: 1}
   winterColor: {r: 0.6180135, g: 0.83557224, b: 0.8773585, a: 1}
-  timeOfDay: {fileID: 206678785}
+  timeOfDay: {fileID: 501237426}
   currentWeek: 0
   weeklyForecast: 
 --- !u!4 &501237425
@@ -751,25 +703,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &501237426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501237423}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a92f0c703068b842abb40438a66c470, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dayDurationSeconds: 10
-  sun: {fileID: 900034474}
-  currentTimeOfDay: 0
-  weeks: 0
---- !u!114 &526702365 stripped
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -781,9 +717,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a92f0c703068b842abb40438a66c470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayDurationSeconds: 60
+  dayDurationSeconds: 45
   sun: {fileID: 900034474}
-  currentTimeOfDay: 0
+  currentTimeOfDay: 0.35
+  weeks: 0
 --- !u!1001 &583154826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -991,7 +928,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &789646352
 GameObject:
@@ -1365,21 +1302,6 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 536482687905955829, guid: 06f1a8cc443f66246ae3750f5480d374, type: 3}
   m_PrefabInstance: {fileID: 536482688784885165}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &963194235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61759383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9642e6667c9781e498df7790d8cfc837, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryCellPrefab: {fileID: 0}
-  openButton: {fileID: 0}
-  cancelPlantingButton: {fileID: 0}
 --- !u!1 &978137516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,7 +1406,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 4402889624777517224}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1385321270104799373, guid: 658d4ccca97001a4295fc8bc17d575e9, type: 3}
       propertyPath: m_RootOrder
@@ -1899,17 +1821,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1605702179 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4402889624031656580, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
-  m_PrefabInstance: {fileID: 4402889624777517223}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1613166699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,97 +2169,7 @@ MonoBehaviour:
   frameOffset: {x: 0, y: -0.16666667}
   rate: 0.054
   frameCount: 6
---- !u!1 &1887739874
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1887739877}
-  - component: {fileID: 1887739876}
-  - component: {fileID: 1887739875}
-  m_Layer: 0
-  m_Name: Rain Particles
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!199 &1887739875
-ParticleSystemRenderer:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887739874}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_RenderMode: 1
-  m_MeshDistribution: 0
-  m_SortMode: 0
-  m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
-  m_CameraVelocityScale: 0
-  m_VelocityScale: 0
-  m_LengthScale: 2
-  m_SortingFudge: 0
-  m_NormalDirection: 1
-  m_ShadowBias: 0
-  m_RenderAlignment: 0
-  m_Pivot: {x: 0, y: 0, z: 0}
-  m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
-  m_EnableGPUInstancing: 1
-  m_ApplyActiveColorSpace: 1
-  m_AllowRoll: 1
-  m_FreeformStretching: 0
-  m_RotateWithStretchDirection: 1
-  m_VertexStreams: 00010304
-  m_Mesh: {fileID: 0}
-  m_Mesh1: {fileID: 0}
-  m_Mesh2: {fileID: 0}
-  m_Mesh3: {fileID: 0}
-  m_MeshWeighting: 1
-  m_MeshWeighting1: 1
-  m_MeshWeighting2: 1
-  m_MeshWeighting3: 1
-  m_MaskInteraction: 0
---- !u!198 &1887739876
+--- !u!198 &1887739876 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2456928108224556538, guid: 5f9d7c7ddf93b3141b2e3bf6c1317c3d, type: 3}
   m_PrefabInstance: {fileID: 2456928107427344926}
