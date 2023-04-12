@@ -5,7 +5,6 @@ using UnityEngine;
 public class GrassMoveScript : MonoBehaviour
 {
     public float moveSpeed = 3;
-    //public float timer = 0f;
     public float deadZone = 265;
 
     public CountdownTimer countdownScript;
@@ -13,7 +12,6 @@ public class GrassMoveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //moveSpeed;
         countdownScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<CountdownTimer>();
     }
 
@@ -21,8 +19,6 @@ public class GrassMoveScript : MonoBehaviour
     void Update()
     {
         transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
-        //timer += 1 * Time.deltaTime;
-        print(countdownScript.getGameTime());
         if(countdownScript.getGameTime() <= 30)
         {
             moveSpeed = 5;
