@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour {
         inventory.Add(item);
         SortInventory();
         GameController.instance.inventoryManager.UpdateInventory();
+        GameController.instance.shopUIManager.Reload();
     }
 
     public void SortInventory() {

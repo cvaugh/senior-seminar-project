@@ -4,14 +4,62 @@ using UnityEngine;
 
 public static class ItemRegistry {
     public static readonly List<AbstractInventoryItem> Items = new List<AbstractInventoryItem> {
-        new Plantable("seed_packet_generic", "Seed Packet", "A small packet containing some seeds.", true, true,
-            new Plant("plant_generic", "Generic Plant", 1, 1, 1.0, 1.0, 1.0, "pinto_beans")),
-        new Plantable("seed_packet_pinto_bean", "Pinto Bean Seeds", "A small packet containing some pinto bean seeds.", true, true,
-            new Plant("pinto_bean", "Pinto Bean", 4, 1, 1.0, 20.0, 40.0, "pinto_beans")),
-        new GenericItem("pinto_beans", "Pinto Beans", "Some pinto beans.", false, true)
+        new Plantable(
+            id: "seed_packet_generic",
+            name: "Seed Packet",
+            description: "A small packet containing some seeds.",
+            canUse: true,
+            canDrop: true,
+            value: -1,
+            plant: new Plant(
+                id: "plant_generic",
+                name: "Generic Plant",
+                growthStages: 1,
+                minContainerSize: 1,
+                growthRate: 1.0,
+                growthStageDuration: 1.0,
+                harvestStageDuration: 1.0,
+                harvestItemId: "pinto_beans"
+            )
+        ),
+        new Plantable(
+            id: "seed_packet_pinto_bean",
+            name: "Pinto Bean Seeds",
+            description: "A small packet containing some pinto bean seeds.",
+            canUse: true,
+            canDrop: true,
+            value: 25,
+            plant: new Plant(
+                id: "pinto_bean",
+                name: "Pinto Bean",
+                growthStages: 4,
+                minContainerSize: 1,
+                growthRate: 1.0,
+                growthStageDuration: 20.0,
+                harvestStageDuration: 40.0,
+                harvestItemId: "pinto_beans"
+            )
+        ),
+        new GenericItem(
+            id: "pinto_beans",
+            name: "Pinto Beans",
+            description: "Some pinto beans.",
+            canUse: false,
+            canDrop: true,
+            value: 5
+        ),
+        new HoeItem(
+            id: "hoe",
+            name: "Hoe",
+            description: "A simple hoe.",
+            canUse: true,
+            canDrop: true,
+            value: 100
+        )
     };
 
     public static void Init() {
+        // TODO: use JSON files instead
         foreach(AbstractInventoryItem item in Items) {
             Transform prefab = Resources.Load<Transform>("Items/Prefabs/" + item.id);
             if(prefab == null) {

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HoeItem : AbstractInventoryItem {
 
-    public HoeItem(string id, string name, string description, bool canUse, bool canDrop)
-        : base(id, name, description, canUse, canDrop) {
+    public HoeItem(string id, string name, string description, bool canUse, bool canDrop, int value)
+        : base(id, name, description, canUse, canDrop, value) {
 
     }
 
