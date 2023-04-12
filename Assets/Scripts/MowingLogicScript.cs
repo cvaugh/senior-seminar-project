@@ -27,9 +27,5 @@ public class MowingLogicScript : MonoBehaviour
         points+= 5;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        addGrassScore();
-        Destroy(gameObject);
-    }
+    
 }

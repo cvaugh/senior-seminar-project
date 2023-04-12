@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -323,9 +323,10 @@ GameObject:
   - component: {fileID: 660545633}
   - component: {fileID: 660545635}
   - component: {fileID: 660545634}
-  m_Layer: 0
+  - component: {fileID: 660545636}
+  m_Layer: 10
   m_Name: Lawnmower
-  m_TagString: Untagged
+  m_TagString: Lawnmower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,7 +411,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.41114044, y: 0.0099105835}
+  m_Offset: {x: 0.46561936, y: 0.0148643255}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -421,7 +422,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.1833038, y: 0.98457336}
+  m_Size: {x: 2.2922614, y: 1.2718322}
   m_EdgeRadius: 0
 --- !u!114 &660545634
 MonoBehaviour:
@@ -456,7 +457,69 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
+--- !u!114 &660545636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660545629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b66cc9cebdc5ab74b8df77595025d580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 0
+  lawnmower: {fileID: 660545629}
+  grass: {fileID: 1393570141921766984, guid: 416195bc4c1cddd49b162dfdd0a3895f, type: 3}
+--- !u!1 &665246460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 665246462}
+  - component: {fileID: 665246461}
+  m_Layer: 0
+  m_Name: Minigame Manager
+  m_TagString: GrassSpawner
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &665246461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665246460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b66cc9cebdc5ab74b8df77595025d580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 0
+  lawnmower: {fileID: 660545629}
+  grass: {fileID: 1393570141921766984, guid: 416195bc4c1cddd49b162dfdd0a3895f, type: 3}
+--- !u!4 &665246462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665246460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 90.58998, y: 228.78, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &692221903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,7 +1367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1975699799
 Light:
   m_ObjectHideFlags: 0
