@@ -23,7 +23,7 @@ public static class ItemRegistry {
             )
         ),
         new Plantable(
-            id: "seed_packet_pinto_bean",
+            id: "seed_packet_bean_pinto",
             name: "Pinto Bean Seeds",
             description: "A small packet containing some pinto bean seeds.",
             canUse: true,
