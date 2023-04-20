@@ -25,11 +25,7 @@ public class WeatherManager : MonoBehaviour
     public float winterTime;
 
     public int currentYear;
-
-    private float morningTemp = 10f;
-    private float noonTemp = 20f;
-    private float eveningTemp = 15f;
-    private float nightTemp = 5f;
+    
     private float minSpringTemp = 10f;
     private float maxSpringTemp = 25f;
     private float minSummerTemp = 20f;
@@ -230,10 +226,16 @@ public class WeatherManager : MonoBehaviour
 
     private void UpdateSeason() {
         this.seasonTime -= Time.deltaTime;
+        Weather current = this.currentWeather;
 
         switch (currentSeason) {
             case Season.SPRING:
-                LerpLight(defaultLightColor, defaultLightIntensity + 0.15f);
+                if (current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
+                    Color darkBlue = new Color(0.05f, 0.05f, 0.1f, 1f);
+                    LerpLight(darkBlue, 0.0f);
+                } else {
+                    LerpLight(defaultLightColor, defaultLightIntensity + 0.15f);
+                }
 
                 if (this.seasonTime <= 0f) {
                     ChangeSeason(Season.SUMMER);
@@ -241,13 +243,25 @@ public class WeatherManager : MonoBehaviour
                 }
                 break;
             case Season.SUMMER:
+                if (current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
+                    Color darkBlue = new Color(0.05f, 0.05f, 0.1f, 1f);
+                    LerpLight(darkBlue, 0.0f);
+                } else {
+                    LerpLight(summerColor, summerLightIntensity + 0.35f);
+                }
+
                 if (this.seasonTime <= 0f) {
                     ChangeSeason(Season.AUTUMN);
                     this.seasonTime = this.autumnTime;
                 }
                 break;
             case Season.AUTUMN:
-                LerpLight(autumnColor, autumnLightIntensity + 0.1f);
+                if (current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
+                    Color darkBlue = new Color(0.05f, 0.05f, 0.1f, 1f);
+                    LerpLight(darkBlue, 0.0f);
+                } else {
+                    LerpLight(autumnColor, autumnLightIntensity + 0.1f);
+                }
 
                 if (this.seasonTime <= 0f) {
                     ChangeSeason(Season.WINTER);
@@ -255,7 +269,12 @@ public class WeatherManager : MonoBehaviour
                 }
                 break;
             case Season.WINTER:
-                LerpLight(winterColor, winterLightIntensity + 0.15f);
+                if (current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
+                    Color darkBlue = new Color(0.05f, 0.05f, 0.1f, 1f);
+                    LerpLight(darkBlue, 0.0f);
+                } else {
+                    LerpLight(winterColor, winterLightIntensity + 0.15f);
+                }
 
                 if (this.seasonTime <= 0f) {
                     this.currentYear ++;
