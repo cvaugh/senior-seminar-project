@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WeatherManager : MonoBehaviour
 {
-    public enum Season {NONE, SPRING, SUMMER, AUTUMN, WINTER}; //MONSOON, DROUGHT
-    public enum Weather {NONE, SUNNY, HOTSUN, RAIN, SNOW, HEAVYRAIN, FOGGY, WINDY, THUNDERSTORM}; //DUST
+    public enum Season {NONE, SPRING, SUMMER, AUTUMN, WINTER};
+    public enum Weather {NONE, SUNNY, HOTSUN, RAIN, SNOW, HEAVYRAIN, WINDY, THUNDERSTORM};
 
     public Season currentSeason;
     public Weather currentWeather;
@@ -13,11 +13,9 @@ public class WeatherManager : MonoBehaviour
     public ParticleSystem rain;
     public ParticleSystem heavyRain;
     public ParticleSystem snow;
-    // public ParticleSystem fog;
     public ParticleSystem wind_curved;
     public ParticleSystem wind_straight;
     public ParticleSystem storm;
-    // public ParticleSystem dust;
 
     [Header ("Season settings")]
     public float seasonTime;
@@ -27,6 +25,22 @@ public class WeatherManager : MonoBehaviour
     public float winterTime;
 
     public int currentYear;
+
+    private float morningTemp = 10f;
+    private float noonTemp = 20f;
+    private float eveningTemp = 15f;
+    private float nightTemp = 5f;
+    private float minSpringTemp = 10f;
+    private float maxSpringTemp = 25f;
+    private float minSummerTemp = 20f;
+    private float maxSummerTemp = 35f;
+    private float minAutumnTemp = 5f;
+    private float maxAutumnTemp = 20f;
+    private float minWinterTemp = -10f;
+    private float maxWinterTemp = 5f;
+    public float currentTemp;
+
+    private Dictionary<int, List<float>> temperatureDict = new Dictionary<int, List<float>>();
 
     [Header ("Light settings")]
     public Light sunlight;
@@ -41,6 +55,7 @@ public class WeatherManager : MonoBehaviour
     public Color winterColor;
 
     public TimeOfDay timeOfDay;
+    public int currentDayOfWeek = 0;
     public int currentWeek = 0;
     public List<Weather> weeklyForecast;
     private bool forecastGenerated = false;
@@ -64,12 +79,12 @@ public class WeatherManager : MonoBehaviour
         this.currentSeason = Season.SPRING;
         this.currentWeather = Weather.SUNNY;
         this.currentYear = 1;
+        this.currentDayOfWeek = timeOfDay.GetCurrentDay();
 
         this.seasonTime = this.springTime;
         this.rain.Stop();
         this.snow.Stop();
         this.heavyRain.Stop();
-        // this.fog.Stop();
         this.wind_curved.Stop();
         this.wind_straight.Stop();
         this.storm.Stop();
@@ -78,16 +93,17 @@ public class WeatherManager : MonoBehaviour
         this.defaultLightIntensity = this.sunlight.intensity;
         if (!forecastGenerated) {
             weeklyForecast = GenerateWeeklyForecast();
+            temperatureDict = GenerateTemp(currentSeason, weeklyForecast);
             forecastGenerated = false;
-            currentWeek = timeOfDay.GetCurrentWeek();
+            this.currentWeek = timeOfDay.GetCurrentWeek();
         }
     }
 
     private void UpdateWeather() {
         int currentDayOfWeek = timeOfDay.GetCurrentDay();
-        if (timeOfDay.GetPreviousDay() == 7 && timeOfDay.GetCurrentWeek() != currentWeek) {
+        if (timeOfDay.GetPreviousDay() == 7 && timeOfDay.GetCurrentWeek() != this.currentWeek) {
             weeklyForecast = GenerateWeeklyForecast();
-            currentWeek = timeOfDay.GetCurrentWeek();
+            this.currentWeek = timeOfDay.GetCurrentWeek();
         }
 
         switch (currentDayOfWeek) {
@@ -140,7 +156,7 @@ public class WeatherManager : MonoBehaviour
                     return Weather.WINDY;
                 }
                 else if (springWeather < 0.8f) {
-                    return Weather.FOGGY;
+                    return Weather.HEAVYRAIN;
                 }
                 else if (springWeather < 0.9f) {
                     return Weather.THUNDERSTORM;
@@ -148,7 +164,6 @@ public class WeatherManager : MonoBehaviour
                 else {
                     return Weather.NONE;
                 }
-                break;
             case Season.SUMMER:
                 float summerWeather = Random.Range(0f, 1f);
                 if (summerWeather < 0.3f) {
@@ -169,20 +184,19 @@ public class WeatherManager : MonoBehaviour
                 else {
                     return Weather.NONE;
                 }
-                break;
             case Season.AUTUMN:
                 float autumnWeather = Random.Range(0f, 1f);
                 if (autumnWeather < 0.3f) {
                     return Weather.SUNNY;
                 }
                 else if (autumnWeather < 0.6f) {
-                    return Weather.HOTSUN;
+                    return Weather.WINDY;
                 }
                 else if (autumnWeather < 0.7f) {
                     return Weather.RAIN;
                 }
                 else if (autumnWeather < 0.8f) {
-                    return Weather.WINDY;
+                    return Weather.HEAVYRAIN;
                 }
                 else if (autumnWeather < 0.9f) {
                     return Weather.THUNDERSTORM;
@@ -190,7 +204,6 @@ public class WeatherManager : MonoBehaviour
                 else {
                     return Weather.NONE;
                 }
-                break;
             case Season.WINTER:
                 float winterWeather = Random.Range(0f, 1f);
                 if (winterWeather < 0.4f) {
@@ -203,9 +216,8 @@ public class WeatherManager : MonoBehaviour
                     return Weather.RAIN;
                 }
                 else {
-                    return Weather.NONE;
+                    return Weather.WINDY;
                 }
-                break;
             default: return Weather.NONE;
         }
     }
@@ -262,6 +274,7 @@ public class WeatherManager : MonoBehaviour
     private void FixedUpdate(){
         UpdateSeason();
         UpdateWeather();
+        UpdateTemp();
     }
 
     public void ChangeWeather(Weather weatherType) {
@@ -272,7 +285,6 @@ public class WeatherManager : MonoBehaviour
                     this.rain.Stop();
                     this.snow.Stop();
                     this.heavyRain.Stop();
-                    // this.fog.Stop();
                     this.wind_curved.Stop();
                     this.wind_straight.Stop();
                     this.storm.Stop();
@@ -282,7 +294,6 @@ public class WeatherManager : MonoBehaviour
                     this.rain.Stop();
                     this.snow.Stop();
                     this.heavyRain.Stop();
-                    // this.fog.Stop();
                     this.wind_curved.Stop();
                     this.wind_straight.Stop();
                     this.storm.Stop();
@@ -292,7 +303,6 @@ public class WeatherManager : MonoBehaviour
                     this.rain.Play();
                     this.snow.Stop();
                     this.heavyRain.Stop();
-                    // this.fog.Stop();
                     this.wind_curved.Stop();
                     this.wind_straight.Stop();
                     this.storm.Stop();
@@ -302,17 +312,15 @@ public class WeatherManager : MonoBehaviour
                     this.snow.Play();
                     this.rain.Stop();
                     this.heavyRain.Stop();
-                    // this.fog.Stop();
                     this.wind_curved.Stop();
                     this.wind_straight.Stop();
                     this.storm.Stop();
                     break;
-                case Weather.FOGGY:
-                    currentWeather = Weather.FOGGY;
-                    // this.fog.Play();
+                case Weather.HEAVYRAIN:
+                    currentWeather = Weather.HEAVYRAIN;
+                    this.heavyRain.Play();
                     this.rain.Stop();
                     this.snow.Stop();
-                    this.heavyRain.Stop();
                     this.wind_curved.Stop();
                     this.wind_straight.Stop();
                     this.storm.Stop();
@@ -324,7 +332,6 @@ public class WeatherManager : MonoBehaviour
                     this.rain.Stop();
                     this.snow.Stop();
                     this.heavyRain.Stop();
-                    // this.fog.Stop();
                     this.storm.Stop();
                     break;
                 case Weather.THUNDERSTORM:
@@ -333,7 +340,6 @@ public class WeatherManager : MonoBehaviour
                     this.heavyRain.Play();
                     this.rain.Stop();
                     this.snow.Stop();
-                    // this.fog.Stop();
                     this.wind_curved.Stop();
                     this.wind_straight.Stop();
                     break;
@@ -342,13 +348,162 @@ public class WeatherManager : MonoBehaviour
                     this.rain.Stop();
                     this.snow.Stop();
                     this.heavyRain.Stop();
-                    // this.fog.Stop();
                     this.wind_curved.Stop();
                     this.wind_straight.Stop();
                     this.storm.Stop();
                     break;
             }
         }
+    }
+
+    private void UpdateTemp(){
+
+        if (timeOfDay.GetPreviousDay() == 7 && timeOfDay.GetCurrentWeek() != this.currentWeek) {
+            Season season = this.currentSeason;
+            List<Weather> forecast = this.weeklyForecast;
+            this.temperatureDict = GenerateTemp(season, forecast);
+            
+        }
+
+        int hour = timeOfDay.GetCurrentHour();
+        int day = timeOfDay.GetCurrentDay();
+
+        if (this.currentTemp != this.temperatureDict[day][hour]) {
+            this.currentTemp = this.temperatureDict[day][hour];
+            // Debug.LogError("current temp: " + this.temperatureDict[day][hour]);
+        }
+
+        this.currentDayOfWeek = timeOfDay.GetCurrentDay();
+    }
+
+    public Dictionary<int, List<float>> GenerateTemp(Season season, List<Weather> weatherTypes) {
+        Dictionary<int, List<float>> Dict = new Dictionary<int, List<float>>();
+
+        for (int day = 1; day <= 7; day ++) {
+            List<float> temperatures = new List<float>();
+            Weather weatherType = weatherTypes[day - 1];
+
+            for (int hour = 0; hour < 24; hour ++) {
+                float minTemp, maxTemp;
+                switch (season) {
+                    case Season.SPRING:
+                        minTemp = minSpringTemp;
+                        maxTemp = maxSpringTemp;
+                        switch (weatherType) {
+                            case Weather.NONE:
+                                temperatures.Add(Random.Range(minTemp, maxTemp));
+                                break;
+                            case Weather.SUNNY:
+                                temperatures.Add(Random.Range(minTemp + 2f, maxTemp + 3f));
+                                break;
+                            case Weather.WINDY:
+                                temperatures.Add(Random.Range(minTemp + 3f, maxTemp - 3f));
+                                break;
+                            case Weather.RAIN:
+                                temperatures.Add(Random.Range(minTemp + 1f, maxTemp - 2f));
+                                break;
+                            case Weather.HEAVYRAIN:
+                                temperatures.Add(Random.Range(minTemp - 1f, maxTemp - 3f));
+                                break;
+                            case Weather.THUNDERSTORM:
+                                temperatures.Add(Random.Range(minTemp - 3f, maxTemp - 5f));
+                                break;
+                            default:
+                                Debug.LogError("Unknown weather type");
+                                break;
+                        }
+                        break;
+                    case Season.SUMMER:
+                        minTemp = minSummerTemp;
+                        maxTemp = maxSummerTemp;
+                        switch (weatherType) {
+                            case Weather.NONE:
+                                temperatures.Add(Random.Range(minTemp, maxTemp));
+                                break;
+                            case Weather.SUNNY:
+                                temperatures.Add(Random.Range(minTemp + 2f, maxTemp + 3f));
+                                break;
+                            case Weather.WINDY:
+                                temperatures.Add(Random.Range(minTemp + 1f, maxTemp - 3f));
+                                break;
+                            case Weather.RAIN:
+                                temperatures.Add(Random.Range(minTemp - 1f, maxTemp - 2f));
+                                break;
+                            case Weather.HOTSUN:
+                                temperatures.Add(Random.Range(minTemp + 5f, maxTemp + 5f));
+                                break;
+                            case Weather.THUNDERSTORM:
+                                temperatures.Add(Random.Range(minTemp - 3f, maxTemp - 5f));
+                                break;
+                            default:
+                                Debug.LogError("Unknown weather type");
+                                break;
+                        }
+                        break;
+                    case Season.AUTUMN:
+                        minTemp = minAutumnTemp;
+                        maxTemp = maxAutumnTemp;
+                        switch (weatherType) {
+                            case Weather.NONE:
+                                temperatures.Add(Random.Range(minTemp, maxTemp));
+                                break;
+                            case Weather.WINDY:
+                                temperatures.Add(Random.Range(minTemp - 1f, maxTemp - 3f));
+                                break;
+                            case Weather.RAIN:
+                                temperatures.Add(Random.Range(minTemp + 1f, maxTemp - 2f));
+                                break;
+                            case Weather.SUNNY:
+                                temperatures.Add(Random.Range(minTemp + 3f, maxTemp + 3f));
+                                break;
+                            case Weather.THUNDERSTORM:
+                                temperatures.Add(Random.Range(minTemp - 3f, maxTemp - 5f));
+                                break;
+                            case Weather.HEAVYRAIN:
+                                temperatures.Add(Random.Range(minTemp - 3f, maxTemp - 2f));
+                                break;
+                            default:
+                                Debug.LogError("Unknown weather type");
+                                break;
+                        }
+                        break;
+                    case Season.WINTER:
+                        minTemp = minWinterTemp;
+                        maxTemp = maxWinterTemp;
+                        switch (weatherType) {
+                            case Weather.NONE:
+                                temperatures.Add(Random.Range(minTemp, maxTemp));
+                                break;
+                            case Weather.WINDY:
+                                temperatures.Add(Random.Range(minTemp + 3f, maxTemp - 3f));
+                                break;
+                            case Weather.RAIN:
+                                temperatures.Add(Random.Range(minTemp - 1f, maxTemp - 2f));
+                                break;
+                            case Weather.SNOW:
+                                temperatures.Add(Random.Range(minTemp - 5f, maxTemp - 5f));
+                                break;
+                            case Weather.SUNNY:
+                                temperatures.Add(Random.Range(minTemp + 3f, maxTemp + 3f));
+                                break;
+                            default:
+                                Debug.LogError("Unknown weather type");
+                                break;
+                        }
+                        break;
+                    default: 
+                        Debug.LogError("Unknown season type");
+                        break;
+                }
+            }
+            Dict[day - 1] = temperatures;
+        }
+        return Dict;
+    }
+    
+    // for adjusting growth rate -> current temp
+    public float getCurrentTemp(){
+        return this.currentTemp;
     }
 }
 

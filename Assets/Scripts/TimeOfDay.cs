@@ -55,6 +55,11 @@ public class TimeOfDay : MonoBehaviour
         }
     }
 
+    public int GetCurrentHour() {
+        int currentHour = Mathf.RoundToInt(currentTimeOfDay * 24f);
+        return currentHour;
+    }
+
     public int GetCurrentDay() {
         return currentDayOfWeek;
     }
@@ -63,16 +68,6 @@ public class TimeOfDay : MonoBehaviour
         return weeks;
     }
 
-    // public bool IsNewWeek() {
-    //     previousDayOfWeek = GetPreviousDay();
-    //     if (currentDayOfWeek == 1 && previousDayOfWeek == 7) {
-    //         return true;
-    //     }
-    //     else {
-    //         return false;
-    //     }
-    // }
-
     public int GetPreviousDay() {
         int previousDayOfWeek = currentDayOfWeek - 1;
         if (previousDayOfWeek == 0) {
@@ -80,5 +75,4 @@ public class TimeOfDay : MonoBehaviour
         }
         return previousDayOfWeek;
     }
-    //method for isDayTime(), isAfternoon(), isNightTime()
 }
