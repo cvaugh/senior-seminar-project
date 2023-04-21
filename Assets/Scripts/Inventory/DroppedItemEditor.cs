@@ -16,7 +16,7 @@ public class DroppedItemEditor : Editor {
         int selected = 0;
         string[] options = new string[ItemRegistry.Items.Count];
         int i = 0;
-        foreach(GenericItem item in ItemRegistry.Items) {
+        foreach(AbstractInventoryItem item in ItemRegistry.Items) {
             options[i] = item.id;
             i++;
         }

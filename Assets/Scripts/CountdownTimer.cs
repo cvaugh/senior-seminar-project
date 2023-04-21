@@ -19,6 +19,13 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] Text gameCountdownText;
     [SerializeField] Text timesUpText;
 
+    [SerializeField] Text pointsText;
+    [SerializeField] Text pointNumText;
+
+    [SerializeField] public GameObject lawnmower;
+    [SerializeField] public GameObject grassSpawner;
+    [SerializeField] public GameObject grass;
+
     void Start()
     {
         introTime = startingTime;
@@ -26,6 +33,12 @@ public class CountdownTimer : MonoBehaviour
         tutorialParagraph.gameObject.SetActive(false);
         startButton.gameObject.SetActive(false);
         gameCountdownText.gameObject.SetActive(false);
+        pointsText.gameObject.SetActive(false);
+        pointNumText.gameObject.SetActive(false);
+
+        lawnmower.gameObject.SetActive(false);
+        grassSpawner.gameObject.SetActive(false);
+        grass.gameObject.SetActive(false);
     }
 
     void Update()
@@ -44,19 +57,37 @@ public class CountdownTimer : MonoBehaviour
                 gameCountdownText.gameObject.SetActive(true);
                 gameTime -= 1 * Time.deltaTime;
                 gameCountdownText.text = gameTime.ToString("0");
+
+                pointsText.gameObject.SetActive(true);
+                pointNumText.gameObject.SetActive(true);
+
+                lawnmower.gameObject.SetActive(true);
+                grassSpawner.gameObject.SetActive(true);
+                grass.gameObject.SetActive(true);
             }
+  
+        }
+        if (gameTime <= 1)
+        {
+            gameCountdownText.gameObject.SetActive(false);
+            pointsText.gameObject.SetActive(false);
+            pointNumText.gameObject.SetActive(false);
+            timesUpText.gameObject.SetActive(true);
 
-            if (gameTime <= 1)
+            lawnmower.gameObject.SetActive(false);
+            grassSpawner.gameObject.SetActive(false);
+            grass.gameObject.SetActive(false);
+
+            if (gameTime <= 0)
             {
-                gameCountdownText.gameObject.SetActive(false);
-                timesUpText.gameObject.SetActive(true);
-
-                if(gameTime <= 0)
-                {
-                    timesUpText.gameObject.SetActive(false);
-                }
+                timesUpText.gameObject.SetActive(false);      
             }
         }
-        
+
+    }
+
+    public float getGameTime()
+    {
+        return gameTime;
     }
 }

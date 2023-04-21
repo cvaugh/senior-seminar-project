@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
 
     public PlayerController player;
     public InventoryManager inventoryManager;
+    public ShopUIManager shopUIManager;
     public PlantInfoManager plantInfoManager;
     public Transform canvas;
     public Dictionary<GameObject, Material> highlightedObjects = new Dictionary<GameObject, Material>();
@@ -22,6 +23,7 @@ public class GameController : MonoBehaviour {
         ItemRegistry.Init();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         inventoryManager = GetComponent<InventoryManager>();
+        shopUIManager = GetComponent<ShopUIManager>();
         plantInfoManager = GetComponent<PlantInfoManager>();
         canvas = GameObject.Find("Canvas").transform;
     }
@@ -37,6 +39,7 @@ public class GameController : MonoBehaviour {
         }
         SceneData.currentScene = SceneManager.GetActiveScene().name;
         loadingBlocker.gameObject.SetActive(false);
+        BalanceManager.Set(200); // FOR DEMO ONLY
     }
 
     public void LoadScene(string scene) {
@@ -59,10 +62,6 @@ public class GameController : MonoBehaviour {
             obj.GetComponent<MeshRenderer>().material = highlightedObjects[obj];
         }
         highlightedObjects.Clear();
-    }
-
-    public static double CurrentTimeMillis() {
-        return System.DateTime.Now.ToUniversalTime().Subtract(System.DateTime.UnixEpoch).TotalMilliseconds;
     }
 }
 

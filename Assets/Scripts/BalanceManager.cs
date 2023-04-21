@@ -14,6 +14,10 @@ public static class BalanceManager {
         return cost <= balance;
     }
 
+    public static bool CanAfford(AbstractInventoryItem item) {
+        return CanAfford(item.value);
+    }
+
     public static int Get() {
         return balance;
     }

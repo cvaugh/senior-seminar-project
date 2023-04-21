@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopManager : Interactable {
+    public string[] soldItems;
+    public List<AbstractInventoryItem> inventory = new List<AbstractInventoryItem>();
 
     void Start() {
-        
-    }
-
-    void Update() {
-        
+        foreach(string id in soldItems) {
+            inventory.Add(ItemRegistry.GetById(id));
+        }
     }
 
     public override void Interact(PlayerController player) {
-        // TODO
-        throw new System.NotImplementedException();
+        GameController.instance.shopUIManager.Show(this);
     }
 }

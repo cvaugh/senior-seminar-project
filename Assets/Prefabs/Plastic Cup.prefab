@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4499979408656243309}
   m_Layer: 0
   m_Name: Plastic Cup
-  m_TagString: Untagged
+  m_TagString: PlantContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,8 +113,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799cea3fe09d83f4fa1e62fb243d450a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canInteractAnywhere: 0
   radius: 0.9
+  hasInteracted: 0
   maxSize: 1
+  constantMoisture: -1
   plantAttachmentPoint: {fileID: 0}
 --- !u!1 &4499979409336471382
 GameObject:

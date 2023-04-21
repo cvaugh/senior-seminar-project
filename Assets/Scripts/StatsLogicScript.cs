@@ -42,4 +42,8 @@ public class StatsLogicScript : MonoBehaviour
     {
        
     }
+
+    private void Update() {
+        coinNumText.text = BalanceManager.Get().ToString();
+    }
 }
