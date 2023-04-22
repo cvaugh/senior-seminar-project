@@ -10,6 +10,7 @@ public class InventoryManager : MonoBehaviour {
     public Button openButton;
     [HideInInspector]
     public Button cancelPlantingButton;
+    public Button cancelPlacementButton;
     private Transform inventoryParent;
     private Transform itemContainer;
     private Button closeButton;
@@ -31,6 +32,8 @@ public class InventoryManager : MonoBehaviour {
         itemInfo = inventoryParent.Find("Info Panel/Item Info").GetComponent<TMP_Text>();
         cancelPlantingButton = GameController.instance.canvas.Find("Cancel Planting Button").GetComponent<Button>();
         cancelPlantingButton.onClick.AddListener(CancelPlanting);
+        cancelPlacementButton = GameController.instance.canvas.Find("Cancel Placement Button").GetComponent<Button>();
+        cancelPlacementButton.onClick.AddListener(CancelPlacement);
         HideInventory();
     }
 
@@ -96,5 +99,29 @@ public class InventoryManager : MonoBehaviour {
         openButton.gameObject.SetActive(true);
         GameController.instance.UnHighlightPlantContainers();
         GameController.instance.player.currentlyPlanting = null;
+    }
+
+    public void StartPlacement(Transform prefab, float gridSize) {
+        openButton.gameObject.SetActive(false);
+        cancelPlacementButton.gameObject.SetActive(true);
+        GameController.instance.player.currentlyPlacing = Instantiate(prefab,
+            GameController.instance.player.transform.position, prefab.rotation);
+        GameController.instance.player.placementGridSnapping = gridSize;
+    }
+
+    public void StartPlacement(Transform prefab) {
+        StartPlacement(prefab, -1.0f);
+    }
+
+    public void CompletePlacement() {
+        cancelPlacementButton.gameObject.SetActive(false);
+        openButton.gameObject.SetActive(true);
+        GameController.instance.player.currentlyPlacing = null;
+        GameController.instance.player.placementGridSnapping = -1.0f;
+    }
+
+    public void CancelPlacement() {
+        Destroy(GameController.instance.player.currentlyPlacing.gameObject);
+        CompletePlacement();
     }
 }

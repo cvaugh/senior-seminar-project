@@ -14,13 +14,6 @@ public class HoeItem : AbstractInventoryItem {
     }
 
     public override void Use(PlayerController player) {
-        Vector3 playerPos = GameController.instance.player.transform.position;
-        Vector3 pos = new Vector3(Mathf.Round(playerPos.x / gridSize) * gridSize, 0.01f,
-                                  Mathf.Round(playerPos.z / gridSize) * gridSize);
-        Collider[] nearby = Physics.OverlapSphere(pos, gridSize / 4.0f);
-        foreach(Collider collider in nearby) {
-            if(collider.GetComponent<PlantContainer>() != null || collider.tag == "DroppedItem") return;
-        }
-        Object.Instantiate(tilledPrefab, pos, tilledPrefab.rotation);
+        GameController.instance.inventoryManager.StartPlacement(tilledPrefab, gridSize);
     }
 }
