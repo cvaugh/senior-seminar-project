@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Plantable : AbstractInventoryItem {
-    public readonly Plant plant;
+    public Plant plant;
 
     public Plantable(string id, string name, string description, bool canUse, bool canDrop, int value, Plant plant)
             : base(id, name, description, canUse, canDrop, value) {

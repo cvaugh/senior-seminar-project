@@ -90,4 +90,9 @@ public class Plant {
             return growthStagePrefabs[currentGrowthStage];
         }
     }
+
+    public Plant Clone() {
+        return new Plant(id, name, growthStages, minContainerSize, growthRate, growthStageDuration,
+            harvestStageDuration, harvestItemId);
+    }
 }
