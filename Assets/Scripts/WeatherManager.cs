@@ -36,7 +36,8 @@ public class WeatherManager : MonoBehaviour
     private float maxWinterTemp = 5f;
     public float currentTemp;
 
-    private Dictionary<int, List<float>> temperatureDict = new Dictionary<int, List<float>>();
+    private Dictionary<int, List<float>> temperatureDict;
+
 
     [Header ("Light settings")]
     public Light sunlight;
@@ -51,6 +52,7 @@ public class WeatherManager : MonoBehaviour
     public Color winterColor;
 
     public TimeOfDay timeOfDay;
+    public int currentHour = 0;
     public int currentDayOfWeek = 0;
     public int currentWeek = 0;
     public List<Weather> weeklyForecast;
@@ -89,7 +91,6 @@ public class WeatherManager : MonoBehaviour
         this.defaultLightIntensity = this.sunlight.intensity;
         if (!forecastGenerated) {
             weeklyForecast = GenerateWeeklyForecast();
-            temperatureDict = GenerateTemp(currentSeason, weeklyForecast);
             forecastGenerated = false;
             this.currentWeek = timeOfDay.GetCurrentWeek();
         }
@@ -377,32 +378,30 @@ public class WeatherManager : MonoBehaviour
 
     private void UpdateTemp(){
 
-        if (timeOfDay.GetPreviousDay() == 7 && timeOfDay.GetCurrentWeek() != this.currentWeek) {
+        this.currentDayOfWeek = timeOfDay.GetCurrentDay();
+        this.currentHour = timeOfDay.GetCurrentHour();
+
+        if ((timeOfDay.GetPreviousDay() == 7 && timeOfDay.GetCurrentWeek() != this.currentWeek) || (this.temperatureDict == null)) {
             Season season = this.currentSeason;
             List<Weather> forecast = this.weeklyForecast;
             this.temperatureDict = GenerateTemp(season, forecast);
             
         }
 
-        int hour = timeOfDay.GetCurrentHour();
-        int day = timeOfDay.GetCurrentDay();
-
-        if (this.currentTemp != this.temperatureDict[day][hour]) {
-            this.currentTemp = this.temperatureDict[day][hour];
-            // Debug.LogError("current temp: " + this.temperatureDict[day][hour]);
+        if (this.currentTemp != this.temperatureDict[this.currentDayOfWeek - 1][this.currentHour]) {
+            this.currentTemp = this.temperatureDict[this.currentDayOfWeek - 1][this.currentHour];
+            // Debug.LogError("current temp: " + this.temperatureDict[this.currentDayOfWeek - 1][hour]);
         }
-
-        this.currentDayOfWeek = timeOfDay.GetCurrentDay();
     }
 
     public Dictionary<int, List<float>> GenerateTemp(Season season, List<Weather> weatherTypes) {
         Dictionary<int, List<float>> Dict = new Dictionary<int, List<float>>();
 
-        for (int day = 1; day <= 7; day ++) {
+        for (int day = 0; day <= 6; day ++) {
             List<float> temperatures = new List<float>();
-            Weather weatherType = weatherTypes[day - 1];
+            Weather weatherType = weatherTypes[day];
 
-            for (int hour = 0; hour < 24; hour ++) {
+            for (int hour = 0; hour <= 24; hour ++) {
                 float minTemp, maxTemp;
                 switch (season) {
                     case Season.SPRING:
@@ -428,7 +427,7 @@ public class WeatherManager : MonoBehaviour
                                 temperatures.Add(Random.Range(minTemp - 3f, maxTemp - 5f));
                                 break;
                             default:
-                                Debug.LogError("Unknown weather type");
+                                temperatures.Add(0);
                                 break;
                         }
                         break;
@@ -455,7 +454,7 @@ public class WeatherManager : MonoBehaviour
                                 temperatures.Add(Random.Range(minTemp - 3f, maxTemp - 5f));
                                 break;
                             default:
-                                Debug.LogError("Unknown weather type");
+                                temperatures.Add(0);
                                 break;
                         }
                         break;
@@ -482,7 +481,7 @@ public class WeatherManager : MonoBehaviour
                                 temperatures.Add(Random.Range(minTemp - 3f, maxTemp - 2f));
                                 break;
                             default:
-                                Debug.LogError("Unknown weather type");
+                                temperatures.Add(0);
                                 break;
                         }
                         break;
@@ -506,7 +505,7 @@ public class WeatherManager : MonoBehaviour
                                 temperatures.Add(Random.Range(minTemp + 3f, maxTemp + 3f));
                                 break;
                             default:
-                                Debug.LogError("Unknown weather type");
+                                temperatures.Add(0);
                                 break;
                         }
                         break;
@@ -515,7 +514,7 @@ public class WeatherManager : MonoBehaviour
                         break;
                 }
             }
-            Dict[day - 1] = temperatures;
+            Dict[day] = temperatures;
         }
         return Dict;
     }
