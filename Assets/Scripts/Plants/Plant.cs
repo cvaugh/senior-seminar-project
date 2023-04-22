@@ -78,7 +78,7 @@ public class Plant {
     public void Harvest() {
         currentGrowthStage = growthStages - 1;
         growth = growthStageDuration * currentGrowthStage;
-        GameController.instance.player.AddItem(ItemRegistry.GetById(harvestItemId));
+        GameController.instance.player.AddItem(ItemRegistry.GetItemById(harvestItemId));
     }
 
     public Transform GetCurrentPrefab() {

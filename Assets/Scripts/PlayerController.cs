@@ -43,8 +43,8 @@ public class PlayerController : MonoBehaviour {
                     GameController.instance.inventoryManager.CompletePlacement();
                 } else if(currentlyPlanting != null && hit.transform.GetComponent<PlantContainer>() != null) {
                     PlantContainer pc = hit.transform.GetComponent<PlantContainer>();
-                    if(pc.maxSize >= currentlyPlanting.plant.minContainerSize) {
-                        pc.PlacePlant(currentlyPlanting.plant.Clone());
+                    if(pc.maxSize >= currentlyPlanting.GetPlant().minContainerSize) {
+                        pc.PlacePlant(currentlyPlanting.GetPlant().Clone());
                         inventory.Remove(currentlyPlanting);
                         GameController.instance.inventoryManager.CancelPlanting();
                     }

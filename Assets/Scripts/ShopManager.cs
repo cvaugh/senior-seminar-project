@@ -8,7 +8,7 @@ public class ShopManager : Interactable {
 
     void Start() {
         foreach(string id in soldItems) {
-            inventory.Add(ItemRegistry.GetById(id));
+            inventory.Add(ItemRegistry.GetItemById(id));
         }
     }
 
