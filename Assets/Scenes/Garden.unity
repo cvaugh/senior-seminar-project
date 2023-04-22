@@ -475,7 +475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b45ccdef9c6596840abfcfdcbb9b3444, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.249
+      value: 3.475
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b45ccdef9c6596840abfcfdcbb9b3444, type: 3}
       propertyPath: m_LocalPosition.z
@@ -520,7 +520,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b45ccdef9c6596840abfcfdcbb9b3444, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fb92fc578dcb56b4baeaca548b04ca13, type: 2}
+      objectReference: {fileID: -4814304853796003176, guid: 82fcae5f51f768f45881a644a63ee2aa, type: 3}
     - target: {fileID: 919132149155446097, guid: b45ccdef9c6596840abfcfdcbb9b3444, type: 3}
       propertyPath: m_Name
       value: house_ceiling
@@ -1003,6 +1003,7 @@ MonoBehaviour:
   canInteractAnywhere: 1
   radius: 3
   hasInteracted: 0
+  title: Shop
   soldItems:
   - seed_packet_bean_pinto
   - hoe
@@ -1198,6 +1199,11 @@ Light:
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 536482687905955829, guid: 06f1a8cc443f66246ae3750f5480d374, type: 3}
   m_PrefabInstance: {fileID: 536482688784885165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &938282020 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: b45ccdef9c6596840abfcfdcbb9b3444, type: 3}
+  m_PrefabInstance: {fileID: 415055845}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &978137516
 GameObject:
@@ -1625,6 +1631,7 @@ Transform:
   - {fileID: 1780028660}
   - {fileID: 1581980226}
   - {fileID: 883348581}
+  - {fileID: 1985502693}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2232,6 +2239,66 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1985502692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1985502693}
+  - component: {fileID: 1985502694}
+  - component: {fileID: 1985502695}
+  m_Layer: 2
+  m_Name: HouseBounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1985502693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985502692}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1518395240}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1985502694
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985502692}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15.75, y: 4, z: 15}
+  m_Center: {x: 1.125, y: 1.5, z: -0.125}
+--- !u!114 &1985502695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985502692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d66d432be82072448121febaed8d92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 938282020}
+  startVisible: 0
 --- !u!198 &2092134953 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 920546926660422402, guid: 696c7e7a11c7259458c99cb0caa4cdfc, type: 3}

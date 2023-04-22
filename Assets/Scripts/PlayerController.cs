@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
-    public List<AbstractInventoryItem> inventory = new List<AbstractInventoryItem>();
+    public static List<AbstractInventoryItem> inventory = new List<AbstractInventoryItem>();
     public Interactable focus;
     public Transform itemDropPoint;
     public Plantable currentlyPlanting = null;
@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         if(currentlyPlacing != null) {
             RaycastHit hit;
-
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
                 Vector3 pos = hit.point;
                 if(placementGridSnapping > 0) {
@@ -37,7 +36,6 @@ public class PlayerController : MonoBehaviour {
 
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
             RaycastHit hit;
-
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
                 if(currentlyPlacing != null) {
                     GameController.instance.inventoryManager.CompletePlacement();
@@ -59,6 +57,12 @@ public class PlayerController : MonoBehaviour {
                     agent.destination = hit.point;
                     RemoveFocus();
                 }
+            }
+        } else if(currentlyPlacing == null && Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject()) {
+            RaycastHit hit;
+            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
+                agent.destination = hit.point;
+                RemoveFocus();
             }
         }
 

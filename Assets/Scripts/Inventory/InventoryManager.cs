@@ -42,11 +42,11 @@ public class InventoryManager : MonoBehaviour {
         GameController.instance.player.SortInventory();
         openButton.gameObject.SetActive(false);
         inventoryParent.gameObject.SetActive(true);
-        for(int i = 0; i < GameController.instance.player.inventory.Count; i++) {
+        for(int i = 0; i < PlayerController.inventory.Count; i++) {
             Transform cell = Instantiate(inventoryCellPrefab, itemContainer);
             int cachedIndex = i;
             cell.GetComponent<Button>().onClick.AddListener(() => SelectItem(cachedIndex));
-            cell.GetChild(0).GetComponent<Image>().sprite = GameController.instance.player.inventory[i].icon;
+            cell.GetChild(0).GetComponent<Image>().sprite = PlayerController.inventory[i].icon;
         }
     }
 
@@ -66,7 +66,7 @@ public class InventoryManager : MonoBehaviour {
     }
 
     public void SelectItem(int index) {
-        AbstractInventoryItem item = GameController.instance.player.inventory[index];
+        AbstractInventoryItem item = PlayerController.inventory[index];
         itemName.text = item.name;
         itemInfo.text = item.description;
         useButton.enabled = item.canUse;

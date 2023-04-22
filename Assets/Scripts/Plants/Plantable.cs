@@ -18,6 +18,6 @@ public class Plantable : AbstractInventoryItem {
     }
 
     public Plant GetPlant() {
-        return ItemRegistry.GetPlantById(plant);
+        return PlantRegistry.GetById(plant);
     }
 }
