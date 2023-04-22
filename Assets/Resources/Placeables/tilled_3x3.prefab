@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2928191037498789124}
   - component: {fileID: 8993491882490109768}
   m_Layer: 0
-  m_Name: tilled_2x2
+  m_Name: tilled_3x3
   m_TagString: PlantContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   canInteractAnywhere: 1
   radius: 1
   hasInteracted: 0
-  maxSize: 2
+  maxSize: 3
   constantMoisture: -1
   plantAttachmentPoint: {fileID: 0}
 --- !u!1 &8993491882360378982

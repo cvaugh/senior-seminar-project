@@ -51,7 +51,7 @@ public static class ItemRegistry {
                 id: "wheat_plant",
                 name: "Wheat",
                 growthStages: 4,
-                minContainerSize: 2,
+                minContainerSize: 3,
                 growthRate: 1.0,
                 growthStageDuration: 40.0,
                 harvestStageDuration: 40.0,
@@ -74,13 +74,15 @@ public static class ItemRegistry {
             canDrop: true,
             value: 20
         ),
-        new HoeItem(
+        new Placeable(
             id: "hoe",
             name: "Hoe",
             description: "A simple hoe.",
             canUse: true,
             canDrop: true,
-            value: 100
+            value: 100,
+            gridSize: 1.2f,
+            prefabId: "tilled_3x3"
         )
     };
 
