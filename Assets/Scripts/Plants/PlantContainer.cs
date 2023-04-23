@@ -8,14 +8,23 @@ public class PlantContainer : Interactable {
     public float constantMoisture = -1f;
     public Plant plant;
     public Transform plantAttachmentPoint;
+    public Color soilColorDry = new Color(0.4245283f, 0.3152183f, 0.1782217f, 1.0f);
+    public Color soilColorWet = new Color(0.149f, 0.0885879f, 0.014751f, 1.0f);
     private Transform plantTransform;
     private int currentGrowthStage = -1;
     private float moisture = 0.0f;
+    private Material soilMaterial;
 
     void Start() {
         Assert.IsTrue(maxSize > 0);
         plantAttachmentPoint = transform.GetChild(0);
         canInteractAnywhere = true;
+        foreach(Material mat in GetComponent<MeshRenderer>().materials) {
+            if(mat.name.StartsWith("soil")) {
+                soilMaterial = mat;
+                break;
+            }
+        }
     }
 
     void FixedUpdate() {
@@ -37,6 +46,12 @@ public class PlantContainer : Interactable {
                 plantTransform.localRotation = Quaternion.identity;
                 currentGrowthStage = plant.currentGrowthStage;
             }
+        }
+    }
+
+    void Update() {
+        if(soilMaterial != null) {
+            soilMaterial.color = Color.Lerp(soilColorDry, soilColorWet, GetMoisture());
         }
     }
 

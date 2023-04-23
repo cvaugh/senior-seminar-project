@@ -119,6 +119,8 @@ MonoBehaviour:
   maxSize: 1
   constantMoisture: -1
   plantAttachmentPoint: {fileID: 0}
+  soilColorDry: {r: 0.42352942, g: 0.3137255, b: 0.1764706, a: 1}
+  soilColorWet: {r: 0.149, g: 0.0885879, b: 0.014751, a: 1}
 --- !u!1 &4499979409336471382
 GameObject:
   m_ObjectHideFlags: 0

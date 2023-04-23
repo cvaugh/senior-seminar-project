@@ -24,4 +24,8 @@ public class TextureScroller : MonoBehaviour {
             material.mainTextureOffset = initialOffset;
         }
     }
+
+    void OnApplicationQuit() {
+        material.mainTextureOffset = initialOffset;
+    }
 }
