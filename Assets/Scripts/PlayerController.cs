@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public Transform itemDropPoint;
     public Plantable currentlyPlanting = null;
     public Transform currentlyPlacing = null;
+    public bool currentlyWatering = false;
     public float placementGridSnapping = -1.0f;
     private NavMeshAgent agent;
     private Transform target;
@@ -58,7 +59,8 @@ public class PlayerController : MonoBehaviour {
                     RemoveFocus();
                 }
             }
-        } else if(currentlyPlacing == null && Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject()) {
+        } else if(currentlyPlacing == null && Input.GetMouseButton(0) && !Input.GetMouseButtonUp(0)
+                  && !EventSystem.current.IsPointerOverGameObject()) {
             RaycastHit hit;
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
                 agent.destination = hit.point;
@@ -67,7 +69,6 @@ public class PlayerController : MonoBehaviour {
         }
 
         if(target != null && Vector3.Distance(transform.position, target.transform.position) > 0.3) {
-            agent.SetDestination(target.position);
             FaceTarget();
         }
     }

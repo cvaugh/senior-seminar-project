@@ -11,6 +11,7 @@ public class InventoryManager : MonoBehaviour {
     [HideInInspector]
     public Button cancelPlantingButton;
     public Button cancelPlacementButton;
+    public Button cancelWateringButton;
     private Transform inventoryParent;
     private Transform itemContainer;
     private Button closeButton;
@@ -34,6 +35,8 @@ public class InventoryManager : MonoBehaviour {
         cancelPlantingButton.onClick.AddListener(CancelPlanting);
         cancelPlacementButton = GameController.instance.canvas.Find("Cancel Placement Button").GetComponent<Button>();
         cancelPlacementButton.onClick.AddListener(CancelPlacement);
+        cancelWateringButton = GameController.instance.canvas.Find("Cancel Watering Button").GetComponent<Button>();
+        cancelWateringButton.onClick.AddListener(StopWatering);
         HideInventory();
     }
 
@@ -123,5 +126,11 @@ public class InventoryManager : MonoBehaviour {
     public void CancelPlacement() {
         Destroy(GameController.instance.player.currentlyPlacing.gameObject);
         CompletePlacement();
+    }
+
+    public void StopWatering() {
+        openButton.gameObject.SetActive(true);
+        cancelWateringButton.gameObject.SetActive(false);
+        GameController.instance.player.currentlyWatering = false;
     }
 }

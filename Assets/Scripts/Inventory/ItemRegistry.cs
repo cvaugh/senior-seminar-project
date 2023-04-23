@@ -52,9 +52,18 @@ public static class ItemRegistry {
             description: "A simple hoe.",
             canUse: true,
             canDrop: true,
-            value: 100,
+            value: 150,
             gridSize: 1.2f,
             prefabId: "tilled_3x3"
+        ),
+        new WateringCan(
+            id: "watering_can",
+            name: "Watering Can",
+            description: "Used for watering plants.",
+            canUse: true,
+            canDrop: true,
+            value: 100,
+            maxUses: 5
         )
     };
 

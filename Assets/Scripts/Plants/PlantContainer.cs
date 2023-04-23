@@ -34,6 +34,7 @@ public class PlantContainer : Interactable {
             if(plant.currentGrowthStage != currentGrowthStage) {
                 Destroy(plantTransform.gameObject);
                 plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
+                plantTransform.localRotation = Quaternion.identity;
                 currentGrowthStage = plant.currentGrowthStage;
             }
         }
@@ -41,7 +42,7 @@ public class PlantContainer : Interactable {
 
     public override void Interact(PlayerController player) {
         if(plant == null) {
-            // TODO
+            // TODO pick up
             throw new System.NotImplementedException();
         } else {
             GameController.instance.plantInfoManager.Show(this);
@@ -52,15 +53,20 @@ public class PlantContainer : Interactable {
         this.plant = plant;
         currentGrowthStage = 0;
         plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
+        plantTransform.localRotation = Quaternion.identity;
+    }
+
+    public void RemovePlant() {
+        plant = null;
+        currentGrowthStage = -1;
+        Destroy(plantTransform.gameObject);
     }
 
     public float GetMoisture() {
-        if(moisture > 1.0f) {
-            return 1.0f;
-        } else if(moisture < 0.0f) {
-            return 0.0f;
-        } else {
-            return moisture;
-        }
+        return Mathf.Clamp01(moisture);
+    }
+    
+    public void SetMoisture(float moisture) {
+        this.moisture = Mathf.Clamp01(moisture);
     }
 }

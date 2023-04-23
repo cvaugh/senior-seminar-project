@@ -10,7 +10,8 @@ public static class PlantRegistry {
             growthRate: 1.0,
             growthStageDuration: 1.0,
             harvestStageDuration: 1.0,
-            harvestItemId: "pinto_beans"
+            harvestItemId: "pinto_beans",
+            destroyOnHarvest: true
         ),
         new Plant(
             id: "pinto_bean",
@@ -20,7 +21,8 @@ public static class PlantRegistry {
             growthRate: 1.0,
             growthStageDuration: 20.0,
             harvestStageDuration: 40.0,
-            harvestItemId: "pinto_beans"
+            harvestItemId: "pinto_beans",
+            destroyOnHarvest: false
         ),
         new Plant(
             id: "wheat_plant",
@@ -30,7 +32,8 @@ public static class PlantRegistry {
             growthRate: 1.0,
             growthStageDuration: 40.0,
             harvestStageDuration: 40.0,
-            harvestItemId: "wheat"
+            harvestItemId: "wheat",
+            destroyOnHarvest: true
         )
     };
 
