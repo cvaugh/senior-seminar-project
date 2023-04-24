@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopManager : Interactable {
+    public string title = "shop";
     public string[] soldItems;
     public List<AbstractInventoryItem> inventory = new List<AbstractInventoryItem>();
 

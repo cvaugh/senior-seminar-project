@@ -5,10 +5,13 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
-    public List<AbstractInventoryItem> inventory = new List<AbstractInventoryItem>();
+    public static List<AbstractInventoryItem> inventory = new List<AbstractInventoryItem>();
     public Interactable focus;
     public Transform itemDropPoint;
     public Plantable currentlyPlanting = null;
+    public Transform currentlyPlacing = null;
+    public bool currentlyWatering = false;
+    public float placementGridSnapping = -1.0f;
     private NavMeshAgent agent;
     private Transform target;
     private int raycastMask;
@@ -20,14 +23,27 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
+        if(currentlyPlacing != null) {
+            RaycastHit hit;
+            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
+                Vector3 pos = hit.point;
+                if(placementGridSnapping > 0) {
+                    pos = new Vector3(Mathf.Round(pos.x / placementGridSnapping) * placementGridSnapping, 0.0f,
+                        Mathf.Round(pos.z / placementGridSnapping) * placementGridSnapping);
+                }
+                currentlyPlacing.transform.position = pos;
+            }
+        }
+
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
             RaycastHit hit;
-
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
-                if(currentlyPlanting != null && hit.transform.GetComponent<PlantContainer>() != null) {
+                if(currentlyPlacing != null) {
+                    GameController.instance.inventoryManager.CompletePlacement();
+                } else if(currentlyPlanting != null && hit.transform.GetComponent<PlantContainer>() != null) {
                     PlantContainer pc = hit.transform.GetComponent<PlantContainer>();
-                    if(pc.maxSize <= currentlyPlanting.plant.minContainerSize) {
-                        pc.PlacePlant(currentlyPlanting.plant);
+                    if(pc.maxSize >= currentlyPlanting.GetPlant().minContainerSize) {
+                        pc.PlacePlant(currentlyPlanting.GetPlant().Clone());
                         inventory.Remove(currentlyPlanting);
                         GameController.instance.inventoryManager.CancelPlanting();
                     }
@@ -43,16 +59,29 @@ public class PlayerController : MonoBehaviour {
                     RemoveFocus();
                 }
             }
+        } else if(currentlyPlacing == null && Input.GetMouseButton(0) && !Input.GetMouseButtonUp(0)
+                  && !EventSystem.current.IsPointerOverGameObject()) {
+            RaycastHit hit;
+            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
+                agent.destination = hit.point;
+                RemoveFocus();
+            }
         }
 
         if(target != null && Vector3.Distance(transform.position, target.transform.position) > 0.3) {
-            agent.SetDestination(target.position);
             FaceTarget();
         }
     }
 
     public void AddItem(AbstractInventoryItem item) {
         inventory.Add(item);
+        SortInventory();
+        GameController.instance.inventoryManager.UpdateInventory();
+        GameController.instance.shopUIManager.Reload();
+    }
+
+    public void RemoveItem(AbstractInventoryItem item) {
+        inventory.Remove(item);
         SortInventory();
         GameController.instance.inventoryManager.UpdateInventory();
         GameController.instance.shopUIManager.Reload();

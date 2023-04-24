@@ -16,12 +16,13 @@ public class Plant {
     public readonly double growthStageDuration;
     public readonly double harvestStageDuration;
     public readonly string harvestItemId;
+    public readonly bool destroyOnHarvest;
 
     public double growth = 0.0;
     public int currentGrowthStage = 0;
 
     public Plant(string id, string name, int growthStages, int minContainerSize, double growthRate,
-                 double growthStageDuration, double harvestStageDuration, string harvestItemId) {
+                 double growthStageDuration, double harvestStageDuration, string harvestItemId, bool destroyOnHarvest) {
         this.id = id;
         this.name = name;
         this.growthStages = growthStages;
@@ -30,6 +31,7 @@ public class Plant {
         this.growthStageDuration = growthStageDuration;
         this.harvestStageDuration = harvestStageDuration;
         this.harvestItemId = harvestItemId;
+        this.destroyOnHarvest = destroyOnHarvest;
         growthStagePrefabs = new Transform[growthStages];
         for(int i = 0; i < growthStages; i++) {
             Transform prefab = Resources.Load<Transform>("Plants/Prefabs/" + id + "/stage_" + i);
@@ -75,10 +77,15 @@ public class Plant {
         return currentGrowthStage == growthStages + 1;
     }
 
-    public void Harvest() {
-        currentGrowthStage = growthStages - 1;
-        growth = growthStageDuration * currentGrowthStage;
+    public bool Harvest() {
         GameController.instance.player.AddItem(ItemRegistry.GetById(harvestItemId));
+        if(destroyOnHarvest) {
+            return true;
+        } else {
+            currentGrowthStage = growthStages - 1;
+            growth = growthStageDuration * currentGrowthStage;
+            return false;
+        }
     }
 
     public Transform GetCurrentPrefab() {
@@ -89,5 +96,10 @@ public class Plant {
         } else {
             return growthStagePrefabs[currentGrowthStage];
         }
+    }
+
+    public Plant Clone() {
+        return new Plant(id, name, growthStages, minContainerSize, growthRate, growthStageDuration,
+            harvestStageDuration, harvestItemId, destroyOnHarvest);
     }
 }

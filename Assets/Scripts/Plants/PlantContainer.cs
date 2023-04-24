@@ -8,14 +8,23 @@ public class PlantContainer : Interactable {
     public float constantMoisture = -1f;
     public Plant plant;
     public Transform plantAttachmentPoint;
+    public Color soilColorDry = new Color(0.4245283f, 0.3152183f, 0.1782217f, 1.0f);
+    public Color soilColorWet = new Color(0.149f, 0.0885879f, 0.014751f, 1.0f);
     private Transform plantTransform;
     private int currentGrowthStage = -1;
     private float moisture = 0.0f;
+    private Material soilMaterial;
 
     void Start() {
         Assert.IsTrue(maxSize > 0);
         plantAttachmentPoint = transform.GetChild(0);
         canInteractAnywhere = true;
+        foreach(Material mat in GetComponent<MeshRenderer>().materials) {
+            if(mat.name.StartsWith("soil")) {
+                soilMaterial = mat;
+                break;
+            }
+        }
     }
 
     void FixedUpdate() {
@@ -34,14 +43,21 @@ public class PlantContainer : Interactable {
             if(plant.currentGrowthStage != currentGrowthStage) {
                 Destroy(plantTransform.gameObject);
                 plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
+                plantTransform.localRotation = Quaternion.identity;
                 currentGrowthStage = plant.currentGrowthStage;
             }
         }
     }
 
+    void Update() {
+        if(soilMaterial != null) {
+            soilMaterial.color = Color.Lerp(soilColorDry, soilColorWet, GetMoisture());
+        }
+    }
+
     public override void Interact(PlayerController player) {
         if(plant == null) {
-            // TODO
+            // TODO pick up
             throw new System.NotImplementedException();
         } else {
             GameController.instance.plantInfoManager.Show(this);
@@ -52,15 +68,20 @@ public class PlantContainer : Interactable {
         this.plant = plant;
         currentGrowthStage = 0;
         plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
+        plantTransform.localRotation = Quaternion.identity;
+    }
+
+    public void RemovePlant() {
+        plant = null;
+        currentGrowthStage = -1;
+        Destroy(plantTransform.gameObject);
     }
 
     public float GetMoisture() {
-        if(moisture > 1.0f) {
-            return 1.0f;
-        } else if(moisture < 0.0f) {
-            return 0.0f;
-        } else {
-            return moisture;
-        }
+        return Mathf.Clamp01(moisture);
+    }
+    
+    public void SetMoisture(float moisture) {
+        this.moisture = Mathf.Clamp01(moisture);
     }
 }

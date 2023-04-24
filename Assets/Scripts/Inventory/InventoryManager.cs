@@ -10,6 +10,8 @@ public class InventoryManager : MonoBehaviour {
     public Button openButton;
     [HideInInspector]
     public Button cancelPlantingButton;
+    public Button cancelPlacementButton;
+    public Button cancelWateringButton;
     private Transform inventoryParent;
     private Transform itemContainer;
     private Button closeButton;
@@ -31,6 +33,10 @@ public class InventoryManager : MonoBehaviour {
         itemInfo = inventoryParent.Find("Info Panel/Item Info").GetComponent<TMP_Text>();
         cancelPlantingButton = GameController.instance.canvas.Find("Cancel Planting Button").GetComponent<Button>();
         cancelPlantingButton.onClick.AddListener(CancelPlanting);
+        cancelPlacementButton = GameController.instance.canvas.Find("Cancel Placement Button").GetComponent<Button>();
+        cancelPlacementButton.onClick.AddListener(CancelPlacement);
+        cancelWateringButton = GameController.instance.canvas.Find("Cancel Watering Button").GetComponent<Button>();
+        cancelWateringButton.onClick.AddListener(StopWatering);
         HideInventory();
     }
 
@@ -39,11 +45,11 @@ public class InventoryManager : MonoBehaviour {
         GameController.instance.player.SortInventory();
         openButton.gameObject.SetActive(false);
         inventoryParent.gameObject.SetActive(true);
-        for(int i = 0; i < GameController.instance.player.inventory.Count; i++) {
+        for(int i = 0; i < PlayerController.inventory.Count; i++) {
             Transform cell = Instantiate(inventoryCellPrefab, itemContainer);
             int cachedIndex = i;
             cell.GetComponent<Button>().onClick.AddListener(() => SelectItem(cachedIndex));
-            cell.GetChild(0).GetComponent<Image>().sprite = GameController.instance.player.inventory[i].icon;
+            cell.GetChild(0).GetComponent<Image>().sprite = PlayerController.inventory[i].icon;
         }
     }
 
@@ -63,7 +69,7 @@ public class InventoryManager : MonoBehaviour {
     }
 
     public void SelectItem(int index) {
-        AbstractInventoryItem item = GameController.instance.player.inventory[index];
+        AbstractInventoryItem item = PlayerController.inventory[index];
         itemName.text = item.name;
         itemInfo.text = item.description;
         useButton.enabled = item.canUse;
@@ -96,5 +102,35 @@ public class InventoryManager : MonoBehaviour {
         openButton.gameObject.SetActive(true);
         GameController.instance.UnHighlightPlantContainers();
         GameController.instance.player.currentlyPlanting = null;
+    }
+
+    public void StartPlacement(Transform prefab, float gridSize) {
+        openButton.gameObject.SetActive(false);
+        cancelPlacementButton.gameObject.SetActive(true);
+        GameController.instance.player.currentlyPlacing = Instantiate(prefab,
+            GameController.instance.player.transform.position, prefab.rotation);
+        GameController.instance.player.placementGridSnapping = gridSize;
+    }
+
+    public void StartPlacement(Transform prefab) {
+        StartPlacement(prefab, -1.0f);
+    }
+
+    public void CompletePlacement() {
+        cancelPlacementButton.gameObject.SetActive(false);
+        openButton.gameObject.SetActive(true);
+        GameController.instance.player.currentlyPlacing = null;
+        GameController.instance.player.placementGridSnapping = -1.0f;
+    }
+
+    public void CancelPlacement() {
+        Destroy(GameController.instance.player.currentlyPlacing.gameObject);
+        CompletePlacement();
+    }
+
+    public void StopWatering() {
+        openButton.gameObject.SetActive(true);
+        cancelWateringButton.gameObject.SetActive(false);
+        GameController.instance.player.currentlyWatering = false;
     }
 }
