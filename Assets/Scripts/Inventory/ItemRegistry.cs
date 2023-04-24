@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,34 +10,25 @@ public static class ItemRegistry {
             canUse: true,
             canDrop: true,
             value: -1,
-            plant: new Plant(
-                id: "plant_generic",
-                name: "Generic Plant",
-                growthStages: 1,
-                minContainerSize: 1,
-                growthRate: 1.0,
-                growthStageDuration: 1.0,
-                harvestStageDuration: 1.0,
-                harvestItemId: "pinto_beans"
-            )
+            plant: "plant_generic"
         ),
         new Plantable(
-            id: "seed_packet_pinto_bean",
+            id: "seed_packet_bean_pinto",
             name: "Pinto Bean Seeds",
             description: "A small packet containing some pinto bean seeds.",
             canUse: true,
             canDrop: true,
             value: 25,
-            plant: new Plant(
-                id: "pinto_bean",
-                name: "Pinto Bean",
-                growthStages: 4,
-                minContainerSize: 1,
-                growthRate: 1.0,
-                growthStageDuration: 20.0,
-                harvestStageDuration: 40.0,
-                harvestItemId: "pinto_beans"
-            )
+            plant: "pinto_bean"
+        ),
+        new Plantable(
+            id: "seed_packet_wheat",
+            name: "Wheat Seeds",
+            description: "A small packet containing some wheat seeds.",
+            canUse: true,
+            canDrop: true,
+            value: 25,
+            plant: "wheat_plant"
         ),
         new GenericItem(
             id: "pinto_beans",
@@ -48,13 +38,32 @@ public static class ItemRegistry {
             canDrop: true,
             value: 5
         ),
-        new HoeItem(
+        new GenericItem(
+            id: "wheat",
+            name: "Wheat",
+            description: "A bundle of wheat.",
+            canUse: false,
+            canDrop: true,
+            value: 20
+        ),
+        new Placeable(
             id: "hoe",
             name: "Hoe",
             description: "A simple hoe.",
             canUse: true,
             canDrop: true,
-            value: 100
+            value: 150,
+            gridSize: 1.2f,
+            prefabId: "tilled_3x3"
+        ),
+        new WateringCan(
+            id: "watering_can",
+            name: "Watering Can",
+            description: "Used for watering plants.",
+            canUse: true,
+            canDrop: true,
+            value: 100,
+            maxUses: 5
         )
     };
 
