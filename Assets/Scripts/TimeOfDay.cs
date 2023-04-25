@@ -55,6 +55,11 @@ public class TimeOfDay : MonoBehaviour
         }
     }
 
+    public int GetCurrentHour() {
+        int currentHour = Mathf.RoundToInt(currentTimeOfDay * 24f);
+        return currentHour;
+    }
+
     public int GetCurrentDay() {
         return currentDayOfWeek;
     }
@@ -70,5 +75,4 @@ public class TimeOfDay : MonoBehaviour
         }
         return previousDayOfWeek;
     }
-    //method for isDayTime(), isAfternoon(), isNightTime()
 }
