@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
     private NavMeshAgent agent;
     private Transform target;
     private int raycastMask;
+    private bool ignoreHold = false;
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();
@@ -40,12 +41,14 @@ public class PlayerController : MonoBehaviour {
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
                 if(currentlyPlacing != null) {
                     GameController.instance.inventoryManager.CompletePlacement();
+                    ignoreHold = true;
                 } else if(currentlyPlanting != null && hit.transform.GetComponent<PlantContainer>() != null) {
                     PlantContainer pc = hit.transform.GetComponent<PlantContainer>();
                     if(pc.maxSize >= currentlyPlanting.GetPlant().minContainerSize) {
                         pc.PlacePlant(currentlyPlanting.GetPlant().Clone());
                         inventory.Remove(currentlyPlanting);
                         GameController.instance.inventoryManager.CancelPlanting();
+                        ignoreHold = true;
                     }
                 } else if(hit.collider.GetComponent<Interactable>() != null) {
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
@@ -54,18 +57,22 @@ public class PlayerController : MonoBehaviour {
                     } else {
                         SetFocus(interactable);
                     }
-                } else {
+                    ignoreHold = true;
+                } else if(!ignoreHold) {
                     agent.destination = hit.point;
                     RemoveFocus();
                 }
             }
-        } else if(currentlyPlacing == null && Input.GetMouseButton(0) && !Input.GetMouseButtonUp(0)
-                  && !EventSystem.current.IsPointerOverGameObject()) {
+        } else if(!ignoreHold && !EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButton(0)) {
             RaycastHit hit;
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
                 agent.destination = hit.point;
                 RemoveFocus();
             }
+        }
+
+        if(Input.GetMouseButtonUp(0)) {
+            ignoreHold = false;
         }
 
         if(target != null && Vector3.Distance(transform.position, target.transform.position) > 0.3) {
