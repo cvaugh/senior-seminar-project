@@ -42,6 +42,10 @@ public class GameController : MonoBehaviour {
         BalanceManager.Set(200); // FOR DEMO ONLY
     }
 
+    private void OnApplicationQuit() {
+        PersistenceManager.Write();
+    }
+
     public void LoadScene(string scene) {
         loadingBlocker.gameObject.SetActive(true);
         SceneManager.LoadSceneAsync(scene);

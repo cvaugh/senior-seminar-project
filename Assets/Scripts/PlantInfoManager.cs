@@ -68,7 +68,9 @@ public class PlantInfoManager : MonoBehaviour {
 
     public void Harvest() {
         if(focused.plant.CanHarvest()) {
-            focused.plant.Harvest();
+            if(focused.plant.Harvest()) {
+                focused.RemovePlant();
+            }
         }
     }
 }
