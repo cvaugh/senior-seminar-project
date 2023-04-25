@@ -180,13 +180,13 @@ public class WeatherManager : MonoBehaviour
     }
 
     private void UpdateSeason() {
-        seasonTime -= Time.deltaTime;
         Weather current = this.currentWeather;
+        seasonTime -= Time.deltaTime;
+        Color darkBlue = new Color(0.05f, 0.05f, 0.1f, 1f);
 
         switch(currentSeason) {
             case Season.SPRING:
-                if (current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
-                    Color darkBlue = new Color(0.05f, 0.05f, 0.1f, 1f);
+                if(current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
                     LerpLight(darkBlue, 0.0f);
                 } else {
                     LerpLight(defaultLightColor, defaultLightIntensity + 0.15f);
@@ -199,7 +199,6 @@ public class WeatherManager : MonoBehaviour
                 break;
             case Season.SUMMER:
                 if (current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
-                    Color darkBlue = new Color(0.05f, 0.05f, 0.1f, 1f);
                     LerpLight(darkBlue, 0.0f);
                 } else {
                     LerpLight(summerColor, summerLightIntensity + 0.35f);
@@ -211,8 +210,7 @@ public class WeatherManager : MonoBehaviour
                 }
                 break;
             case Season.AUTUMN:
-                if (current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
-                    Color darkBlue = new Color(0.05f, 0.05f, 0.1f, 1f);
+                if(current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
                     LerpLight(darkBlue, 0.0f);
                 } else {
                     LerpLight(autumnColor, autumnLightIntensity + 0.1f);
@@ -224,15 +222,14 @@ public class WeatherManager : MonoBehaviour
                 }
                 break;
             case Season.WINTER:
-                if (current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
-                    Color darkBlue = new Color(0.05f, 0.05f, 0.1f, 1f);
+                if(current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
                     LerpLight(darkBlue, 0.0f);
                 } else {
                     LerpLight(winterColor, winterLightIntensity + 0.15f);
                 }
 
                 if(seasonTime <= 0f) {
-                    currentYear ++;
+                    currentYear++;
                     ChangeSeason(Season.SPRING);
                     seasonTime = springTime;
                 }
@@ -301,14 +298,14 @@ public class WeatherManager : MonoBehaviour
         this.currentDayOfWeek = timeOfDay.GetCurrentDay();
         this.currentHour = timeOfDay.GetCurrentHour();
 
-        if ((timeOfDay.GetPreviousDay() == 7 && timeOfDay.GetCurrentWeek() != this.currentWeek) || (this.temperatureDict == null)) {
+        if((timeOfDay.GetPreviousDay() == 7 && timeOfDay.GetCurrentWeek() != this.currentWeek) || (this.temperatureDict == null)) {
             Season season = this.currentSeason;
             Weather[] forecast = this.weeklyForecast;
             this.temperatureDict = GenerateTemp(season, forecast);
             
         }
 
-        if (this.currentTemp != this.temperatureDict[this.currentDayOfWeek - 1][this.currentHour]) {
+        if(this.currentTemp != this.temperatureDict[this.currentDayOfWeek - 1][this.currentHour]) {
             this.currentTemp = this.temperatureDict[this.currentDayOfWeek - 1][this.currentHour];
             // Debug.LogError("current temp: " + this.temperatureDict[this.currentDayOfWeek - 1][hour]);
         }
@@ -317,17 +314,17 @@ public class WeatherManager : MonoBehaviour
     public Dictionary<int, List<float>> GenerateTemp(Season season, Weather[] weatherTypes) {
         Dictionary<int, List<float>> Dict = new Dictionary<int, List<float>>();
 
-        for (int day = 0; day <= 6; day ++) {
+        for(int day = 0; day <= 6; day ++) {
             List<float> temperatures = new List<float>();
             Weather weatherType = weatherTypes[day];
 
-            for (int hour = 0; hour <= 24; hour ++) {
+            for(int hour = 0; hour <= 24; hour ++) {
                 float minTemp, maxTemp;
-                switch (season) {
+                switch(season) {
                     case Season.SPRING:
                         minTemp = minSpringTemp;
                         maxTemp = maxSpringTemp;
-                        switch (weatherType) {
+                        switch(weatherType) {
                             case Weather.NONE:
                                 temperatures.Add(Random.Range(minTemp, maxTemp));
                                 break;
@@ -354,7 +351,7 @@ public class WeatherManager : MonoBehaviour
                     case Season.SUMMER:
                         minTemp = minSummerTemp;
                         maxTemp = maxSummerTemp;
-                        switch (weatherType) {
+                        switch(weatherType) {
                             case Weather.NONE:
                                 temperatures.Add(Random.Range(minTemp, maxTemp));
                                 break;
@@ -381,7 +378,7 @@ public class WeatherManager : MonoBehaviour
                     case Season.AUTUMN:
                         minTemp = minAutumnTemp;
                         maxTemp = maxAutumnTemp;
-                        switch (weatherType) {
+                        switch(weatherType) {
                             case Weather.NONE:
                                 temperatures.Add(Random.Range(minTemp, maxTemp));
                                 break;
@@ -408,7 +405,7 @@ public class WeatherManager : MonoBehaviour
                     case Season.WINTER:
                         minTemp = minWinterTemp;
                         maxTemp = maxWinterTemp;
-                        switch (weatherType) {
+                        switch(weatherType) {
                             case Weather.NONE:
                                 temperatures.Add(Random.Range(minTemp, maxTemp));
                                 break;
@@ -441,7 +438,7 @@ public class WeatherManager : MonoBehaviour
     
     // for adjusting growth rate -> current temp
     public float getCurrentTemp(){
-        return this.currentTemp;
+        return currentTemp;
     }
 }
 
