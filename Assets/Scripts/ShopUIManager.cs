@@ -20,6 +20,7 @@ public class ShopUIManager : MonoBehaviour {
     private TMP_Text itemName;
     private TMP_Text itemInfo;
     private TMP_Text balanceText;
+    private TMP_Text titleText;
 
     private ShopManager shop;
 
@@ -34,6 +35,7 @@ public class ShopUIManager : MonoBehaviour {
         itemName = shopParent.Find("Item Name Panel/Item Name").GetComponent<TMP_Text>();
         itemInfo = shopParent.Find("Info Panel/Item Info").GetComponent<TMP_Text>();
         balanceText = shopParent.Find("Balance Panel/Text").GetComponent<TMP_Text>();
+        titleText = shopParent.Find("Shop Label/Text").GetComponent<TMP_Text>();
         Hide();
     }
 
@@ -43,13 +45,14 @@ public class ShopUIManager : MonoBehaviour {
         GameController.instance.player.SortInventory();
         shopParent.gameObject.SetActive(true);
         balanceText.text = BalanceManager.Get().ToString() + " F";
+        titleText.text = shop.title;
         transactionButton.GetComponent<Image>().color = colorDisabled;
-        for(int i = 0; i < GameController.instance.player.inventory.Count; i++) {
+        for(int i = 0; i < PlayerController.inventory.Count; i++) {
             Transform cell = Instantiate(shopCellPrefab, inventoryItemContainer);
             int cachedIndex = i;
             cell.GetComponent<Button>().onClick.AddListener(() => SelectItem(false, cachedIndex));
-            cell.GetChild(0).GetComponent<Image>().sprite = GameController.instance.player.inventory[i].icon;
-            cell.GetChild(2).GetComponent<TMP_Text>().text = GameController.instance.player.inventory[i].value.ToString() + " F";
+            cell.GetChild(0).GetComponent<Image>().sprite = PlayerController.inventory[i].icon;
+            cell.GetChild(2).GetComponent<TMP_Text>().text = PlayerController.inventory[i].value.ToString() + " F";
         }
         for(int i = 0; i < shop.inventory.Count; i++) {
             Transform cell = Instantiate(shopCellPrefab, shopItemContainer);
@@ -93,7 +96,7 @@ public class ShopUIManager : MonoBehaviour {
                 });
             }
         } else {
-            AbstractInventoryItem item = GameController.instance.player.inventory[index];
+            AbstractInventoryItem item = PlayerController.inventory[index];
             itemName.text = item.name;
             itemInfo.text = item.description;
             transactionButtonText.text = "Sell";
