@@ -44,7 +44,7 @@ public static class ItemRegistry {
             description: "A bundle of wheat.",
             canUse: false,
             canDrop: true,
-            value: 20
+            value: 30
         ),
         new Placeable(
             id: "hoe",
@@ -64,7 +64,135 @@ public static class ItemRegistry {
             canDrop: true,
             value: 100,
             maxUses: 5
-        )
+        ),
+        new GenericItem(
+            id: "barley",
+            name: "Barley",
+            description: "A bundle of barley.",
+            canUse: false,
+            canDrop: true,
+            value: 20
+        ),
+        new GenericItem(
+            id: "beet",
+            name: "Beet",
+            description: "A beet.",
+            canUse: false,
+            canDrop: true,
+            value: 25
+        ),
+        new GenericItem(
+            id: "cabbage",
+            name: "Cabbage",
+            description: "A green cabbage.",
+            canUse: false,
+            canDrop: true,
+            value: 20
+        ),
+        new GenericItem(
+            id: "cauliflower",
+            name: "Cauliflower",
+            description: "A cauliflower.",
+            canUse: false,
+            canDrop: true,
+            value: 20
+        ),
+        new GenericItem(
+            id: "cotton",
+            name: "Cotton",
+            description: "A boll of cotton.",
+            canUse: false,
+            canDrop: true,
+            value: 60
+        ),
+        new GenericItem(
+            id: "gourd",
+            name: "Gourd",
+            description: "A calabash, also known as a bottle gourd or birdhouse gourd.",
+            canUse: false,
+            canDrop: true,
+            value: 25
+        ),
+        new GenericItem(
+            id: "onion_yellow",
+            name: "Yellow Onion",
+            description: "A yellow onion.",
+            canUse: false,
+            canDrop: true,
+            value: 30
+        ),
+        new GenericItem(
+            id: "quinoa",
+            name: "Quinoa",
+            description: "A bundle of quinoa.",
+            canUse: false,
+            canDrop: true,
+            value: 25
+        ),
+        new GenericItem(
+            id: "radish",
+            name: "Radish",
+            description: "A radish.",
+            canUse: false,
+            canDrop: true,
+            value: 15
+        ),
+        new GenericItem(
+            id: "rice",
+            name: "Rice",
+            description: "A bundle of rice.",
+            canUse: false,
+            canDrop: true,
+            value: 10
+        ),
+        new GenericItem(
+            id: "rye",
+            name: "Rye",
+            description: "A bundle of rye.",
+            canUse: false,
+            canDrop: true,
+            value: 20
+        ),
+        new GenericItem(
+            id: "tomato",
+            name: "Tomato",
+            description: "A tomato.",
+            canUse: false,
+            canDrop: true,
+            value: 25
+        ),
+        new GenericItem(
+            id: "turnip",
+            name: "Turnip",
+            description: "A turnip.",
+            canUse: false,
+            canDrop: true,
+            value: 20
+        ),
+        new GenericItem(
+            id: "watermelon",
+            name: "Watermelon",
+            description: "A watermelon.",
+            canUse: false,
+            canDrop: true,
+            value: 35
+        ),
+        new GenericItem(
+            id: "soybeans",
+            name: "Soybeans",
+            description: "Some soybeans.",
+            canUse: false,
+            canDrop: true,
+            value: 30
+        ),
+        new GenericItem(
+            id: "orange",
+            name: "Orange",
+            description: "An orange.",
+            canUse: false,
+            canDrop: true,
+            value: 30
+        ),
     };
 
     public static void Init() {
