@@ -303,7 +303,7 @@ public class WeatherManager : MonoBehaviour
 
         if ((timeOfDay.GetPreviousDay() == 7 && timeOfDay.GetCurrentWeek() != this.currentWeek) || (this.temperatureDict == null)) {
             Season season = this.currentSeason;
-            List<Weather> forecast = this.weeklyForecast;
+            Weather[] forecast = this.weeklyForecast;
             this.temperatureDict = GenerateTemp(season, forecast);
             
         }
@@ -314,7 +314,7 @@ public class WeatherManager : MonoBehaviour
         }
     }
 
-    public Dictionary<int, List<float>> GenerateTemp(Season season, List<Weather> weatherTypes) {
+    public Dictionary<int, List<float>> GenerateTemp(Season season, Weather[] weatherTypes) {
         Dictionary<int, List<float>> Dict = new Dictionary<int, List<float>>();
 
         for (int day = 0; day <= 6; day ++) {
