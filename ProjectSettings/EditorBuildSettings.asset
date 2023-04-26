@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mow.unity
     guid: 789936b03392e3d4a9418848e7f8d133
+  - enabled: 1
+    path: Assets/Scenes/Leaderboard.unity
+    guid: 38eddf0dd1c181b479b2d97a804cfdd6
   m_configObjects: {}
