@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Garden.unity
     guid: fb67cdc3793e6704b8714f6f0252a703
+  - enabled: 1
+    path: Assets/Scenes/NewMow.unity
+    guid: 789936b03392e3d4a9418848e7f8d133
   m_configObjects: {}
