@@ -5,11 +5,11 @@ using UnityEngine;
 public class LawnmowerScript : MonoBehaviour
 {
     public Rigidbody2D myRigidBody;
-    public float volume = 10;
+    public float volume;
     // Start is called before the first frame update
     void Start()
     {
-        
+        volume = 20;
     }
 
     // Update is called once per frame
