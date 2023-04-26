@@ -78909,6 +78909,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4005989968314501643, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
+      propertyPath: m_TagString
+      value: StatusBar
+      objectReference: {fileID: 0}
     - target: {fileID: 4402889625516514586, guid: 6022d25e15d27d24cba17473397f1f05, type: 3}
       propertyPath: m_Pivot.x
       value: 0
