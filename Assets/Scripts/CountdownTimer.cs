@@ -26,6 +26,10 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] public GameObject grassSpawner;
     [SerializeField] public GameObject grass;
 
+    [SerializeField] Text gameOverText;
+    [SerializeField] Text goPointsText;
+    [SerializeField] Text goPointsNum;
+
     void Start()
     {
         introTime = startingTime;
@@ -39,6 +43,10 @@ public class CountdownTimer : MonoBehaviour
         lawnmower.gameObject.SetActive(false);
         grassSpawner.gameObject.SetActive(false);
         grass.gameObject.SetActive(false);
+
+        gameOverText.gameObject.SetActive(false);
+        goPointsText.gameObject.SetActive(false);
+        goPointsNum.gameObject.SetActive(false);
     }
 
     void Update()
@@ -65,8 +73,6 @@ public class CountdownTimer : MonoBehaviour
                 pointNumText.gameObject.SetActive(true);
 
                 lawnmower.gameObject.SetActive(true);
-                //grassSpawner.gameObject.SetActive(true);
-                //grass.gameObject.SetActive(true);
             }
   
         }
@@ -80,6 +86,11 @@ public class CountdownTimer : MonoBehaviour
             lawnmower.gameObject.SetActive(false);
             grassSpawner.gameObject.SetActive(false);
             grass.gameObject.SetActive(false);
+
+           
+            gameOverText.gameObject.SetActive(true);
+            goPointsText.gameObject.SetActive(true);
+            goPointsNum.gameObject.SetActive(true);
 
             if (gameTime <= 0)
             {
