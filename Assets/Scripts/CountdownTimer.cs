@@ -30,6 +30,8 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] Text goPointsText;
     [SerializeField] Text goPointsNum;
 
+    [SerializeField] Button backButton;
+
     void Start()
     {
         introTime = startingTime;
@@ -47,6 +49,8 @@ public class CountdownTimer : MonoBehaviour
         gameOverText.gameObject.SetActive(false);
         goPointsText.gameObject.SetActive(false);
         goPointsNum.gameObject.SetActive(false);
+
+        backButton.gameObject.SetActive(false);
     }
 
     void Update()
@@ -94,7 +98,8 @@ public class CountdownTimer : MonoBehaviour
 
             if (gameTime <= 0)
             {
-                timesUpText.gameObject.SetActive(false);      
+                timesUpText.gameObject.SetActive(false);
+                backButton.gameObject.SetActive(true);
             }
         }
 
