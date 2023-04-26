@@ -46,10 +46,13 @@ public class CountdownTimer : MonoBehaviour
         introCountdownText.gameObject.SetActive(true);
         introTime -= 1 * Time.deltaTime;
         introCountdownText.text = introTime.ToString("0");
+        grassSpawner.gameObject.SetActive(true);
+        grass.gameObject.SetActive(true);
         if (introTime <= 1)
         {
             introCountdownText.gameObject.SetActive(false);
             goText.gameObject.SetActive(true);
+           
 
             if (introTime <= 0)
             {
@@ -62,8 +65,8 @@ public class CountdownTimer : MonoBehaviour
                 pointNumText.gameObject.SetActive(true);
 
                 lawnmower.gameObject.SetActive(true);
-                grassSpawner.gameObject.SetActive(true);
-                grass.gameObject.SetActive(true);
+                //grassSpawner.gameObject.SetActive(true);
+                //grass.gameObject.SetActive(true);
             }
   
         }
@@ -89,5 +92,10 @@ public class CountdownTimer : MonoBehaviour
     public float getGameTime()
     {
         return gameTime;
+    }
+
+    public float getStartTime()
+    {
+        return introTime;
     }
 }
