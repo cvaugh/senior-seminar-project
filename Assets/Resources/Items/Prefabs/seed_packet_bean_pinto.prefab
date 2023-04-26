@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d804fa3c9e5ad244aa08b6596665f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canInteractAnywhere: 0
   radius: 0.5
   hasInteracted: 0
   itemIndex: 1

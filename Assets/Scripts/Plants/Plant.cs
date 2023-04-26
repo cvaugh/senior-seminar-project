@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -101,5 +102,9 @@ public class Plant {
     public Plant Clone() {
         return new Plant(id, name, growthStages, minContainerSize, growthRate, growthStageDuration,
             harvestStageDuration, harvestItemId, destroyOnHarvest);
+    }
+
+    public void Serialize(BinaryWriter writer) {
+
     }
 }

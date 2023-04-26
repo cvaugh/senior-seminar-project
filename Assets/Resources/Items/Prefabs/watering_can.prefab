@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3192210259981192970}
   - component: {fileID: 3192210259981193205}
   - component: {fileID: 3192210259981193204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: watering_can
-  m_TagString: Untagged
+  m_TagString: DroppedItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
