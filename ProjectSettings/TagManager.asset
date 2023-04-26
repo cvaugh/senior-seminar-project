@@ -11,6 +11,8 @@ TagManager:
   - Grass
   - Lawnmower
   - Logic
+  - StatusBar
+  - Leaderboard
   layers:
   - Default
   - TransparentFX
