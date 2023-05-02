@@ -147,4 +147,8 @@ public class PlayerController : MonoBehaviour {
     public bool IsFocused(Transform t) {
         return focus != null && focus.transform == t;
     }
+
+    public List<AbstractInventoryItem> GetInventory() {
+        return inventory;
+    }
 }
