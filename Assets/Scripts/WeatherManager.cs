@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeatherManager : MonoBehaviour
-{
-    public enum Season {SPRING, SUMMER, AUTUMN, WINTER}; //MONSOON, DROUGHT
-    public enum Weather {NONE, SUNNY, HOTSUN, RAIN, SNOW, HEAVYRAIN, FOGGY, WINDY, THUNDERSTORM}; //DUST
+public class WeatherManager : MonoBehaviour {
+    public enum Season { SPRING, SUMMER, AUTUMN, WINTER };
+    public enum Weather { NONE, SUNNY, HOTSUN, RAIN, SNOW, HEAVYRAIN, FOGGY, WINDY, THUNDERSTORM };
 
     public Season currentSeason;
     public Weather currentWeather;
@@ -38,7 +37,6 @@ public class WeatherManager : MonoBehaviour
 
     private Dictionary<int, List<float>> temperatureDict;
 
-
     [Header ("Light settings")]
     public Light sunlight;
     private float defaultLightIntensity;
@@ -57,21 +55,6 @@ public class WeatherManager : MonoBehaviour
     public int currentWeek = 0;
     private Weather[] weeklyForecast;
     private bool forecastGenerated = false;
-
-    // [Header("UI Elements")]
-    // public Text currentSeasonText;
-    // public Text currentWeatherText;
-    // public Image currentWeatherImage;
-    // public Sprite sunnySprite;
-    // public Sprite rainSprite;
-    // public Sprite heavyRainSprite;
-    // public Sprite stormSprite;
-    // public Sprite snowSprite;
-    // public Sprite windSprite;
-    // public Sprite fogSprite;
-
-    // public Text[] forecastDaysText;
-    // public Image[] forecastDaysImage;
 
     private void Start() {
         currentSeason = Season.SPRING;
@@ -100,7 +83,7 @@ public class WeatherManager : MonoBehaviour
         int currentDayOfWeek = timeOfDay.GetCurrentDay();
         if(timeOfDay.GetPreviousDay() == 7 && timeOfDay.GetCurrentWeek() != currentWeek) {
             weeklyForecast = GenerateWeeklyForecast();
-            this.currentWeek = timeOfDay.GetCurrentWeek();
+            currentWeek = timeOfDay.GetCurrentWeek();
         }
 
         ChangeWeather(weeklyForecast[currentDayOfWeek - 1]);
@@ -180,7 +163,7 @@ public class WeatherManager : MonoBehaviour
     }
 
     private void UpdateSeason() {
-        Weather current = this.currentWeather;
+        Weather current = currentWeather;
         seasonTime -= Time.deltaTime;
         Color darkBlue = new Color(0.05f, 0.05f, 0.1f, 1f);
 
@@ -198,13 +181,13 @@ public class WeatherManager : MonoBehaviour
                 }
                 break;
             case Season.SUMMER:
-                if (current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
+                if(current == Weather.HEAVYRAIN || current == Weather.THUNDERSTORM || current == Weather.RAIN) {
                     LerpLight(darkBlue, 0.0f);
                 } else {
                     LerpLight(summerColor, summerLightIntensity + 0.35f);
                 }
 
-                if (this.seasonTime <= 0f) {
+                if(seasonTime <= 0f) {
                     ChangeSeason(Season.AUTUMN);
                     seasonTime = autumnTime;
                 }
@@ -250,78 +233,31 @@ public class WeatherManager : MonoBehaviour
 
     public void ChangeWeather(Weather weatherType) {
         if(weatherType != currentWeather) {
+            currentWeather = weatherType;
+            rain.Stop();
+            snow.Stop();
+            heavyRain.Stop();
+            wind_curved.Stop();
+            wind_straight.Stop();
+            storm.Stop();
             switch(weatherType) {
                 case Weather.RAIN:
-                    currentWeather = Weather.RAIN;
                     rain.Play();
-                    snow.Stop();
-                    heavyRain.Stop();
-                    wind_curved.Stop();
-                    wind_straight.Stop();
-                    storm.Stop();
                     break;
                 case Weather.HEAVYRAIN:
-                    currentWeather = Weather.HEAVYRAIN;
                     heavyRain.Play();
-                    rain.Stop();
-                    snow.Stop();
-                    wind_curved.Stop();
-                    wind_straight.Stop();
-                    storm.Stop();
                     break;
                 case Weather.SNOW:
-                    currentWeather = Weather.SNOW;
                     snow.Play();
-                    rain.Stop();
-                    heavyRain.Stop();
-                    wind_curved.Stop();
-                    wind_straight.Stop();
-                    storm.Stop();
-                    break;
-                case Weather.SUNNY:
-                    currentWeather = Weather.SUNNY;
-                    rain.Stop();
-                    snow.Stop();
-                    heavyRain.Stop();
-                    wind_curved.Stop();
-                    wind_straight.Stop();
-                    storm.Stop();
-                    break;
-                case Weather.HOTSUN:
-                    currentWeather = Weather.HOTSUN;
-                    rain.Stop();
-                    snow.Stop();
-                    heavyRain.Stop();
-                    wind_curved.Stop();
-                    wind_straight.Stop();
-                    storm.Stop();
                     break;
                 case Weather.WINDY:
-                    currentWeather = Weather.WINDY;
                     wind_curved.Play();
-                    wind_straight.Play();
-                    rain.Stop();
-                    snow.Stop();
-                    heavyRain.Stop();
-                    storm.Stop();
                     break;
                 case Weather.THUNDERSTORM:
-                    currentWeather = Weather.THUNDERSTORM;
                     storm.Play();
                     heavyRain.Play();
-                    rain.Stop();
-                    snow.Stop();
-                    wind_curved.Stop();
-                    wind_straight.Stop();
                     break;
                 default:
-                    currentWeather = Weather.NONE;
-                    rain.Stop();
-                    snow.Stop();
-                    heavyRain.Stop();
-                    wind_curved.Stop();
-                    wind_straight.Stop();
-                    storm.Stop();
                     break;
             }
         }
@@ -329,25 +265,23 @@ public class WeatherManager : MonoBehaviour
     }
 
     private void UpdateTemp(){
+        currentDayOfWeek = timeOfDay.GetCurrentDay();
+        currentHour = timeOfDay.GetCurrentHour();
 
-        this.currentDayOfWeek = timeOfDay.GetCurrentDay();
-        this.currentHour = timeOfDay.GetCurrentHour();
-
-        if((timeOfDay.GetPreviousDay() == 7 && timeOfDay.GetCurrentWeek() != this.currentWeek) || (this.temperatureDict == null)) {
-            Season season = this.currentSeason;
-            Weather[] forecast = this.weeklyForecast;
-            this.temperatureDict = GenerateTemp(season, forecast);
-            
+        if((timeOfDay.GetPreviousDay() == 7 && timeOfDay.GetCurrentWeek() != currentWeek) || (temperatureDict == null)) {
+            Season season = currentSeason;
+            Weather[] forecast = weeklyForecast;
+            temperatureDict = GenerateTemp(season, forecast);
         }
 
-        if(this.currentTemp != this.temperatureDict[this.currentDayOfWeek - 1][this.currentHour]) {
-            this.currentTemp = this.temperatureDict[this.currentDayOfWeek - 1][this.currentHour];
+        if(currentTemp != temperatureDict[currentDayOfWeek - 1][currentHour]) {
+            currentTemp = temperatureDict[currentDayOfWeek - 1][currentHour];
             // Debug.LogError("current temp: " + this.temperatureDict[this.currentDayOfWeek - 1][hour]);
         }
     }
 
     public Dictionary<int, List<float>> GenerateTemp(Season season, Weather[] weatherTypes) {
-        Dictionary<int, List<float>> Dict = new Dictionary<int, List<float>>();
+        Dictionary<int, List<float>> dict = new Dictionary<int, List<float>>();
 
         for(int day = 0; day <= 6; day ++) {
             List<float> temperatures = new List<float>();
@@ -466,9 +400,9 @@ public class WeatherManager : MonoBehaviour
                         break;
                 }
             }
-            Dict[day] = temperatures;
+            dict[day] = temperatures;
         }
-        return Dict;
+        return dict;
     }
     
     // for adjusting growth rate -> current temp
@@ -476,4 +410,3 @@ public class WeatherManager : MonoBehaviour
         return currentTemp;
     }
 }
-

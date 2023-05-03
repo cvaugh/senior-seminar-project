@@ -1,27 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class LawnmowerScript : MonoBehaviour
-{
-    public Rigidbody2D myRigidBody;
-    public float volume;
-    // Start is called before the first frame update
-    void Start()
-    {
-        volume = 20;
-    }
+public class LawnmowerScript : MonoBehaviour {
+    public float speed;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.UpArrow) == true)
-        {
-            transform.position += (Vector3.up * volume);
+    private void FixedUpdate() {
+        if(Input.GetKey(KeyCode.UpArrow)) {
+            transform.position += Vector3.up * speed;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) == true)
-        {
-            transform.position += (Vector3.down * volume);
+        if(Input.GetKey(KeyCode.DownArrow)) {
+            transform.position += Vector3.down * speed;
         }
     }
 }

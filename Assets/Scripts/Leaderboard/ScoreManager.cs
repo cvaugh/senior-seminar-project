@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 using UnityEngine.UI;
 
-public class ScoreManager : MonoBehaviour
-{
+public class ScoreManager : MonoBehaviour {
     //[SerializeField]
     //private TextMeshProUGUI inputScore;
 
@@ -18,13 +15,11 @@ public class ScoreManager : MonoBehaviour
     public UnityEvent<string, int> submitScoreEvent;
     public LeaderboardManager lbManScript;
 
-    void Start()
-    {
+    void Start() {
         lbManScript = GameObject.FindGameObjectWithTag("Leaderboard").GetComponent<LeaderboardManager>();
     }
 
-    public void SubmitScore()
-    {
+    public void SubmitScore() {
         //submitScoreEvent.Invoke(inputName.text, int.Parse(inputScore.text));
         lbManScript.SetLeaderboardEntry(inputName.text, int.Parse(inputScore.text));
     }

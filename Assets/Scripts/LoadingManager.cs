@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 
 public class LoadingManager : MonoBehaviour {
     public static LoadingManager instance;
@@ -22,7 +19,6 @@ public class LoadingManager : MonoBehaviour {
     public float fadeTime;
 
     public Text currentFact;
-    
 
     string[] facts = {
         "The world's tallest tree is the coast redwood", 
@@ -56,17 +52,14 @@ public class LoadingManager : MonoBehaviour {
         fadeImage.canvasRenderer.SetAlpha(0);
         currentFact.gameObject.SetActive(true);
 
-        while (!Fade(1)) {
+        while(!Fade(1)) {
             yield return null;
         }
-    
+
         loadingPanel.SetActive(true);
         StartCoroutine(SpinWheelRoutine());
 
-        int randNum = UnityEngine.Random.Range(0, facts.Length);
-        currentFact.text = facts[randNum];
-        //Debug.Log("Fact: " + currentFact.text);
-
+        currentFact.text = facts[Random.Range(0, facts.Length)];
 
         while (!Fade(0)) {
             yield return null;
@@ -85,24 +78,20 @@ public class LoadingManager : MonoBehaviour {
             yield return null;
         }
 
-        
         while(!Fade(1)) {
             yield return null;
         }
 
         currentFact.gameObject.SetActive(false);
         loadingPanel.SetActive(false);
-        
 
-        while (!Fade(0)) {
+        while(!Fade(0)) {
             yield return null;
         }
 
-        
         isLoading = false;
     }
 
-   
     private bool Fade(float target) {
         fadeImage.CrossFadeAlpha(target, fadeTime, true);
         if(Mathf.Abs(fadeImage.canvasRenderer.GetAlpha() - target) <= 0.05f) {
@@ -112,7 +101,6 @@ public class LoadingManager : MonoBehaviour {
 
         return false;
     }
-   
 
     private IEnumerator SpinWheelRoutine() {
         while(isLoading) {

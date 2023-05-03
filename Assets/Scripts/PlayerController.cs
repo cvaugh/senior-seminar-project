@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -146,9 +145,5 @@ public class PlayerController : MonoBehaviour {
 
     public bool IsFocused(Transform t) {
         return focus != null && focus.transform == t;
-    }
-
-    public List<AbstractInventoryItem> GetInventory() {
-        return inventory;
     }
 }

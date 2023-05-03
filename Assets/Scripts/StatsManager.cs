@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,13 +10,11 @@ public class StatsManager : MonoBehaviour {
 
     //public Text S;
 
-    void Start()
-    {
+    void Start() {
         playerCoins = 100;
     }
 
-    void Update()
-    {
+    void Update() {
         playerCoins = getPlayerCoins();
     }
 
@@ -47,8 +43,7 @@ public class StatsManager : MonoBehaviour {
        
     }
 
-    public int getPlayerCoins()
-    {
+    public int getPlayerCoins() {
         return playerCoins;
     }
 }

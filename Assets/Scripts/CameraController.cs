@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
@@ -14,4 +12,3 @@ public class CameraController : MonoBehaviour {
                                          Mathf.Lerp(transform.position.z, pos.z, interpolation));
     }
 }
-

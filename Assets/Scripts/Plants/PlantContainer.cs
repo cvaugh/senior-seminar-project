@@ -27,8 +27,6 @@ public class PlantContainer : Interactable {
     }
 
     void FixedUpdate() {
-        // TODO update base moisture based on scene environment
-        // write shader to mix wet/dry soil material
         if(constantMoisture >= 0.0f) {
             moisture = constantMoisture;
         } else {

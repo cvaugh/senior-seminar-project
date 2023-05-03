@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class WateringCan : AbstractInventoryItem {
     public readonly int maxUses;
     public int waterLevel = 0;
@@ -31,9 +27,11 @@ public class WateringCan : AbstractInventoryItem {
             container.SetMoisture(1.0f);
             waterLevel -= 1;
         }
-        if(waterLevel == 0) {
+
+        canUse = waterLevel > 0;
+
+        if(!canUse) {
             GameController.instance.inventoryManager.StopWatering();
         }
-        canUse = waterLevel > 0;
     }
 }

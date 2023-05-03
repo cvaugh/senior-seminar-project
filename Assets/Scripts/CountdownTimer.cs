@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CountdownTimer : MonoBehaviour
-{
+public class CountdownTimer : MonoBehaviour {
     float introTime = 0f;
     float startingTime = 3f;
     float gameTime = 60f;
@@ -32,8 +29,7 @@ public class CountdownTimer : MonoBehaviour
 
     [SerializeField] Button backButton;
 
-    void Start()
-    {
+    void Start() {
         introTime = startingTime;
         titleText.gameObject.SetActive(false);
         tutorialParagraph.gameObject.SetActive(false);
@@ -53,21 +49,18 @@ public class CountdownTimer : MonoBehaviour
         backButton.gameObject.SetActive(false);
     }
 
-    void Update()
-    {
+    private void FixedUpdate() {
         introCountdownText.gameObject.SetActive(true);
         introTime -= 1 * Time.deltaTime;
         introCountdownText.text = introTime.ToString("0");
         grassSpawner.gameObject.SetActive(true);
         grass.gameObject.SetActive(true);
-        if (introTime <= 1)
-        {
+        if(introTime <= 1) {
             introCountdownText.gameObject.SetActive(false);
             goText.gameObject.SetActive(true);
            
 
-            if (introTime <= 0)
-            {
+            if(introTime <= 0) {
                 goText.gameObject.SetActive(false);
                 gameCountdownText.gameObject.SetActive(true);
                 gameTime -= 1 * Time.deltaTime;
@@ -80,8 +73,7 @@ public class CountdownTimer : MonoBehaviour
             }
   
         }
-        if (gameTime <= 1)
-        {
+        if(gameTime <= 1) {
             gameCountdownText.gameObject.SetActive(false);
             pointsText.gameObject.SetActive(false);
             pointNumText.gameObject.SetActive(false);
@@ -91,27 +83,22 @@ public class CountdownTimer : MonoBehaviour
             grassSpawner.gameObject.SetActive(false);
             grass.gameObject.SetActive(false);
 
-           
             gameOverText.gameObject.SetActive(true);
             goPointsText.gameObject.SetActive(true);
             goPointsNum.gameObject.SetActive(true);
 
-            if (gameTime <= 0)
-            {
+            if(gameTime <= 0) {
                 timesUpText.gameObject.SetActive(false);
                 backButton.gameObject.SetActive(true);
             }
         }
-
     }
 
-    public float getGameTime()
-    {
+    public float getGameTime() {
         return gameTime;
     }
 
-    public float getStartTime()
-    {
+    public float getStartTime() {
         return introTime;
     }
 }

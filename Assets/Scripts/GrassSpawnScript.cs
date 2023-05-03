@@ -1,56 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GrassSpawnScript : MonoBehaviour
-{
+public class GrassSpawnScript : MonoBehaviour {
     public GameObject grass;
-    public double spawnRate;
     public float heightOffset = 20;
-    private float timer = 0;
     public CountdownTimer countdownScript;
+    private double spawnRate = 2.0;
+    private float timer = 0.0f;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        spawnRate = 2;
-        Instantiate(grass, new Vector3(1000, Random.Range(0, 1000), 0), transform.rotation);
-        Instantiate(grass, new Vector3(1200, Random.Range(0, 1000), 0), transform.rotation);
-        Instantiate(grass, new Vector3(1400, Random.Range(0, 1000), 0), transform.rotation);  
-        Instantiate(grass, new Vector3(1600, Random.Range(0, 1000), 0), transform.rotation);
-        Instantiate(grass, new Vector3(1800, Random.Range(0, 1000), 0), transform.rotation);
-        Instantiate(grass, new Vector3(2000, Random.Range(0, 1000), 0), transform.rotation);
+    void Start() {
+        for(int i = 1000; i <= 2000; i += 200) {
+            // this won't work as expected for some screen sizes
+            Instantiate(grass, new Vector3(i, Random.Range(0, 1000), 0), transform.rotation);
+        }
         countdownScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<CountdownTimer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(countdownScript.getStartTime() == 3 || countdownScript.getStartTime() == 2 || countdownScript.getStartTime() == 1)
-        {
-            spawnGrass();
+    private void FixedUpdate() {
+        if(countdownScript.getStartTime() == 3 || countdownScript.getStartTime() == 2 || countdownScript.getStartTime() == 1) {
+            SpawnGrass();
         }
-        if (timer < spawnRate)
-        {
+        if(timer < spawnRate) {
             timer += Time.deltaTime;
-        }
-        else
-        {
-            spawnGrass();
+        } else {
+            SpawnGrass();
             timer = 0;
         }
-
     }
 
-    public void spawnGrass()
-    {
+    public void SpawnGrass() {
         Instantiate(grass, new Vector3(transform.position.x, Random.Range(0, 1000), 0), transform.rotation);
     }
 
- 
-    public void setSpawnRate(double spawn)
-    {
+    public void SetSpawnRate(double spawn) {
         spawnRate = spawn;
     }
 }

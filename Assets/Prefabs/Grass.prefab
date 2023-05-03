@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1393570141921766988
 Transform:
   m_ObjectHideFlags: 0
@@ -98,8 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c780e6ce902da4aad0138e44b3d3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  deadZone: 250
   countdownScript: {fileID: 0}
   grassSpawnScript: {fileID: 0}
 --- !u!61 &6963548704143255152
