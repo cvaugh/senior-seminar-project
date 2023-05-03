@@ -17,6 +17,7 @@ public class WateringCan : AbstractInventoryItem {
             GameController.instance.inventoryManager.openButton.gameObject.SetActive(true);
             GameController.instance.inventoryManager.cancelWateringButton.gameObject.SetActive(false);
             GameController.instance.player.currentlyWatering = true;
+            waterLevel -= 1;
         }
     }
 
