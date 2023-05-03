@@ -164,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c36be3624640b364a9856b16d7707796, type: 3}
       propertyPath: m_Name
-      value: player(1)
+      value: player(1) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c36be3624640b364a9856b16d7707796, type: 3}
       propertyPath: m_Layer
@@ -231,10 +231,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 1.8
+  m_Radius: 1.0940834
+  m_Height: 6.095001
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0.95, z: -0.00000008940697}
+  m_Center: {x: -0.084694564, y: 3.0974963, z: -0.00000009260224}
 --- !u!95 &1453680674
 Animator:
   serializedVersion: 5
@@ -290,8 +290,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focus: {fileID: 0}
-  gc: {fileID: 0}
   itemDropPoint: {fileID: 0}
+  currentlyPlacing: {fileID: 0}
+  currentlyWatering: 0
+  placementGridSnapping: -1
 --- !u!114 &1453680680
 MonoBehaviour:
   m_ObjectHideFlags: 0

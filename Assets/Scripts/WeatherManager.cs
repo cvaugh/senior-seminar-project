@@ -249,44 +249,79 @@ public class WeatherManager : MonoBehaviour
     }
 
     public void ChangeWeather(Weather weatherType) {
-        rain.Stop();
-        snow.Stop();
-        heavyRain.Stop();
-        wind_curved.Stop();
-        wind_straight.Stop();
-        storm.Stop();
         if(weatherType != currentWeather) {
             switch(weatherType) {
                 case Weather.RAIN:
                     currentWeather = Weather.RAIN;
                     rain.Play();
+                    snow.Stop();
+                    heavyRain.Stop();
+                    wind_curved.Stop();
+                    wind_straight.Stop();
+                    storm.Stop();
                     break;
                 case Weather.HEAVYRAIN:
                     currentWeather = Weather.HEAVYRAIN;
                     heavyRain.Play();
+                    rain.Stop();
+                    snow.Stop();
+                    wind_curved.Stop();
+                    wind_straight.Stop();
+                    storm.Stop();
                     break;
                 case Weather.SNOW:
                     currentWeather = Weather.SNOW;
                     snow.Play();
+                    rain.Stop();
+                    heavyRain.Stop();
+                    wind_curved.Stop();
+                    wind_straight.Stop();
+                    storm.Stop();
                     break;
                 case Weather.SUNNY:
                     currentWeather = Weather.SUNNY;
+                    rain.Stop();
+                    snow.Stop();
+                    heavyRain.Stop();
+                    wind_curved.Stop();
+                    wind_straight.Stop();
+                    storm.Stop();
                     break;
                 case Weather.HOTSUN:
                     currentWeather = Weather.HOTSUN;
+                    rain.Stop();
+                    snow.Stop();
+                    heavyRain.Stop();
+                    wind_curved.Stop();
+                    wind_straight.Stop();
+                    storm.Stop();
                     break;
                 case Weather.WINDY:
                     currentWeather = Weather.WINDY;
                     wind_curved.Play();
                     wind_straight.Play();
+                    rain.Stop();
+                    snow.Stop();
+                    heavyRain.Stop();
+                    storm.Stop();
                     break;
                 case Weather.THUNDERSTORM:
                     currentWeather = Weather.THUNDERSTORM;
                     storm.Play();
                     heavyRain.Play();
+                    rain.Stop();
+                    snow.Stop();
+                    wind_curved.Stop();
+                    wind_straight.Stop();
                     break;
                 default:
                     currentWeather = Weather.NONE;
+                    rain.Stop();
+                    snow.Stop();
+                    heavyRain.Stop();
+                    wind_curved.Stop();
+                    wind_straight.Stop();
+                    storm.Stop();
                     break;
             }
         }
