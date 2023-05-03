@@ -10,7 +10,17 @@ public class StatsManager : MonoBehaviour {
     public int playerCoins;
     public Text coinNumText;
 
-    public Text playerNameText;
+    //public Text S;
+
+    void Start()
+    {
+        playerCoins = 100;
+    }
+
+    void Update()
+    {
+        playerCoins = getPlayerCoins();
+    }
 
     [ContextMenu("Increase Level")]
     public void increaseLevel() {
@@ -35,5 +45,10 @@ public class StatsManager : MonoBehaviour {
     [ContextMenu("Input Player Name")]
     public void setPlayerName() {
        
+    }
+
+    public int getPlayerCoins()
+    {
+        return playerCoins;
     }
 }

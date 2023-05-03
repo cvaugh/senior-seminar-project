@@ -9,18 +9,19 @@ public class MowingLogicScript : MonoBehaviour
     [SerializeField] Text pointsText;
     public GameObject lawnmower;
     public GameObject grass;
-
+    [SerializeField] Text goPointsText;
 
     // Start is called before the first frame update
     void Start()
     {
         pointsText.text = points.ToString();
+        goPointsText.text = points.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     [ContextMenu("Add GrassScore")]
@@ -28,6 +29,7 @@ public class MowingLogicScript : MonoBehaviour
     {
         points+= 5;
         pointsText.text = points.ToString();
+        goPointsText.text = points.ToString();
     }
 
       void OnTriggerEnter2D(Collider2D other)
