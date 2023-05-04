@@ -55,7 +55,8 @@ public class PlantContainer : Interactable {
     public override void Interact(PlayerController player) {
         if(plant == null) {
             // TODO pick up
-            throw new System.NotImplementedException();
+            Destroy(gameObject);
+            AudioRegistry.Play("sfx100v2_metal_hit_01");
         } else {
             GameController.instance.plantInfoManager.Show(this);
         }

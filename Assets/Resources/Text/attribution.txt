@@ -19,3 +19,4 @@ depth_mask.shader:
 https://www.kenney.nl/assets/ui-audio
 https://opengameart.org/content/sound-effects-pack
 https://opengameart.org/content/100-cc0-sfx-2
+https://opengameart.org/content/20-rustles-dry-leaves

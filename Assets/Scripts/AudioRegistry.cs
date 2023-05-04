@@ -3,9 +3,8 @@ using UnityEngine;
 
 public static class AudioRegistry {
     private static readonly List<string> Sounds = new List<string> {
-        "switch2",
-        "switch22",
-        "switch23",
+        "rustle15", // harvest
+        "sfx100v2_metal_hit_01", // pick up container
         "sfx100v2_misc_02", // water refill
         "sfx100v2_misc_27", // hoe
         "sfx100v2_misc_30", // item pickup
@@ -14,6 +13,9 @@ public static class AudioRegistry {
         "sfx100v2_items_01", // buy
         "sfx100v2_items_02", // sell
         "sfx100v2_stones_02", // watering can
+        "switch2",
+        "switch22",
+        "switch23",
     };
     private static readonly Dictionary<string, AudioClip> Clips = new Dictionary<string, AudioClip>();
 

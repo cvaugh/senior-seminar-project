@@ -88,7 +88,7 @@ public static class ItemRegistry {
             description: "A green cabbage.",
             canUse: false,
             canDrop: true,
-            value: 20
+            value: 40
         ),
         new GenericItem(
             id: "cauliflower",
@@ -96,7 +96,7 @@ public static class ItemRegistry {
             description: "A cauliflower.",
             canUse: false,
             canDrop: true,
-            value: 20
+            value: 35
         ),
         new GenericItem(
             id: "cotton",
@@ -276,6 +276,42 @@ public static class ItemRegistry {
             gridSize: -1,
             prefabId: "pot_6",
             isConsumed: true
+        ),
+        new Plantable(
+            id: "seed_packet_barley",
+            name: "Barley Seeds",
+            description: "A small packet containing some barley seeds.",
+            canUse: true,
+            canDrop: true,
+            value: 25,
+            plant: "barley"
+        ),
+        new Plantable(
+            id: "seed_packet_rye",
+            name: "Rye Seeds",
+            description: "A small packet containing some rye seeds.",
+            canUse: true,
+            canDrop: true,
+            value: 25,
+            plant: "rye"
+        ),
+        new Plantable(
+            id: "seed_packet_rice",
+            name: "Rice Seeds",
+            description: "A small packet containing some rice seeds.",
+            canUse: true,
+            canDrop: true,
+            value: 25,
+            plant: "rice"
+        ),
+        new Plantable(
+            id: "seed_packet_cabbage",
+            name: "Cabbage Seeds",
+            description: "A small packet containing some cabbage seeds.",
+            canUse: true,
+            canDrop: true,
+            value: 25,
+            plant: "cabbage"
         ),
     };
 

@@ -70,6 +70,7 @@ public class PlantInfoManager : MonoBehaviour {
                 focused.RemovePlant();
                 Hide();
             }
+            AudioRegistry.Play("rustle15");
         }
     }
 }

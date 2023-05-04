@@ -45,7 +45,51 @@ public static class PlantRegistry {
             harvestStageDuration: 50.0,
             harvestItemId: "eggplant",
             destroyOnHarvest: false
-        )
+        ),
+        new Plant(
+            id: "barley",
+            name: "Barley",
+            growthStages: 4,
+            minContainerSize: 3,
+            growthRate: 1.0,
+            growthStageDuration: 40.0,
+            harvestStageDuration: 40.0,
+            harvestItemId: "barley",
+            destroyOnHarvest: true
+        ),
+        new Plant(
+            id: "rye",
+            name: "Rye",
+            growthStages: 4,
+            minContainerSize: 3,
+            growthRate: 1.0,
+            growthStageDuration: 40.0,
+            harvestStageDuration: 40.0,
+            harvestItemId: "rye",
+            destroyOnHarvest: true
+        ),
+        new Plant(
+            id: "rice",
+            name: "Rice",
+            growthStages: 4,
+            minContainerSize: 3,
+            growthRate: 1.0,
+            growthStageDuration: 40.0,
+            harvestStageDuration: 40.0,
+            harvestItemId: "rice",
+            destroyOnHarvest: true
+        ),
+        new Plant(
+            id: "cabbage",
+            name: "Cabbage",
+            growthStages: 4,
+            minContainerSize: 2,
+            growthRate: 1.0,
+            growthStageDuration: 35.0,
+            harvestStageDuration: 45.0,
+            harvestItemId: "cabbage",
+            destroyOnHarvest: true
+        ),
     };
 
     public static Plant GetById(string id) {
