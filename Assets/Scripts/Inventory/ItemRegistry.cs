@@ -313,6 +313,15 @@ public static class ItemRegistry {
             value: 25,
             plant: "cabbage"
         ),
+        new Plantable(
+            id: "seed_packet_cauliflower",
+            name: "Cauliflower Seeds",
+            description: "A small packet containing some cauliflower seeds.",
+            canUse: true,
+            canDrop: true,
+            value: 25,
+            plant: "cauliflower"
+        ),
     };
 
     public static void Init() {

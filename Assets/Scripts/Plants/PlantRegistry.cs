@@ -90,6 +90,17 @@ public static class PlantRegistry {
             harvestItemId: "cabbage",
             destroyOnHarvest: true
         ),
+        new Plant(
+            id: "cauliflower",
+            name: "Cauliflower",
+            growthStages: 4,
+            minContainerSize: 2,
+            growthRate: 1.0,
+            growthStageDuration: 35.0,
+            harvestStageDuration: 40.0,
+            harvestItemId: "cauliflower",
+            destroyOnHarvest: true
+        ),
     };
 
     public static Plant GetById(string id) {
