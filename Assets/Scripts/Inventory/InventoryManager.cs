@@ -125,23 +125,29 @@ public class InventoryManager : MonoBehaviour {
         GameController.instance.player.currentlyPlanting = null;
     }
 
-    public void StartPlacement(Transform prefab, float gridSize) {
+    public void StartPlacement(Placeable placeable, float gridSize) {
         openButton.gameObject.SetActive(false);
         cancelPlacementButton.gameObject.SetActive(true);
-        GameController.instance.player.currentlyPlacing = Instantiate(prefab,
-            GameController.instance.player.transform.position, prefab.rotation);
+        GameController.instance.player.currentlyPlacing = Instantiate(placeable.placeablePrefab,
+            GameController.instance.player.transform.position, placeable.placeablePrefab.rotation);
+        GameController.instance.player.currentlyPlacingItem = placeable;
         GameController.instance.player.currentlyPlacing.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        GameController.instance.player.currentlyPlacing.GetComponent<Collider>().enabled = false;
         GameController.instance.player.placementGridSnapping = gridSize;
     }
 
-    public void StartPlacement(Transform prefab) {
-        StartPlacement(prefab, -1.0f);
+    public void StartPlacement(Placeable placeable) {
+        StartPlacement(placeable, -1.0f);
     }
 
     public void CompletePlacement() {
         cancelPlacementButton.gameObject.SetActive(false);
         openButton.gameObject.SetActive(true);
+        if(GameController.instance.player.currentlyPlacingItem.isConsumed) {
+            GameController.instance.player.RemoveItem(GameController.instance.player.currentlyPlacingItem);
+        }
         GameController.instance.player.currentlyPlacing.gameObject.layer = 0;
+        GameController.instance.player.currentlyPlacing.GetComponent<Collider>().enabled = true;
         GameController.instance.player.currentlyPlacing = null;
         GameController.instance.player.placementGridSnapping = -1.0f;
         AudioRegistry.Play("sfx100v2_misc_27");

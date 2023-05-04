@@ -54,7 +54,8 @@ public static class ItemRegistry {
             canDrop: true,
             value: 150,
             gridSize: 1.2f,
-            prefabId: "tilled_3x3"
+            prefabId: "tilled_3x3",
+            isConsumed: false
         ),
         new WateringCan(
             id: "watering_can",
@@ -218,7 +219,8 @@ public static class ItemRegistry {
             canDrop: false,
             value: 100,
             gridSize: -1,
-            prefabId: "pot_1"
+            prefabId: "pot_1",
+            isConsumed: true
         ),
         new Placeable(
             id: "pot_2",
@@ -228,7 +230,8 @@ public static class ItemRegistry {
             canDrop: false,
             value: 250,
             gridSize: -1,
-            prefabId: "pot_2"
+            prefabId: "pot_2",
+            isConsumed: true
         ),
         new Placeable(
             id: "pot_3",
@@ -238,7 +241,8 @@ public static class ItemRegistry {
             canDrop: false,
             value: 70,
             gridSize: -1,
-            prefabId: "pot_3"
+            prefabId: "pot_3",
+            isConsumed: true
         ),
         new Placeable(
             id: "pot_4",
@@ -248,7 +252,8 @@ public static class ItemRegistry {
             canDrop: false,
             value: 100,
             gridSize: -1,
-            prefabId: "pot_4"
+            prefabId: "pot_4",
+            isConsumed: true
         ),
         new Placeable(
             id: "pot_5",
@@ -258,7 +263,8 @@ public static class ItemRegistry {
             canDrop: false,
             value: 400,
             gridSize: -1,
-            prefabId: "pot_5"
+            prefabId: "pot_5",
+            isConsumed: true
         ),
         new Placeable(
             id: "pot_6",
@@ -268,7 +274,8 @@ public static class ItemRegistry {
             canDrop: false,
             value: 150,
             gridSize: -1,
-            prefabId: "pot_6"
+            prefabId: "pot_6",
+            isConsumed: true
         ),
     };
 

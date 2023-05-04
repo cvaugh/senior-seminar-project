@@ -56,4 +56,8 @@ public class GameController : MonoBehaviour {
     public void PlaySound(string key) {
         AudioRegistry.Play(key);
     }
+
+    public void Quit() {
+        Application.Quit();
+    }
 }

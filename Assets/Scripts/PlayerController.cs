@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public Transform itemDropPoint;
     public Plantable currentlyPlanting = null;
     public Transform currentlyPlacing = null;
+    public Placeable currentlyPlacingItem = null;
     public WateringCan currentlyWatering = null;
     public float placementGridSnapping = -1.0f;
     private NavMeshAgent agent;
