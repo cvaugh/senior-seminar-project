@@ -3,7 +3,7 @@ using UnityEngine;
 public class TimeOfDay : MonoBehaviour {
     public float dayDurationSeconds = 10f;
     public Light sun;
-    public float currentTimeOfDay = 0f;
+    public float currentTimeOfDay;
     private float timeMultiplier = 1f;
     private float sunInitialIntensity;
     private int currentDayOfWeek = 1;
@@ -14,8 +14,10 @@ public class TimeOfDay : MonoBehaviour {
 
         if(sun == null) {
             Debug.LogError("No directional light found");
+            sunInitialIntensity = 1.2f;
+        } else {
+            sunInitialIntensity = sun.intensity;
         }
-        sunInitialIntensity = sun.intensity;
     }
 
     private void UpdateSun() {
@@ -23,7 +25,7 @@ public class TimeOfDay : MonoBehaviour {
 
         float intensityMultiplier = 1;
         if(currentTimeOfDay <= 0.23f || currentTimeOfDay >= 0.75f) {
-            intensityMultiplier = 0;
+            intensityMultiplier = 0.01f;
         } else if(currentTimeOfDay <= 0.25f) {
             intensityMultiplier = Mathf.Clamp01((currentTimeOfDay - 0.23f) * (1 / 0.02f));
         } else if(currentTimeOfDay >= 0.73f) {
@@ -34,19 +36,19 @@ public class TimeOfDay : MonoBehaviour {
     }
 
     private void Update() {
-        UpdateSun();
-
         currentTimeOfDay += Time.deltaTime / dayDurationSeconds * timeMultiplier;
 
         if(currentTimeOfDay >= 1) {
             currentTimeOfDay = 0;
-            currentDayOfWeek ++;
+            currentDayOfWeek++;
 
             if(currentDayOfWeek > 7) {
                 currentDayOfWeek = 1;
-                weeks ++;
+                weeks++;
             }
         }
+
+        UpdateSun();
     }
 
     public int GetCurrentHour() {

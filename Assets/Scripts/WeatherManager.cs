@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,7 +48,7 @@ public class WeatherManager : MonoBehaviour {
     public Color autumnColor;
     public Color winterColor;
 
-    public TimeOfDay timeOfDay;
+    private TimeOfDay timeOfDay;
     public int currentHour = 0;
     public int currentDayOfWeek = 0;
     public int currentWeek = 0;
@@ -57,6 +56,7 @@ public class WeatherManager : MonoBehaviour {
     private bool forecastGenerated = false;
 
     private void Start() {
+        timeOfDay = GetComponent<TimeOfDay>();
         currentSeason = Season.SPRING;
         currentWeather = Weather.SUNNY;
         currentYear = 1;

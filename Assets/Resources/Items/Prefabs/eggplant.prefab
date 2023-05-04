@@ -132,4 +132,4 @@ MonoBehaviour:
   canInteractAnywhere: 0
   radius: 0.4
   hasInteracted: 0
-  itemIndex: 0
+  itemIndex: 23

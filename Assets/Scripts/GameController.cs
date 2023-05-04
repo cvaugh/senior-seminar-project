@@ -9,7 +9,6 @@ public class GameController : MonoBehaviour {
 
     public SceneStartPoint[] sceneStartPoints;
     public Transform loadingBlocker;
-    public Material highlightMaterial;
     public AudioSource sfxSource;
 
     public PlayerController player;
