@@ -27,7 +27,10 @@ public class ShopUIManager : MonoBehaviour {
         shopItemContainer = shopParent.Find("Shop Scroll/Viewport/Shop Contents");
         inventoryItemContainer = shopParent.Find("Inventory Scroll/Viewport/Inventory Contents");
         closeButton = shopParent.Find("Close Button").GetComponent<Button>();
-        closeButton.onClick.AddListener(Hide);
+        closeButton.onClick.AddListener(() => {
+            Hide();
+            AudioRegistry.Play("switch2");
+        });
         transactionButton = shopParent.Find("Transaction Button").GetComponent<Button>();
         transactionButtonText = shopParent.Find("Transaction Button/Text").GetComponent<TMP_Text>();
         itemName = shopParent.Find("Item Name Panel/Item Name").GetComponent<TMP_Text>();
@@ -48,14 +51,20 @@ public class ShopUIManager : MonoBehaviour {
         for(int i = 0; i < PlayerController.inventory.Count; i++) {
             Transform cell = Instantiate(shopCellPrefab, inventoryItemContainer);
             int cachedIndex = i;
-            cell.GetComponent<Button>().onClick.AddListener(() => SelectItem(false, cachedIndex));
+            cell.GetComponent<Button>().onClick.AddListener(() => {
+                SelectItem(false, cachedIndex);
+                AudioRegistry.Play("switch2");
+            });
             cell.GetChild(0).GetComponent<Image>().sprite = PlayerController.inventory[i].icon;
             cell.GetChild(2).GetComponent<TMP_Text>().text = PlayerController.inventory[i].value.ToString() + " F";
         }
         for(int i = 0; i < shop.inventory.Count; i++) {
             Transform cell = Instantiate(shopCellPrefab, shopItemContainer);
             int cachedIndex = i;
-            cell.GetComponent<Button>().onClick.AddListener(() => SelectItem(true, cachedIndex));
+            cell.GetComponent<Button>().onClick.AddListener(() => {
+                SelectItem(true, cachedIndex);
+                AudioRegistry.Play("switch2");
+            });
             cell.GetChild(0).GetComponent<Image>().sprite = shop.inventory[i].icon;
             cell.GetChild(1).GetComponent<Image>().color = BalanceManager.CanAfford(shop.inventory[i]) ? colorCanAfford : colorTooExpensive;
             cell.GetChild(2).GetComponent<TMP_Text>().text = shop.inventory[i].value.ToString() + " F";
@@ -91,6 +100,7 @@ public class ShopUIManager : MonoBehaviour {
                 transactionButton.onClick.RemoveAllListeners();
                 transactionButton.onClick.AddListener(() => {
                     BuyItem(item);
+                    AudioRegistry.Play("sfx100v2_items_01");
                 });
             }
         } else {
@@ -103,6 +113,7 @@ public class ShopUIManager : MonoBehaviour {
             transactionButton.onClick.RemoveAllListeners();
             transactionButton.onClick.AddListener(() => {
                 SellItem(item);
+                AudioRegistry.Play("sfx100v2_items_02");
             });
         }
     }

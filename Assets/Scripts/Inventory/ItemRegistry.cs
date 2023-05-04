@@ -193,6 +193,83 @@ public static class ItemRegistry {
             canDrop: true,
             value: 30
         ),
+        new GenericItem(
+            id: "eggplant",
+            name: "Eggplant",
+            description: "An eggplant.",
+            canUse: false,
+            canDrop: true,
+            value: 25
+        ),
+        new Plantable(
+            id: "seed_packet_eggplant",
+            name: "Eggplant Seeds",
+            description: "A small packet containing some eggplant seeds.",
+            canUse: true,
+            canDrop: true,
+            value: 25,
+            plant: "eggplant"
+        ),
+        new Placeable(
+            id: "pot_1",
+            name: "Medium Pot (Round)",
+            description: "A medium-sized round terracotta pot.",
+            canUse: true,
+            canDrop: false,
+            value: 100,
+            gridSize: -1,
+            prefabId: "pot_1"
+        ),
+        new Placeable(
+            id: "pot_2",
+            name: "Large Pot (Round)",
+            description: "A large, round terracotta pot.",
+            canUse: true,
+            canDrop: false,
+            value: 250,
+            gridSize: -1,
+            prefabId: "pot_2"
+        ),
+        new Placeable(
+            id: "pot_3",
+            name: "Small Pot (Round)",
+            description: "A small, round plastic pot.",
+            canUse: true,
+            canDrop: false,
+            value: 70,
+            gridSize: -1,
+            prefabId: "pot_3"
+        ),
+        new Placeable(
+            id: "pot_4",
+            name: "Medium Pot (Square)",
+            description: "A medium-sized square terracotta pot.",
+            canUse: true,
+            canDrop: false,
+            value: 100,
+            gridSize: -1,
+            prefabId: "pot_4"
+        ),
+        new Placeable(
+            id: "pot_5",
+            name: "Tall Pot (Round)",
+            description: "A tall, ornate terracotta pot.",
+            canUse: true,
+            canDrop: false,
+            value: 400,
+            gridSize: -1,
+            prefabId: "pot_5"
+        ),
+        new Placeable(
+            id: "pot_6",
+            name: "Medium Pot (Square, Detailed)",
+            description: "A medium-sized square terracotta pot with detailing.",
+            canUse: true,
+            canDrop: false,
+            value: 150,
+            gridSize: -1,
+            prefabId: "pot_6"
+        ),
     };
 
     public static void Init() {

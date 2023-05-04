@@ -4,6 +4,7 @@ public class WaterSource : Interactable {
         foreach(AbstractInventoryItem item in PlayerController.inventory){
             if(item is WateringCan) {
                 ((WateringCan)item).Refill();
+                AudioRegistry.Play("sfx100v2_misc_02");
             } 
         }
     }

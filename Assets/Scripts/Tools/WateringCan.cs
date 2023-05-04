@@ -10,10 +10,9 @@ public class WateringCan : AbstractInventoryItem {
 
     public override void Use(PlayerController player) {
         if(waterLevel > 0) {
-            GameController.instance.inventoryManager.openButton.gameObject.SetActive(true);
-            GameController.instance.inventoryManager.cancelWateringButton.gameObject.SetActive(false);
-            GameController.instance.player.currentlyWatering = true;
-            waterLevel -= 1;
+            GameController.instance.inventoryManager.openButton.gameObject.SetActive(false);
+            GameController.instance.inventoryManager.cancelWateringButton.gameObject.SetActive(true);
+            GameController.instance.player.currentlyWatering = this;
         }
     }
 
@@ -26,6 +25,7 @@ public class WateringCan : AbstractInventoryItem {
         if(waterLevel > 0) {
             container.SetMoisture(1.0f);
             waterLevel -= 1;
+            AudioRegistry.Play("sfx100v2_stones_02");
         }
 
         canUse = waterLevel > 0;

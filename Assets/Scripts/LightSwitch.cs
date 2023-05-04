@@ -16,5 +16,10 @@ public class LightSwitch : Interactable {
     public override void Interact(PlayerController player) {
         lightComponent.enabled = !lightComponent.enabled;
         UpdateSwitchRotation();
+        if(lightComponent.enabled) {
+            AudioRegistry.Play("switch23");
+        } else {
+            AudioRegistry.Play("switch22");
+        }
     }
 }

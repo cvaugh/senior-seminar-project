@@ -22,19 +22,34 @@ public class InventoryManager : MonoBehaviour {
         inventoryParent = GameController.instance.canvas.Find("Inventory");
         itemContainer = inventoryParent.Find("Inventory Scroll/Viewport/Inventory Contents");
         openButton = GameController.instance.canvas.Find("Inventory Open Button").GetComponent<Button>();
-        openButton.onClick.AddListener(ShowInventory);
+        openButton.onClick.AddListener(() => {
+            ShowInventory();
+            AudioRegistry.Play("sfx100v2_misc_32");
+        });
         closeButton = inventoryParent.Find("Close Button").GetComponent<Button>();
-        closeButton.onClick.AddListener(HideInventory);
+        closeButton.onClick.AddListener(() => {
+            HideInventory();
+            AudioRegistry.Play("sfx100v2_wood_04");
+        });
         useButton = inventoryParent.Find("Use Button").GetComponent<Button>();
         dropButton = inventoryParent.Find("Drop Button").GetComponent<Button>();
         itemName = inventoryParent.Find("Title Panel/Item Name").GetComponent<TMP_Text>();
         itemInfo = inventoryParent.Find("Info Panel/Item Info").GetComponent<TMP_Text>();
         cancelPlantingButton = GameController.instance.canvas.Find("Cancel Planting Button").GetComponent<Button>();
-        cancelPlantingButton.onClick.AddListener(CancelPlanting);
+        cancelPlantingButton.onClick.AddListener(() => {
+            CancelPlanting();
+            AudioRegistry.Play("switch2");
+        });
         cancelPlacementButton = GameController.instance.canvas.Find("Cancel Placement Button").GetComponent<Button>();
-        cancelPlacementButton.onClick.AddListener(CancelPlacement);
+        cancelPlacementButton.onClick.AddListener(() => {
+            CancelPlacement();
+            AudioRegistry.Play("switch2");
+        });
         cancelWateringButton = GameController.instance.canvas.Find("Cancel Watering Button").GetComponent<Button>();
-        cancelWateringButton.onClick.AddListener(StopWatering);
+        cancelWateringButton.onClick.AddListener(() => {
+            StopWatering();
+            AudioRegistry.Play("switch2");
+        });
         HideInventory();
     }
 
@@ -42,11 +57,16 @@ public class InventoryManager : MonoBehaviour {
         DeselectItem();
         GameController.instance.player.SortInventory();
         openButton.gameObject.SetActive(false);
+        useButton.gameObject.SetActive(false);
+        dropButton.gameObject.SetActive(false);
         inventoryParent.gameObject.SetActive(true);
         for(int i = 0; i < PlayerController.inventory.Count; i++) {
             Transform cell = Instantiate(inventoryCellPrefab, itemContainer);
             int cachedIndex = i;
-            cell.GetComponent<Button>().onClick.AddListener(() => SelectItem(cachedIndex));
+            cell.GetComponent<Button>().onClick.AddListener(() => {
+                SelectItem(cachedIndex);
+                AudioRegistry.Play("switch2");
+            });
             cell.GetChild(0).GetComponent<Image>().sprite = PlayerController.inventory[i].icon;
         }
     }
@@ -71,19 +91,23 @@ public class InventoryManager : MonoBehaviour {
         itemName.text = item.name;
         itemInfo.text = item.description;
         useButton.enabled = item.canUse;
+        useButton.gameObject.SetActive(item.canUse);
         useButton.onClick.RemoveAllListeners();
         if(item.canUse) {
             useButton.onClick.AddListener(() => {
                 HideInventory();
                 GameController.instance.player.UseItem(item);
+                AudioRegistry.Play("switch2");
             });
         }
         dropButton.enabled = item.canDrop;
+        dropButton.gameObject.SetActive(item.canDrop);
         dropButton.onClick.RemoveAllListeners();
         if(item.canDrop) {
             dropButton.onClick.AddListener(() => {
                 HideInventory();
                 GameController.instance.player.DropItem(item);
+                AudioRegistry.Play("switch2");
             });
         }
     }
@@ -98,7 +122,6 @@ public class InventoryManager : MonoBehaviour {
     public void CancelPlanting() {
         cancelPlantingButton.gameObject.SetActive(false);
         openButton.gameObject.SetActive(true);
-        GameController.instance.UnHighlightPlantContainers();
         GameController.instance.player.currentlyPlanting = null;
     }
 
@@ -107,6 +130,7 @@ public class InventoryManager : MonoBehaviour {
         cancelPlacementButton.gameObject.SetActive(true);
         GameController.instance.player.currentlyPlacing = Instantiate(prefab,
             GameController.instance.player.transform.position, prefab.rotation);
+        GameController.instance.player.currentlyPlacing.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
         GameController.instance.player.placementGridSnapping = gridSize;
     }
 
@@ -117,8 +141,10 @@ public class InventoryManager : MonoBehaviour {
     public void CompletePlacement() {
         cancelPlacementButton.gameObject.SetActive(false);
         openButton.gameObject.SetActive(true);
+        GameController.instance.player.currentlyPlacing.gameObject.layer = 0;
         GameController.instance.player.currentlyPlacing = null;
         GameController.instance.player.placementGridSnapping = -1.0f;
+        AudioRegistry.Play("sfx100v2_misc_27");
     }
 
     public void CancelPlacement() {
@@ -129,6 +155,6 @@ public class InventoryManager : MonoBehaviour {
     public void StopWatering() {
         openButton.gameObject.SetActive(true);
         cancelWateringButton.gameObject.SetActive(false);
-        GameController.instance.player.currentlyWatering = false;
+        GameController.instance.player.currentlyWatering = null;
     }
 }

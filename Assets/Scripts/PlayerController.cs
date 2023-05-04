@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     public Transform itemDropPoint;
     public Plantable currentlyPlanting = null;
     public Transform currentlyPlacing = null;
-    public bool currentlyWatering = false;
+    public WateringCan currentlyWatering = null;
     public float placementGridSnapping = -1.0f;
     private NavMeshAgent agent;
     private Transform target;
@@ -28,10 +28,11 @@ public class PlayerController : MonoBehaviour {
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, raycastMask)) {
                 Vector3 pos = hit.point;
                 if(placementGridSnapping > 0) {
-                    pos = new Vector3(Mathf.Round(pos.x / placementGridSnapping) * placementGridSnapping, 0.0f,
-                        Mathf.Round(pos.z / placementGridSnapping) * placementGridSnapping);
+                    currentlyPlacing.transform.position = new Vector3(Mathf.Round(pos.x / placementGridSnapping)
+                        * placementGridSnapping, 0.0f, Mathf.Round(pos.z / placementGridSnapping) * placementGridSnapping);
+                } else {
+                    currentlyPlacing.transform.position = new Vector3(hit.point.x, 0.0f, hit.point.z);
                 }
-                currentlyPlacing.transform.position = pos;
             }
         }
 
@@ -51,7 +52,9 @@ public class PlayerController : MonoBehaviour {
                     }
                 } else if(hit.collider.GetComponent<Interactable>() != null) {
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
-                    if(interactable.canInteractAnywhere) {
+                    if(currentlyWatering != null && interactable is PlantContainer) {
+                        currentlyWatering.Water((PlantContainer) interactable);
+                    } else if(interactable.canInteractAnywhere) {
                         interactable.Interact(this);
                     } else {
                         SetFocus(interactable);

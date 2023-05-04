@@ -40,6 +40,7 @@ public class PlantContainer : Interactable {
             if(plant.currentGrowthStage != currentGrowthStage) {
                 Destroy(plantTransform.gameObject);
                 plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
+                plantTransform.localRotation = Quaternion.identity;
                 currentGrowthStage = plant.currentGrowthStage;
             }
         }
@@ -64,6 +65,7 @@ public class PlantContainer : Interactable {
         this.plant = plant;
         currentGrowthStage = 0;
         plantTransform = Instantiate(plant.GetCurrentPrefab(), plantAttachmentPoint.position, Quaternion.identity, plantAttachmentPoint);
+        plantTransform.localRotation = Quaternion.identity;
     }
 
     public void RemovePlant() {

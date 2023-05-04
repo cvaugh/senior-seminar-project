@@ -11,6 +11,7 @@ public class DroppedItem : Interactable {
 
     public override void Interact(PlayerController player) {
         PickUp(player);
+        AudioRegistry.Play("sfx100v2_misc_30");
     }
 
     public void PickUp(PlayerController player) {

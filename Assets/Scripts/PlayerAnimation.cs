@@ -12,7 +12,7 @@ public class PlayerAnimation : MonoBehaviour {
     void Update() {
         Vector3 currentPosition = transform.position;
 
-        if(currentPosition != lastPosition) {
+        if(Vector3.Distance(currentPosition, lastPosition) > 0.01f) {
             animator.SetBool("isJogging", true);
         } else {
             animator.SetBool("isJogging", false);

@@ -34,6 +34,17 @@ public static class PlantRegistry {
             harvestStageDuration: 40.0,
             harvestItemId: "wheat",
             destroyOnHarvest: true
+        ),
+        new Plant(
+            id: "eggplant",
+            name: "Eggplant",
+            growthStages: 4,
+            minContainerSize: 2,
+            growthRate: 1.0,
+            growthStageDuration: 30.0,
+            harvestStageDuration: 50.0,
+            harvestItemId: "eggplant",
+            destroyOnHarvest: false
         )
     };
 

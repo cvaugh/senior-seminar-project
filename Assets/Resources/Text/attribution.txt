@@ -14,3 +14,8 @@ Steel City Comic:
 depth_mask.shader:
    Created by Mark Johns (doomlaser)
    https://github.com/doomlaser/DepthMask-Unity-Shader
+
+--- AUDIO ATTRIBUTION ---
+https://www.kenney.nl/assets/ui-audio
+https://opengameart.org/content/sound-effects-pack
+https://opengameart.org/content/100-cc0-sfx-2
